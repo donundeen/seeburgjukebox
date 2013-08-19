@@ -16,7 +16,7 @@ DESCRIPTION: 2nd DRAFT. WORK IN PROGRESS!!
 
 
 // the opto-isolator is connected to pin 7.
-int opto = 7;
+int opto = 8;
 
 void setup() {    
    Serial.begin(9600); 
