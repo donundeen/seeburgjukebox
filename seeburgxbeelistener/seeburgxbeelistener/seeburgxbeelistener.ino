@@ -8,13 +8,14 @@ void setup() {
   Serial.begin(9600);
 
 
+
 }
 
 void loop() {
   // see if there's incoming serial data:
   if (Serial.available() > 0) {
     incomingByte = Serial.read();
-    
+    Serial.println("read");
     if(incomingByte == 13){
       // here's where we got the message: send it to MAX!
       Serial.println(message);

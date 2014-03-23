@@ -1,6 +1,6 @@
 
 /*
-AUTHOR: Steve Bennett 
+AUTHOR: Steve Bennett  
 DATE: May 6 2013
 PURPOSE: Read the pulse stream from a Seeburg 3WA "Wall-O-Matic 200" and decode it.
 DESCRIPTION: 2nd DRAFT. WORK IN PROGRESS!! 
@@ -15,17 +15,38 @@ DESCRIPTION: 2nd DRAFT. WORK IN PROGRESS!!
 */
 
 
-// the opto-isolator is connected to pin 7.
+// the opto-isolator is connected to pin 8.
 int opto = 8;
+int led = 13;
+
+int rled = 5;           // the pin that the LED is attached to
+int gled = 7;           // the pin that the LED is attached to
+int bled = 6;           // the pin that the LED is attached to
+
+
+
 
 void setup() {    
    Serial.begin(9600); 
    pinMode(opto, INPUT); //initialize the digital pin as an input from the opto-isolator.
    digitalWrite(opto, HIGH); //turns on the internal pull up resistor.
+   pinMode(led, OUTPUT);
+   
+  pinMode(rled, OUTPUT);
+  pinMode(gled, OUTPUT);
+  pinMode(bled, OUTPUT);
+   
+        digitalWrite(rled, HIGH);
+     digitalWrite(gled, HIGH);
+     digitalWrite(bled, HIGH);
+
+
 }
 
 // The loop routine runs over and over again forever:
 void loop() {
+  
+  
   int alphacnt = 0;  // counts the alphabet pulses
   int digitcnt = 0;  // counts the digit pulses.
 
@@ -41,8 +62,13 @@ void loop() {
   buffer[3] = 1;
   //Serial.print("loop");
   
+  int r = HIGH;
+  int g = HIGH;
+  int b = HIGH;
+  
   while( pausecnt < maxpause ) { // Begin the alphabet loop
    // Serial.print("while 1");
+   
    
      buffer[buffndx] = digitalRead(opto); // read the input pin
      
@@ -50,6 +76,14 @@ void loop() {
 //       Serial.println(buffer[buffndx]);
        
      }
+     
+     
+     if(buffer[buffndx] == 0){
+        rgbRand();
+     }else{
+        rgbOff();
+     }
+     
      delay(4); // space out the reads a little.
      buffndx++; 
      if (buffndx == 4) buffndx = 0; // rotate the buffer index.
@@ -74,7 +108,13 @@ void loop() {
         if (countpause == true) pausecnt++; // else no valid input
      }
      
+
   } // end while
+
+               digitalWrite(rled, LOW);
+     digitalWrite(gled, LOW);
+     digitalWrite(bled, LOW);
+
 
 //Serial.println("aphafinal");
 //Serial.println(alphacnt);
@@ -84,7 +124,19 @@ void loop() {
     pausecnt = 0;   // Reset the pausent counter. Ready for the next stream of pulses to arrive.
     countpause = false; // loop forever until a pulse is recieved.
     while( pausecnt < maxpause ) { // Begin the digit loop
+    
+    
+    
      buffer[buffndx] = digitalRead(opto); // read the input pin
+     
+     if(buffer[buffndx] == 0){
+        rgbRand();
+     }else{
+        rgbOff();
+     }
+     
+     
+     
      delay(4);
      buffndx++; 
      if (buffndx == 4) buffndx = 0; // rotate the buffer index.
@@ -105,7 +157,7 @@ void loop() {
      }
      
   } // end while
-  
+  rgbOff();
  
   // finished polling for both pulse trains so print the pulses counted.
   int temp = alphacnt;
@@ -151,8 +203,37 @@ void loop() {
   */
   signal += String(digitcnt);
   Serial.println(signal);
-  
+
+  digitalWrite(led, HIGH);   // turn the LED on (HIGH is the voltage level)
+  rgbRand();
+  delay(1000);               // wait for a second
+
+
+
+  digitalWrite(led, LOW);    // turn the LED off by making the voltage LOW
+  rgbOff();
+  delay(1000);
   
 } 
 
+
+
+void rgbOff(){
+     digitalWrite(rled, LOW);
+     digitalWrite(gled, LOW);
+     digitalWrite(bled, LOW);
+ 
+}
+
+void rgbRand(){
+  int randR = (int)random(0, 2);
+  int randG = (int)random(0, 2);
+  int randB = (int)random(0, 2);
+  
+     digitalWrite(rled, randR);
+     digitalWrite(gled, randG);
+     digitalWrite(bled, randB);
+  
+  
+}
 
