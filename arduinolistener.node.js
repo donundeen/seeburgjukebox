@@ -255,8 +255,9 @@ function processMessage(command){
 
       break;
     case "A9":
+
       $.ajax({
-        url : stations.santigold,
+        url : stations.arcadeFire,
         success : function(data, status, jqXHR){
           console.log("success!");
           console.log(status);
@@ -272,7 +273,7 @@ function processMessage(command){
       break;
     case "A10":
       $.ajax({
-        url : stations.jimmySmith,
+        url : stations.nextSong,
         success : function(data, status, jqXHR){
           console.log("success!");
           console.log(status);
@@ -351,8 +352,9 @@ function processMessage(command){
 
       break;
     case "B5":
+    
       $.ajax({
-        url : stations.arcadeFire,
+        url : stations.santigold,
         success : function(data, status, jqXHR){
           console.log("success!");
           console.log(status);
@@ -368,7 +370,7 @@ function processMessage(command){
       break;
     case "B6":
       $.ajax({
-        url : stations.nextSong,
+        url : stations.jimmySmith,
         success : function(data, status, jqXHR){
           console.log("success!");
           console.log(status);
@@ -382,6 +384,8 @@ function processMessage(command){
       });
 
       break;
+
+
     case "B7":
       $.ajax({
         url : stations.rem,
