@@ -4,4 +4,5 @@ Seeburg_Draft_Sketch2/.DS_Store
 .DS_Store
 
 noduino/
-node_modules/
+node_modules/jquery
+node_modules/serialport
