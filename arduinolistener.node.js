@@ -3,6 +3,47 @@
 //
 var fs = require("fs");
 
+
+var dgram = require("dgram");
+var osc = require('osc-min');
+
+var hue = require("node-hue-api");
+
+console.log(hue);
+
+var lightState = require("node-hue-api").lightState;
+
+var username = "newdeveloper";
+
+var hostname = "192.168.1.57";
+
+
+var displayResult = function(result) {
+    console.log(JSON.stringify(result, null, 2));
+};
+
+var displayBridges = function(bridge) {
+    console.log("Hue Bridges Found: " + JSON.stringify(bridge));
+};
+
+hue.locateBridges().then(displayBridges).done();
+
+var api = new hue.HueApi(hostname, username);
+
+api.connect().then(displayResult).done();
+
+api.lights()
+    .then(displayResult)
+    .done();
+
+
+var displayResult = function(result) {
+  console.log("in displayResult");
+    console.log(JSON.stringify(result, null, 2));
+};
+
+
+
 var files = fs.readdirSync("/dev");
 var portname = false;
 files.forEach(function(filename){
@@ -82,6 +123,41 @@ var stations = {
 }
 
 
+var updatedSeries = false;
+var inDoNewState = false;
+var doNewState = function(index, series, initial){
+  inDoNewState = true;
+  if(updatedSeries){
+    series= updatedSeries;
+    updatedSeries = false;
+  }
+  if(series.length == 0){
+    inDoNewState = false;
+    return;
+  }
+
+  index = index % series.length;
+  var item = series[index];
+
+  var newstate;
+  if(item[0] == "rgb"){
+    newstate = lightState.create().transition(15).rgb(item[1], item[2], item[3]);
+  }if(item[0] == "hsl"){
+    newstate = lightState.create().transition(15).hsl(item[1], item[2], item[3]);
+  } 
+  api.setLightState(2, newstate,
+  function(err, newResult){
+    if(err){
+      console.log("error " + err);
+    }
+    console.log("in Then");
+    index++;
+    setTimeout(function(){doNewState(index, series, false);}, 20000);
+  });
+  inDoNewState = false;
+};
+
+
 
 squeeze.on('register', function(){
   //you're ready to use the api, eg.
@@ -128,6 +204,7 @@ function processMessage(command){
 	console.log("going to process command : " + command);
   switch(command){
     case "A1":
+      updatedSeries = [];
       $.ajax({
         url : stations.barryWhite,
         success : function(data, status, jqXHR){
@@ -143,6 +220,7 @@ function processMessage(command){
       });
       break;
     case "A2":
+      updatedSeries = [];
       $.ajax({
         url : stations.johnnyCash,
         success : function(data, status, jqXHR){
@@ -159,6 +237,7 @@ function processMessage(command){
 
       break;
     case "A3":
+      updatedSeries = [];
       $.ajax({
         url : stations.hallAndOates,
         success : function(data, status, jqXHR){
@@ -175,6 +254,7 @@ function processMessage(command){
 
       break;
     case "A4":
+      updatedSeries = [];
       $.ajax({
         url : stations.johnColtrane,
         success : function(data, status, jqXHR){
@@ -191,6 +271,7 @@ function processMessage(command){
 
       break;
     case "A5":
+      updatedSeries = [];
       $.ajax({
         url : stations.ninaSimone,
         success : function(data, status, jqXHR){
@@ -207,6 +288,7 @@ function processMessage(command){
 
       break;
     case "A6":
+      updatedSeries = [];
       $.ajax({
         url : stations.joeBataan,
         success : function(data, status, jqXHR){
@@ -223,6 +305,7 @@ function processMessage(command){
 
       break;
     case "A7":
+      updatedSeries = [];
       $.ajax({
         url : stations.africanJazz,
         success : function(data, status, jqXHR){
@@ -239,6 +322,7 @@ function processMessage(command){
 
       break;
     case "A8":
+      updatedSeries = [];
       $.ajax({
         url : stations.theShins,
         success : function(data, status, jqXHR){
@@ -255,6 +339,7 @@ function processMessage(command){
 
       break;
     case "A9":
+      updatedSeries = [];
 
       $.ajax({
         url : stations.arcadeFire,
@@ -272,6 +357,7 @@ function processMessage(command){
 
       break;
     case "A10":
+      updatedSeries = [];
       $.ajax({
         url : stations.nextSong,
         success : function(data, status, jqXHR){
@@ -288,6 +374,7 @@ function processMessage(command){
 
       break;
     case "B1":
+      updatedSeries = [];
       $.ajax({
         url : stations.echoAndTheBunnymen,
         success : function(data, status, jqXHR){
@@ -304,6 +391,7 @@ function processMessage(command){
 
       break;
     case "B2":
+      updatedSeries = [];
       $.ajax({
         url : stations.morrisey,
         success : function(data, status, jqXHR){
@@ -320,6 +408,7 @@ function processMessage(command){
 
       break;
     case "B3":
+      updatedSeries = [];
       $.ajax({
         url : stations.archieShepp,
         success : function(data, status, jqXHR){
@@ -336,6 +425,7 @@ function processMessage(command){
 
       break;
     case "B4":
+      updatedSeries = [];
       $.ajax({
         url : stations.benWebster,
         success : function(data, status, jqXHR){
@@ -352,6 +442,7 @@ function processMessage(command){
 
       break;
     case "B5":
+      updatedSeries = [];
     
       $.ajax({
         url : stations.santigold,
@@ -369,6 +460,7 @@ function processMessage(command){
 
       break;
     case "B6":
+      updatedSeries = [];
       $.ajax({
         url : stations.jimmySmith,
         success : function(data, status, jqXHR){
@@ -387,6 +479,7 @@ function processMessage(command){
 
 
     case "B7":
+      updatedSeries = [];
       $.ajax({
         url : stations.rem,
         success : function(data, status, jqXHR){
@@ -403,6 +496,7 @@ function processMessage(command){
 
       break;
     case "B8":
+      updatedSeries = [];
       $.ajax({
         url : stations.radiohead,
         success : function(data, status, jqXHR){
@@ -419,6 +513,7 @@ function processMessage(command){
 
       break;
     case "B9":
+      updatedSeries = [];
       $.ajax({
         url : stations.spiritualized,
         success : function(data, status, jqXHR){
@@ -435,6 +530,7 @@ function processMessage(command){
 
       break;
     case "B10":
+      updatedSeries = [];
       $.ajax({
         url : stations.albertAyler,
         success : function(data, status, jqXHR){
@@ -451,6 +547,7 @@ function processMessage(command){
 
       break;
     case "C1":
+      updatedSeries = [];
       $.ajax({
         url : stations.chetBaker,
         success : function(data, status, jqXHR){
@@ -467,6 +564,7 @@ function processMessage(command){
 
       break;
     case "C2":
+      updatedSeries = [];
       $.ajax({
         url : stations.neutralMilkHotel,
         success : function(data, status, jqXHR){
@@ -483,6 +581,7 @@ function processMessage(command){
 
       break;
     case "C3":
+      updatedSeries = [];
       $.ajax({
         url : stations.tvOnTheRadio,
         success : function(data, status, jqXHR){
@@ -499,6 +598,7 @@ function processMessage(command){
 
       break;
     case "C4":
+      updatedSeries = [];
       $.ajax({
         url : stations.bigJayMcNeely,
         success : function(data, status, jqXHR){
@@ -515,6 +615,7 @@ function processMessage(command){
 
       break;
     case "C5":
+      updatedSeries = [];
       $.ajax({
         url : stations.gustavMahler,
         success : function(data, status, jqXHR){
@@ -531,6 +632,7 @@ function processMessage(command){
 
       break;
     case "C6":
+      updatedSeries = [];
       $.ajax({
         url : stations.mozart,
         success : function(data, status, jqXHR){
@@ -547,6 +649,7 @@ function processMessage(command){
 
       break;
     case "C7":
+      updatedSeries = [];
       $.ajax({
         url : stations.theCure,
         success : function(data, status, jqXHR){
@@ -563,6 +666,7 @@ function processMessage(command){
 
       break;
     case "C8":
+      updatedSeries = [];
       $.ajax({
         url : stations.tearsForFears,
         success : function(data, status, jqXHR){
@@ -579,6 +683,7 @@ function processMessage(command){
 
       break;
     case "C9":
+      updatedSeries = [];
       $.ajax({
         url : stations.newOrder,
         success : function(data, status, jqXHR){
@@ -595,6 +700,7 @@ function processMessage(command){
 
       break;
     case "C10":
+      updatedSeries = [];
       $.ajax({
         url : stations.kanyeWest,
         success : function(data, status, jqXHR){
@@ -611,6 +717,7 @@ function processMessage(command){
 
       break;
     case "D1":
+      updatedSeries = [];
       $.ajax({
         url : stations.gilEvans,
         success : function(data, status, jqXHR){
@@ -627,6 +734,7 @@ function processMessage(command){
 
       break;
     case "D2":
+      updatedSeries = [];
       $.ajax({
         url : stations.fleetwoodMac,
         success : function(data, status, jqXHR){
@@ -643,7 +751,17 @@ function processMessage(command){
 
       break;
     case "D3":
-
+      var rgbSeries = [
+        ["rgb", 150, 0 , 150],
+        ["rgb", 50, 0, 150],
+        ["rgb", 150, 0 ,50],
+        ["rgb", 50, 0 ,50]
+      ];
+      if(inDoNewState){
+        updatedSeries = rgbSeries;
+      }else{
+        doNewState(0, rgbSeries, true);
+      }
       break;
     case "D4":
 

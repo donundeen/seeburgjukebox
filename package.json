@@ -1,0 +1,12 @@
+{
+	"name" : "seeburgjukeboxlistener",
+	"dependencies" : {
+		"osc-min" : "0.1.0",
+		"squeezenode" : "0.0.x",
+		"jquery" : "2.x.x",
+		"serialport" : "1.3.x",
+		"node-hue-api" : "0.2.x"
+
+	}
+
+}
