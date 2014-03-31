@@ -6,4 +6,5 @@ Seeburg_Draft_Sketch2/.DS_Store
 noduino/
 node_modules/jquery
 node_modules/serialport
-node_modules/osc-min
+node_modules/pandora
+node_modules/squeezenode
