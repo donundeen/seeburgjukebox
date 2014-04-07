@@ -8,3 +8,5 @@ node_modules/jquery
 node_modules/serialport
 node_modules/pandora
 node_modules/squeezenode
+node_modules/node-hue-api
+node_modules/osc-min

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+<key>Disabled</key>
+<false/>
+<key>Label</key>
+<string>com.apple.mymount</string>
+<key>ProgramArguments</key>
+<array>
+<string>/usr/local/bin/node</string>
+<string>/Users/buffy/Documents/myApps/seeburgjukebox/arduinolistener.node.js</string>
+</array>
+<key>StandardErrorPath</key>
+<string>/var/log/seeburglistener.err.log</string>
+<key>StandardOutPath</key>
+<string>/var/log/seeburglistener.out.log</string>
+<key>RunAtLoad</key>
+<true/>
+</dict>
+</plist>
