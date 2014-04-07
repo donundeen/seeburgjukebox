@@ -74,7 +74,9 @@ var SqueezeServer = require('squeezenode');
 var Spotify = require("./node_modules/squeezenode/spotify");
 var Pandora = require("./node_modules/squeezenode/pandora");
 
-var $ = require("jquery");
+
+var jsdom = require("jsdom"); 
+$ = require("jquery")(jsdom.jsdom().createWindow()); 
 
 var squeeze = new SqueezeServer('http://192.168.1.84', 9000);
 //subscribe for the 'register' event to ensure player registration is complete
