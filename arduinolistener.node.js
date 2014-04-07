@@ -55,7 +55,7 @@ files.forEach(function(filename){
 
 if(!portname){
   console.log("don't have an arduino to listen to!");
-  process.exit();
+  process.exit(1);
 }
 
 var serialport = require("serialport");
