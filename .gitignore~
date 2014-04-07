@@ -6,12 +6,12 @@ Seeburg_Draft_Sketch2/.DS_Store
 noduino/
 node_modules/jquery
 node_modules/serialport
-node_modules/pandora
-node_modules/squeezenode
 <<<<<<< HEAD
+node_models/squeezenode
+node_modules/pandora
 node_modules/node-hue-api
 node_modules/osc-min
 =======
-node_modules/osc-min
-node_modules/node-hue-api
->>>>>>> FETCH_HEAD
+node_modules/pandora
+node_modules/squeezenode
+>>>>>>> 88b4d7de0d33880f6af7ca91cb8d73516d20868d
