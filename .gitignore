@@ -8,10 +8,5 @@ node_modules/jquery
 node_modules/serialport
 node_modules/pandora
 node_modules/squeezenode
-<<<<<<< HEAD
 node_modules/node-hue-api
 node_modules/osc-min
-=======
-node_modules/osc-min
-node_modules/node-hue-api
->>>>>>> FETCH_HEAD
