@@ -5,23 +5,60 @@ var fs = require("fs");
 
 var Mopidy = require("mopidy");
 
+
+var playPlaylist = function(playlist_uri){
+    var cleared = mopidy.tracklist.clear();
+    mopidy.playback.stop();
+    cleared.then(function(){
+	mopidy.library.lookup(playlist_uri).then(function(data){
+	    console.log("lookup");
+	    var added = mopidy.tracklist.add(data);
+	    added.then(function(){
+		mopidy.playback.play();
+	    });
+	});
+    });
+};
+
+
+var stopPlaying = function(){
+    mopidy.playback.stop();
+};
+
+var randomize = function(){
+
+};
+
 var mopidy = new Mopidy({
+    autoConnect: true,
     webSocketUrl : "ws://127.0.0.1:6680/mopidy/ws/",
     callingConvention : "by-position-or-name"
 });
 
-console.log("got mopidy");
-console.log(mopidy);
-
-var promise = mopidy.tracklist.add({'uri': "spotify:track:3EKx19nFwUt3uIyz9USG6e"});
-promise.then(function(data){
-    console.log("track added");
-    console.log(data);
-    mopidy.playback.play({}).then(function(data){
-	console.log("playing");
+var listPlaylists = function(){
+    mopidy.playlists.asList().then(function(data){
 	console.log(data);
     });
+};
+
+//mopidy.on(console.log.bind(console));
+
+var mopidy_online = false;
+
+mopidy.on("state:online", function(){
+    listPlaylists();
 });
+
+
+
+//mopidy.connect();
+
+console.log("got mopidy");
+console.log(mopidy); 
+/*
+*/
+
+
 
 var displayResult = function(result) {
     console.log(JSON.stringify(result, null, 2));
@@ -83,25 +120,45 @@ function processMessage(command){
 	console.log("going to process command : " + command);
   switch(command){
   case "A1":
+      // Songs my friends like
+      playPlaylist("spotify:user:donundeen:playlist:256RJuSKsdQBdntrGp7928");
+      break;
+  case "A2":
+      // Barry White
+      playPlaylist("spotify:user:donundeen:playlist:6zIuFUjOIvG3qG1ORyuHOb");
+      break;
+  case "A3":
+      // Johnny Hartman
+      playPlaylist("spotify:user:donundeen:playlist:3hx6GfQJENuW84C7YQ6cIe");
+      break;
+  case "A4":
+      // vibraphone players
+      playPlaylist("spotify:user:donundeen:playlist:2qbUArKUbtWwWdYlJ1o0LD");
+      break;
+  case "A5":
+      // fierce tenors
+      playPlaylist("'spotify:user:donundeen:playlist:0G1EhPDl2ef4KfoZrIusQi");
+      break;
+  case "A6":
+      // wilco
+      playPlaylist("spotify:user:donundeen:playlist:2nxQBojlEceOCnBjXZNdal");
+      break;
+   case "A7":
+      // dorothy ashby
+      playPlaylist("spotify:user:donundeen:playlist:18BWkPW3hXIVv276wstMxT");
+      break;
+  case "A8":
+      // classic tenors
+      playPlaylist("spotify:user:donundeen:playlist:6QRS4jCAsPKK4zSG3SPQfj");
+      break;
       
+  case "A9":
+      // jazz organ
+      playPlaylist("spotify:user:donundeen:playlist:4OOD1glae7mrq4Z6hA4fEi");
       break;
-    case "A2":
-      break;
-    case "A3":
-      break;
-    case "A4":
-      break;
-    case "A5":
-      break;
-    case "A6":
-      break;
-    case "A7":
-      break;
-    case "A8":
-      break;
-    case "A9":
-      break;
-    case "A10":
+  case "A10":
+      //afrobeat
+      playPlaylist("spotify:user:donundeen:playlist:3o4MEIW5FWeEYnLIat9SiG");
       break;
     case "B1":
       break;
