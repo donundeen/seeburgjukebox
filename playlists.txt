@@ -1,3 +1,5 @@
+this is an added comment
+
 got mopidy
 { _console: 
    { log: [Function],
