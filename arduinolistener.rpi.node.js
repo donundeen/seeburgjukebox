@@ -21,12 +21,24 @@ var playPlaylist = function(playlist_uri){
 };
 
 
+var shuffle = function(){
+    mopidy.tracklist.shuffle();
+};
+
+var nextSong = function(){
+    mopidy.playback.next();
+};
+
 var stopPlaying = function(){
     mopidy.playback.stop();
 };
 
-var randomize = function(){
+var startPlaying = function(){
+  mopidy.playback.play();
+};
 
+var reboot = function(){
+  require('reboot').reboot();
 };
 
 var mopidy = new Mopidy({
@@ -151,7 +163,6 @@ function processMessage(command){
       // classic tenors
       playPlaylist("spotify:user:donundeen:playlist:6QRS4jCAsPKK4zSG3SPQfj");
       break;
-      
   case "A9":
       // jazz organ
       playPlaylist("spotify:user:donundeen:playlist:4OOD1glae7mrq4Z6hA4fEi");
@@ -161,12 +172,20 @@ function processMessage(command){
       playPlaylist("spotify:user:donundeen:playlist:3o4MEIW5FWeEYnLIat9SiG");
       break;
     case "B1":
+      // next song
+      nextSong();
       break;
     case "B2":
+      //shuffle
+      shuffle();
       break;
     case "B3":
+      // stop playback
+      stopPlaying();
       break;
     case "B4":
+      //start playback
+      startPlaying();
       break;
     case "B5":
       break;
