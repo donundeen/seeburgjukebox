@@ -420,7 +420,7 @@ function processMessage(command){
 
       break;
     case "K10":
-
+      reboot();
       break;
 
 
