@@ -4,6 +4,7 @@ Seeburg_Draft_Sketch2/.DS_Store
 .DS_Store
 
 noduino/
+node_modules/mopidy
 node_modules/jquery
 node_modules/serialport
 node_modules/pandora
@@ -11,3 +12,5 @@ node_modules/squeezenode
 node_modules/node-hue-api
 node_modules/osc-min
 node_modules/jsdom
+
+node_modules/mopidy/.npmignore

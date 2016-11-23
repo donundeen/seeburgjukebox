@@ -5,32 +5,22 @@ var fs = require("fs");
 
 var Mopidy = require("mopidy");
 
-
-var playPlaylist = function(playlist_uri){
-    var cleared = mopidy.tracklist.clear();
-    mopidy.playback.stop();
-    cleared.then(function(){
-	mopidy.library.lookup(playlist_uri).then(function(data){
-	    console.log("lookup");
-	    var added = mopidy.tracklist.add(data);
-	    added.then(function(){
-		mopidy.playback.play();
-	    });
-	});
-    });
-};
-
+var mopidy = new Mopidy({
+    autoConnect: true,
+    webSocketUrl : "ws://127.0.0.1:6680/mopidy/ws/",
+    callingConvention : "by-position-or-name"
+});
 
 var shuffle = function(){
-    mopidy.tracklist.shuffle();
+  mopidy.tracklist.shuffle();
 };
 
 var nextSong = function(){
-    mopidy.playback.next();
+  mopidy.playback.next();
 };
 
 var stopPlaying = function(){
-    mopidy.playback.stop();
+  mopidy.playback.stop();
 };
 
 var startPlaying = function(){
@@ -41,16 +31,28 @@ var reboot = function(){
   require('reboot').reboot();
 };
 
-var mopidy = new Mopidy({
-    autoConnect: true,
-    webSocketUrl : "ws://127.0.0.1:6680/mopidy/ws/",
-    callingConvention : "by-position-or-name"
-});
+
+var playPlaylist = function(playlist_uri){
+  var cleared = mopidy.tracklist.clear();
+  mopidy.playback.stop();
+  cleared.then(function(){
+    mopidy.library.lookup(playlist_uri).then(function(data){
+      console.log("lookup");
+      var added = mopidy.tracklist.add(data);
+      added.then(function(){
+        shuffle();
+        mopidy.playback.play();
+      });
+    });
+  });
+};
+
+
 
 var listPlaylists = function(){
-    mopidy.playlists.asList().then(function(data){
-	console.log(data);
-    });
+  mopidy.playlists.asList().then(function(data){
+	  console.log(data);
+  });
 };
 
 //mopidy.on(console.log.bind(console));
