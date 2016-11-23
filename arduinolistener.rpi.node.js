@@ -151,7 +151,7 @@ function processMessage(command){
       break;
   case "A5":
       // fierce tenors
-      playPlaylist("'spotify:user:donundeen:playlist:0G1EhPDl2ef4KfoZrIusQi");
+      playPlaylist("spotify:user:donundeen:playlist:0G1EhPDl2ef4KfoZrIusQi");
       break;
   case "A6":
       // wilco
