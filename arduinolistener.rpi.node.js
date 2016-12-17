@@ -134,8 +134,8 @@ function processMessage(command){
 	console.log("going to process command : " + command);
   switch(command){
   case "A1":
-      // Songs my friends like
-      playPlaylist("spotify:user:donundeen:playlist:256RJuSKsdQBdntrGp7928");
+      // Maker Hub Staff picks
+      playPlaylist("spotify:user:donundeen:playlist:6HxYIhgWt8BOoDpC9Scpcz");
       break;
   case "A2":
       // Barry White
@@ -190,6 +190,8 @@ function processMessage(command){
       startPlaying();
       break;
     case "B5":
+      // Songs my friends like
+      playPlaylist("spotify:user:donundeen:playlist:256RJuSKsdQBdntrGp7928");		  
       break;
     case "B6":
       break;
