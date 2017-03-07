@@ -190,14 +190,20 @@ function processMessage(command){
       startPlaying();
       break;
     case "B5":
-      // Songs my friends like
-      playPlaylist("spotify:user:donundeen:playlist:256RJuSKsdQBdntrGp7928");		  
+      // Brian Eno spotify:user:donundeen:playlist:1upuMzQyMwwAHVf2msmDWm
+      playPlaylist("spotify:user:donundeen:playlist:1upuMzQyMwwAHVf2msmDWm");		  
       break;
     case "B6":
+      // the Shins spotify:user:donundeen:playlist:6wgip2mM9hKKjc9MgUbJxL
+      playPlaylist("spotify:user:donundeen:playlist:6wgip2mM9hKKjc9MgUbJxL");		  
       break;
     case "B7":
+		  // Smooth 80's Jams
+      playPlaylist("spotify:user:donundeen:playlist:7DMtiftZqnle27n9uCNOR2");
       break;
     case "B8":
+		  // Clap your hands say yeah 
+      playPlaylist("spotify:user:donundeen:playlist:4iEKSHmA51XCv58mZ2JpND");
       break;
     case "B9":
       break;
