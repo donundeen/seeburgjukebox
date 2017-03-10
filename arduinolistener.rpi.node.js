@@ -48,7 +48,9 @@ var playPlaylist = function(playlist_uri){
 };
 
 var setVolumeLow = function(){
-	mopidy.mixer.set_volume(20);
+	
+	var result = mopidy.mixer.set_volume(20);
+	console.log("set volume low " + result);
 };
 
 var setVolumeMedium = function(){
