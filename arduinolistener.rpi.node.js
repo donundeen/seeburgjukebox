@@ -71,6 +71,7 @@ var mopidy_online = false;
 
 mopidy.on("state:online", function(){
     listPlaylists();
+    setVolumeMedium();
 });
 
 
