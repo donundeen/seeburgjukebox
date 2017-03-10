@@ -47,7 +47,17 @@ var playPlaylist = function(playlist_uri){
   });
 };
 
+var setVolumeLow = function(){
+	mopidy.mixer.set_volume(20);
+};
 
+var setVolumeMedium = function(){
+	mopidy.mixer.set_volume(50);
+};
+
+var setVolumeHigh = function(){
+	mopidy.mixer.set_volume(70);
+};
 
 var listPlaylists = function(){
   mopidy.playlists.asList().then(function(data){
@@ -205,15 +215,18 @@ function processMessage(command){
 		  // Clap your hands say yeah 
       playPlaylist("spotify:user:donundeen:playlist:4iEKSHmA51XCv58mZ2JpND");
       break;
-    case "B9":
+    case "B9": 
       break;
     case "B10":
       break;
-    case "C1":
+    case "C1": // set volume low
+      setVolumeLow();
       break;
-    case "C2":
+    case "C2": // set volume Medium
+      setVolumeMedium();
       break;
-    case "C3":
+    case "C3": // set volume High
+      setVolumeHigh();
       break;
     case "C4":
       break;
