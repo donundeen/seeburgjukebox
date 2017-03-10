@@ -49,16 +49,16 @@ var playPlaylist = function(playlist_uri){
 
 var setVolumeLow = function(){
 	
-	var result = mopidy.mixer.set_volume(20);
+	var result = mopidy.mixer.setVolume(20);
 	console.log("set volume low " + result);
 };
 
 var setVolumeMedium = function(){
-	mopidy.mixer.set_volume(50);
+	mopidy.mixer.setVolume(50);
 };
 
 var setVolumeHigh = function(){
-	mopidy.mixer.set_volume(70);
+	mopidy.mixer.setVolume(70);
 };
 
 var listPlaylists = function(){
