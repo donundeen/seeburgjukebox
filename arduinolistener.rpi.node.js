@@ -159,7 +159,10 @@ var serialPort = new SerialPort(portname, {
 function processMessage(command){
 	console.log("going to process command : " + command);
 	if(sb){
+		console.log("sending to spacebrew");
 		sb.send("selection","string",command);
+	}else{
+		console.log("not going to send to spacebrew");	
 	}
   switch(command){
   case "A1":
