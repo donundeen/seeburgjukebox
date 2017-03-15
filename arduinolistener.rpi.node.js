@@ -9,10 +9,14 @@ var Spacebrew = require('spacebrew');
 var server = "192.168.1.96";
 var name = "Jukebox";
 var description = "Jukebox Selections";
-var sb = new Spacebrew.Client( server, name, description );
-sb.addPublish("selection", "string", "Jukebox selection code");  // create the publication feed
-sb.send("selection","string","boot");
-
+var sb = false;
+try{
+	sb = new Spacebrew.Client( server, name, description );
+}catch(ex){}
+if(sb){
+	sb.addPublish("selection", "string", "Jukebox selection code");  // create the publication feed
+	sb.send("selection","string","boot");
+}
 
 var mopidy = new Mopidy({
     autoConnect: true,
@@ -154,8 +158,9 @@ var serialPort = new SerialPort(portname, {
 
 function processMessage(command){
 	console.log("going to process command : " + command);
-	sb.send("selection","string",command);
-
+	if(sb){
+		sb.send("selection","string",command);
+	}
   switch(command){
   case "A1":
       // Maker Hub Staff picks
