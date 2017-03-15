@@ -14,9 +14,11 @@ sb = new Spacebrew.Client( server, name, description );
 if(sb){
 	sb.addPublish("selection", "string", "Jukebox selection code");  // create the publication feed
 	sb.connect();
+	sb.addPublish("selection2", "string", "Jukebox selection code");  // create the publication feed
 
 //	sb.send("selection","string","boot");
 }
+	sb.addPublish("selection3", "string", "Jukebox selection code");  // create the publication feed
 
 var mopidy = new Mopidy({
     autoConnect: true,
