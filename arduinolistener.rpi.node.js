@@ -11,10 +11,11 @@ var name = "Jukebox";
 var description = "Jukebox Selections";
 var sb = false;
 sb = new Spacebrew.Client( server, name, description );
-sb.connect();
 if(sb){
 	sb.addPublish("selection", "string", "Jukebox selection code");  // create the publication feed
-	sb.send("selection","string","boot");
+	sb.connect();
+
+//	sb.send("selection","string","boot");
 }
 
 var mopidy = new Mopidy({
