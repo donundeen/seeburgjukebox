@@ -10,9 +10,7 @@ var server = "192.168.1.96";
 var name = "Jukebox";
 var description = "Jukebox Selections";
 var sb = false;
-try{
-	sb = new Spacebrew.Client( server, name, description );
-}catch(ex){}
+sb = new Spacebrew.Client( server, name, description );
 if(sb){
 	sb.addPublish("selection", "string", "Jukebox selection code");  // create the publication feed
 	sb.send("selection","string","boot");
