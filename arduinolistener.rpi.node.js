@@ -124,6 +124,18 @@ mopidy.on("state:online", function(){
 mopidy.on("event:trackPlaybackStarted", function(track){
 	console.log("track playback started 2");
 	console.log(JSON.stringify(track, null, 2));
+	try{
+		console.log("artist " + track.tl_track.track.artists[0].name);
+		sb.send("songartist","string", track.tl_track.track.artists[0].name);
+	}catch(artisterror){
+		console.log("error getting track artists name");	
+	}
+	try{
+		console.log("song " + track.tl_track.track.name);
+		sb.send("songtitle","string", track.tl_track.track.name);
+	}catch(titleerror){
+		console.log("error getting track name");
+	}
 });
 
 //mopidy.connect();
