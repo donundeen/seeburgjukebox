@@ -1,6 +1,18 @@
 // placeholder for the work i'll do getting node and arduino to talk:
 // https://github.com/voodootikigod/node-serialport
 //
+
+// fail if network isn't up:
+    require('dns').lookup('google.com',function(err) {
+        if (err && err.code == "ENOTFOUND") {
+		console.log("no network, shutting down");
+		process.exit();
+        } else {
+		// all ok
+	}
+    });
+
+
 var fs = require("fs");
 
 var Mopidy = require("mopidy");
