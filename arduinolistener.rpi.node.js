@@ -5,6 +5,8 @@ var fs = require("fs");
 
 var Mopidy = require("mopidy");
 
+var allPlaylists = {};
+
 var Spacebrew = require('spacebrew');
 var server = "192.168.1.96";
 var name = "Jukebox";
@@ -69,10 +71,11 @@ var reboot = function(){
 var playPlaylist = function(playlist_uri){
   var cleared = mopidy.tracklist.clear();
   mopidy.playback.stop();
+  var playlist = allPlaylists[playlist_uri];
+  console.log("playlist is ");
+  console.log(playlist);
   cleared.then(function(){
     mopidy.library.lookup(playlist_uri).then(function(data){
-      console.log("lookup");
-	    console.log(data);
       var added = mopidy.tracklist.add(data);
       added.then(function(){
         shuffle();
@@ -83,7 +86,6 @@ var playPlaylist = function(playlist_uri){
 };
 
 var setVolumeLow = function(){
-	
 	var result = mopidy.mixer.setVolume(10);
 	console.log("set volume low " + result);
 };
@@ -99,6 +101,9 @@ var setVolumeHigh = function(){
 var listPlaylists = function(){
   mopidy.playlists.asList().then(function(data){
 	  console.log(data);
+	  for (var i=0; i < data.length; i++){
+		allPlaylists[data[i].uri] = data[i];	  
+	  }
   });
 };
 
@@ -112,12 +117,10 @@ mopidy.on("state:online", function(){
 });
 
 //mopidy.on(console.log.bind(console));
-mopidy.on("track_playback_started", function(track){
-	console.log("track playback started 1");
-});
+
 mopidy.on("event:trackPlaybackStarted", function(track){
 	console.log("track playback started 2");
-	console.log(track);
+	console.log(JSON.stringify(track));
 });
 
 //mopidy.connect();
