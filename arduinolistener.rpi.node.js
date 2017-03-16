@@ -21,7 +21,7 @@ if(sb){
 		sb.addPublish("selection", "string", "Jukebox selection code");  // create the publication feed
 		console.log("connect");
 		sb.connect();
-		sb.socket.error(function(error){
+		sb.socket.on("error",function(error){
 			console.log("caught error");
 			console.log(error);
 		});
