@@ -13,6 +13,10 @@ var sb = false;
 sb = new Spacebrew.Client( server, name, description );
 if(sb){
 	try{
+		sb.on("error", function(error){
+			console.log("caught error");
+			console.log(error);
+		});
 		console.log("onClose");
 		sb.onClose(function(){
 			 console.log("closed");
