@@ -22,8 +22,10 @@ if(sb){
 		console.log("connect");
 		sb.connect();
 		sb.socket.on("error",function(error){
-			console.log("caught error");
+			
+			console.log("caught spacebrew websocket error");
 			console.log(error);
+			sb = false;
 		});
 		
 	}catch(ex){
