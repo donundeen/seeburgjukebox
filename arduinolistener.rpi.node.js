@@ -74,7 +74,9 @@ var playPlaylist = function(playlist_uri){
   var playlist = allPlaylists[playlist_uri];
   console.log("playlist is ");
   console.log(playlist);
-  sb.send("playlistname", "string", playlist.name);
+  if(sb){
+	  sb.send("playlistname", "string", playlist.name);
+  }
   cleared.then(function(){
     mopidy.library.lookup(playlist_uri).then(function(data){
       var added = mopidy.tracklist.add(data);
