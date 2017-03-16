@@ -19,6 +19,9 @@ if(sb){
 		});
 		console.log("addPublish");
 		sb.addPublish("selection", "string", "Jukebox selection code");  // create the publication feed
+		sb.addPublish("songtitle", "string", "current jukebox song");  // create the publication feed
+		sb.addPublish("songartist", "string", "current jukebox artist");  // create the publication feed
+		sb.addPublish("playlistname", "string", "current jukebox playlist");  // create the publication feed
 		console.log("connect");
 		sb.connect();
 		sb.socket.on("error",function(error){
@@ -69,6 +72,7 @@ var playPlaylist = function(playlist_uri){
   cleared.then(function(){
     mopidy.library.lookup(playlist_uri).then(function(data){
       console.log("lookup");
+	    console.log(data);
       var added = mopidy.tracklist.add(data);
       added.then(function(){
         shuffle();
@@ -107,6 +111,7 @@ mopidy.on("state:online", function(){
     setVolumeMedium();
 });
 
+mopidy.on(console.log.bind(console));
 
 
 //mopidy.connect();
