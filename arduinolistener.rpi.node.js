@@ -122,7 +122,6 @@ mopidy.on("state:online", function(){
 mopidy.on("event:trackPlaybackStarted", function(track){
 	console.log("track playback started 2");
 	console.log(JSON.stringify(track, null, 2));
-	console.log(track.
 });
 
 //mopidy.connect();
