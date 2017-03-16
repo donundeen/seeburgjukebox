@@ -111,8 +111,14 @@ mopidy.on("state:online", function(){
     setVolumeMedium();
 });
 
-mopidy.on(console.log.bind(console));
-
+//mopidy.on(console.log.bind(console));
+mopidy.on("track_playback_started", function(track){
+	console.log("track playback started 1");
+});
+mopidy.on("event:trackPlaybackStarted", function(track){
+	console.log("track playback started 2");
+	console.log(track);
+});
 
 //mopidy.connect();
 
