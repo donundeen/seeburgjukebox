@@ -3,6 +3,7 @@
 //
 
 // fail if network isn't up:
+/*
     require('dns').lookup('google.com',function(err) {
         if (err && err.code == "ENOTFOUND") {
 		console.log("no network, shutting down");
@@ -11,7 +12,7 @@
 		// all ok
 	}
     });
-
+*/
 
 var fs = require("fs");
 
@@ -24,6 +25,11 @@ var server = "192.168.1.96";
 var name = "Jukebox";
 var description = "Jukebox Selections";
 var sb = false;
+
+function sb_connect(){
+	if(sb){
+		return;
+	}
 sb = new Spacebrew.Client( server, name, description );
 if(sb){
 	try{
@@ -52,6 +58,8 @@ if(sb){
 	}
 //	sb.send("selection","string","boot");
 }
+}
+sb_connect();
 
 var mopidy = new Mopidy({
     autoConnect: true,
@@ -217,6 +225,7 @@ var serialPort = new SerialPort(portname, {
 
 function processMessage(command){
 	console.log("going to process command : " + command);
+	sb_connect();
 	if(sb){
 		console.log("sending to spacebrew");
 		sb.send("selection","string",command);
