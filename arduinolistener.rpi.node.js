@@ -12,8 +12,14 @@ var description = "Jukebox Selections";
 var sb = false;
 sb = new Spacebrew.Client( server, name, description );
 if(sb){
-	sb.addPublish("selection", "string", "Jukebox selection code");  // create the publication feed
 	try{
+		console.log("onClose");
+		sb.onClose(function(){
+			 console.log("closed");
+		});
+		console.log("addPublish");
+		sb.addPublish("selection", "string", "Jukebox selection code");  // create the publication feed
+		console.log("connect");
 		sb.connect();
 	}catch(ex){
 		console.log("exception " );
