@@ -109,16 +109,16 @@ var playPlaylist = function(playlist_uri){
 };
 
 var setVolumeLow = function(){
-	var result = mopidy.mixer.setVolume(10);
+	var result = mopidy.mixer.setVolume(5);
 	console.log("set volume low " + result);
 };
 
 var setVolumeMedium = function(){
-	mopidy.mixer.setVolume(30);
+	mopidy.mixer.setVolume(15);
 };
 
 var setVolumeHigh = function(){
-	mopidy.mixer.setVolume(50);
+	mopidy.mixer.setVolume(25);
 };
 
 var listPlaylists = function(){
@@ -136,7 +136,7 @@ var mopidy_online = false;
 
 mopidy.on("state:online", function(){
     listPlaylists();
-    setVolumeMedium();
+    setVolumeLow();
 });
 
 //mopidy.on(console.log.bind(console));
