@@ -306,8 +306,12 @@ function processMessage(command){
       playPlaylist("spotify:user:donundeen:playlist:4iEKSHmA51XCv58mZ2JpND");
       break;
     case "B9": 
+		  // magnetic fields
+      playPlaylist("spotify:user:donundeen:playlist:7oekMg1d0Jd4V9Pl242DV8");
       break;
     case "B10":
+		  // The Hold Steady
+      playPlaylist("spotify:user:donundeen:playlist:3Hs9sHphOiM8JeyI6nudZG");
       break;
     case "C1": // set volume low
       setVolumeLow();
