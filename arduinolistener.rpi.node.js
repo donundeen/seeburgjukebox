@@ -24,9 +24,10 @@ ps.lookup({
     psargs: ''
     }, function(err, resultList ) {
     if (err) {
+	    console.log("there was an error");
         throw new Error( err );
     }
- 
+ console.log(resultList);
     resultList.forEach(function( process ){
         if( process ){
             console.log( 'PID: %s, COMMAND: %s, ARGUMENTS: %s', process.pid, process.command, process.arguments );
