@@ -21,7 +21,7 @@ var ps = require("ps-node");
 
 ps.lookup({
     command: '/usr/bin/nodejs',
-    psargs: ''
+    psargs: 'arduinolistener.rpi.node.js'
     }, function(err, resultList ) {
 	console.log("got pslookup results");
     if (err) {
