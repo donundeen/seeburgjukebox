@@ -23,6 +23,7 @@ ps.lookup({
     command: '/usr/bin/nodejs',
     psargs: ''
     }, function(err, resultList ) {
+	console.log("got pslookup results");
     if (err) {
 	    console.log("there was an error");
         throw new Error( err );
