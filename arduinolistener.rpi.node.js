@@ -16,6 +16,24 @@
 
 var fs = require("fs");
 
+var ps = require("ps-node");
+
+
+ps.lookup({
+    command: '/usr/bin/nodejs',
+    psargs: ''
+    }, function(err, resultList ) {
+    if (err) {
+        throw new Error( err );
+    }
+ 
+    resultList.forEach(function( process ){
+        if( process ){
+            console.log( 'PID: %s, COMMAND: %s, ARGUMENTS: %s', process.pid, process.command, process.arguments );
+        }
+    });
+});
+
 var Mopidy = require("mopidy");
 
 var allPlaylists = {};
