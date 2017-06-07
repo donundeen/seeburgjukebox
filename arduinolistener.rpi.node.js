@@ -338,6 +338,9 @@ function processMessage(command){
     case "C10":
       break;
     case "D1":
+		// spotify:user:1269706439:playlist:1JuUoy8kiYVXlwnmpUg3lo
+		  //https://open.spotify.com/user/1269706439/playlist/1JuUoy8kiYVXlwnmpUg3lo
+      playPlaylist("spotify:user:1269706439:playlist:1JuUoy8kiYVXlwnmpUg3lo");
       break;
     case "D2":
       break;
