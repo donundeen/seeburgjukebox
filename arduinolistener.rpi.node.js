@@ -1,7 +1,7 @@
 // placeholder for the work i'll do getting node and arduino to talk:
 // https://github.com/voodootikigod/node-serialport
 //
-
+// see mopidy docs here: https://docs.mopidy.com/en/latest/api/core/#mopidy.core.PlaybackController 
 // fail if network isn't up:
 /*
     require('dns').lookup('google.com',function(err) {
@@ -43,6 +43,57 @@ if(sb){
 		sb.addPublish("songtitle", "string", "current jukebox song");  // create the publication feed
 		sb.addPublish("songartist", "string", "current jukebox artist");  // create the publication feed
 		sb.addPublish("playlistname", "string", "current jukebox playlist");  // create the publication feed
+		sb.addSubscribe("Select_A1","string","any string to trigger A1");
+		sb.addSubscribe("Select_A2","string","any string to trigger A2");
+		sb.addSubscribe("Select_A3","string","any string to trigger A3");
+		sb.addSubscribe("Select_A4","string","any string to trigger A4");
+		sb.addSubscribe("Select_A5","string","any string to trigger A5");
+		sb.addSubscribe("Select_A6","string","any string to trigger A6");
+		sb.addSubscribe("Select_A7","string","any string to trigger A7");
+		sb.addSubscribe("Select_A8","string","any string to trigger A8");
+		sb.addSubscribe("Select_A9","string","any string to trigger A9");
+		sb.addSubscribe("Select_A10","string","any string to trigger A10");
+		sb.addSubscribe("Select_B1","string","any string to trigger B1");
+		sb.addSubscribe("Select_B2","string","any string to trigger B2");
+		sb.addSubscribe("Select_B3","string","any string to trigger B3");
+		sb.addSubscribe("Select_B4","string","any string to trigger B4");
+		sb.addSubscribe("Select_B5","string","any string to trigger B5");
+		sb.addSubscribe("Select_B6","string","any string to trigger B6");
+		sb.addSubscribe("Select_B7","string","any string to trigger B7");
+		sb.addSubscribe("Select_B8","string","any string to trigger B8");
+		sb.addSubscribe("Select_B9","string","any string to trigger B9");
+		sb.addSubscribe("Select_B10","string","any string to trigger B10");
+		sb.addSubscribe("Select_C1","string","any string to trigger C1");
+		sb.addSubscribe("Select_C2","string","any string to trigger C2");
+		sb.addSubscribe("Select_C3","string","any string to trigger C3");
+		sb.addSubscribe("Select_C4","string","any string to trigger C4");
+		sb.addSubscribe("Select_C5","string","any string to trigger C5");
+		sb.addSubscribe("Select_C6","string","any string to trigger C6");
+		sb.addSubscribe("Select_C7","string","any string to trigger C7");
+		sb.addSubscribe("Select_C8","string","any string to trigger C8");
+		sb.addSubscribe("Select_C9","string","any string to trigger C9");
+		sb.addSubscribe("Select_C10","string","any string to trigger C10");
+		sb.addSubscribe("Select_D1","string","any string to trigger D1");
+		sb.addSubscribe("Select_D2","string","any string to trigger D2");
+		sb.addSubscribe("Select_D3","string","any string to trigger D3");
+		sb.addSubscribe("Select_D4","string","any string to trigger D4");
+		sb.addSubscribe("Select_D5","string","any string to trigger D5");
+		sb.addSubscribe("Select_D6","string","any string to trigger D6");
+		sb.addSubscribe("Select_D7","string","any string to trigger D7");
+		sb.addSubscribe("Select_D8","string","any string to trigger D8");
+		sb.addSubscribe("Select_D9","string","any string to trigger D9");
+		sb.addSubscribe("Select_D10","string","any string to trigger D10");
+		
+		
+		sb.onStringMessage = onStringMessage( name, value ){
+			if(name.match(/Select_.*/) {
+				console.log("Message from sb: "+name);
+				var matches = name.match(/Select_([A-K][0-9]+)/);
+				var sent_command = matches[1];
+				processMessage(sent_command);	
+			}
+		}		
+		
 		console.log("connect");
 		sb.connect();
 		sb.socket.on("error",function(error){
