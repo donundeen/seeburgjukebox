@@ -311,7 +311,11 @@ var playPlaylist = function(playlist_uri){
   console.log("playlist is ");
   console.log(playlist);
   if(sb){
-	  sb.send("playlistname", "string", playlist.name);
+	  try{
+		  sb.send("playlistname", "string", playlist.name);
+	  }catch(e){
+		console.log("sb send error " + e);	  
+	  }
   }
   cleared.then(function(){
     mopidy.library.lookup(playlist_uri).then(function(data){
