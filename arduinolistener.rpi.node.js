@@ -31,13 +31,17 @@ function sb_connect(){
 	if(sb){
 		return;
 	}
-sb = new Spacebrew.Client( server, name, description );
-if(sb){
+	sb = new Spacebrew.Client( server, name, description );
+	if(sb){
 	try{
-		console.log("onClose");
 		sb.onClose(function(){
-			 console.log("closed");
+			 console.log("sb closed");
 		});
+		
+		sb.onOpen(function(){
+			console.log("sb opened");
+		}
+		
 		console.log("addPublish");
 		sb.addPublish("selection", "string", "Jukebox selection code");  // create the publication feed
 		sb.addPublish("songtitle", "string", "current jukebox song");  // create the publication feed
@@ -245,8 +249,6 @@ if(sb){
                 sb.addPublish("Selected_K8","string","sent when the Jukebox has selected K8");
                 sb.addPublish("Selected_K9","string","sent when the Jukebox has selected K9");
                 sb.addPublish("Selected_K10","string","sent when the Jukebox has selected K10");
-
-		
 		
 		sb.onStringMessage = function( name, value ){
 			if(name.match(/Select_.*/)) {
@@ -260,14 +262,13 @@ if(sb){
 		console.log("connect");
 		sb.connect();
 		sb.socket.on("error",function(error){
-			
 			console.log("caught spacebrew websocket error");
 			console.log(error);
 			sb = false;
 		});
 		
 	}catch(ex){
-		console.log("exception " );
+		console.log("sb connect exception " );
 		console.log(ex);
 		sb = false;
 	}
@@ -443,8 +444,12 @@ function processMessage(command){
 	sb_connect();
 	if(sb){
 		console.log("sending to spacebrew");
-		sb.send("selection","string",command);
-		sb.send("Selected_" + command,"string",command);
+		try{
+			sb.send("selection","string",command);
+			sb.send("Selected_" + command,"string",command);
+		}catch(e){
+			console.log("error sending to spacebrew : "  + e);	
+		}
 	}else{
 		console.log("not going to send to spacebrew");	
 	}
