@@ -249,7 +249,7 @@ if(sb){
 		
 		
 		sb.onStringMessage = function( name, value ){
-			if(name.match(/Select_.*/) {
+			if(name.match(/Select_.*/)) {
 				console.log("Message from sb: "+name);
 				var matches = name.match(/Select_([A-K][0-9]+)/);
 				var sent_command = matches[1];
