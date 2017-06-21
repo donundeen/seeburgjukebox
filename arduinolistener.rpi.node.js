@@ -40,7 +40,7 @@ function sb_connect(){
 		
 		sb.onOpen(function(){
 			console.log("sb opened");
-		}
+		});
 		
 		console.log("addPublish");
 		sb.addPublish("selection", "string", "Jukebox selection code");  // create the publication feed
