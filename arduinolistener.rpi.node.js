@@ -303,7 +303,7 @@ var reboot = function(){
   require('reboot').reboot();
 };
 
-var interruptWithTrack(){
+var interruptWithTrack = function(){
 	// get current track and time position
 	var currentTrack = mopidy.playback.getCurrentTrack();
 	var currentPosition = mopidy.playback.getTimePosition();
