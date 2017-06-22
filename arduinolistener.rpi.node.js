@@ -303,6 +303,39 @@ var reboot = function(){
   require('reboot').reboot();
 };
 
+var interruptWithTrack(){
+	// get current track and time position
+	var currentTrack = mopidy.playback.getCurrentTrack();
+	var currentPosition = mopidy.playback.getTimePosition();
+	// end playback
+	
+	var songDir = "";
+	var interruptSong = "welcomeToMakerHub.mp3";
+	var interruptUri = songDir + interruptSong;
+	// add interrupt track to playlist, at first position	
+	var added = mopidy.tracklist.add(null, 0, interruptUri);
+	// play the track
+	var newTrack  =added[0];
+	var whenDone;
+	whenDone = function(track){
+	
+		mopidy.playback.play(currentTrack);
+		mopidy.playback.pause();
+		mopidy.playback.seek(currentPosition);
+		mopidy.playback.resume();
+		// resume at original location
+		// remove the track
+		mopidy.tracklist.remove(newTrack);
+		
+		// remove the listener
+		mopidy.off("event:trackPlaybackEnded", whenDone);
+	};
+	mopidy.playback.stop();
+
+	mopidy.on("event:trackPlaybackEnded", whenDone);
+	mopidy.playback.play(newTrack);
+};
+
 
 var playPlaylist = function(playlist_uri){
   var cleared = mopidy.tracklist.clear();
