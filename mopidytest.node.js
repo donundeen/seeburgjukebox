@@ -94,40 +94,59 @@ console.log("interrupting");
 };
 
 var playPlaylist = function(playlist_uri){
-	console.log("in playPlayList");
-  var cleared = mopidy.tracklist.clear();
-  mopidy.playback.stop();
-  var playlist = allPlaylists[playlist_uri];
+  console.log("in playPlayList");
   console.log("playlist is " + playlist_uri);
-//  console.log(playlist);
-  cleared.then(function(){
-    mopidy.library.lookup(playlist_uri).then(function(data){
-      var added = mopidy.tracklist.add(data);
-      return added.then(function(){
-	console.log("going to play");
-        shuffle();
-        mopidy.playback.play();
-      });
-    });
-  }).done();
+
+  var playlist = allPlaylists[playlist_uri];
+  var playlist_data;
+	
+  var clear = function(){
+  	return mopidy.tracklist.clear();   	  
+  };
+  var stop = function(){
+	return mopidy.playback.stop();
+  };
+	
+  var lookup = function(playlist_uri){
+	return mopidy.library.lookup(playlist_uri)
+	  .then(function(data){
+		playlist_data = data;
+	});	  
+  };
+	
+  var add = function(data){
+	return mopidy.tracklist.add(data);	  
+  };
+	
+  var play = function(){
+	shuffle();
+	return mopidy.playback.play();	  
+  };
+	
+  stop()
+	.then(clear())
+	.then(lookup(playlist_uri))
+	.then(add(playlist_data))
+	.then(shuffle())
+	.then(play())
+	.done();
 };
 
 
 var shuffle = function(){
-  mopidy.tracklist.shuffle();
+  return mopidy.tracklist.shuffle();
 };
 
 var setVolumeLow = function(){
-	var result = mopidy.mixer.setVolume(5);
-	console.log("set volume low " + result);
+	return mopidy.mixer.setVolume(5);
 };
 
 var setVolumeMedium = function(){
-	mopidy.mixer.setVolume(15);
+	return mopidy.mixer.setVolume(15);
 };
 
 var setVolumeHigh = function(){
-	mopidy.mixer.setVolume(25);
+	return mopidy.mixer.setVolume(25);
 };
 
 var allPlaylists = [];
@@ -153,7 +172,7 @@ mopidy.on("state:online", function(){
 		console.log("results are  ");
 		console.log(JSON.stringify(res[0].tracks));
 	}).done();
-    playPlaylist("spotify:user:donundeen:playlist:6wgip2mM9hKKjc9MgUbJxL");		  
+ //   playPlaylist("spotify:user:donundeen:playlist:6wgip2mM9hKKjc9MgUbJxL");		  
 //setTimeout(interruptWithTrack, 3000);
 });
 
