@@ -168,8 +168,8 @@ mopidy.on("state:online", function(){
     setVolumeLow();
 //	mopidy.library.search({"track_name":"welcomeToMakerHub.mp3"}).then(function(res){
 //	mopidy.library.search({"uri":"local:"}).then(function(res){
-	mopidy.library.search({"any":"welcome"}, uris = ["file:///home/pi/Music"]).then(function(res){
-		console.log("results are  ");
+	mopidy.library.search({}, uris = ["file:///home/pi/Music"]).then(function(res){
+		console.log("results are");
 		console.log(JSON.stringify(res));
 	}).done();
  //   playPlaylist("spotify:user:donundeen:playlist:6wgip2mM9hKKjc9MgUbJxL");		  
