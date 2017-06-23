@@ -129,7 +129,7 @@ mopidy.on("state:online", function(){
 	}).done();
 	*/
     playPlaylist("spotify:user:donundeen:playlist:6wgip2mM9hKKjc9MgUbJxL");		  
-//setTimeout(interruptWithTrack, 3000);
+setTimeout(interruptWithTrack, 3000);
 	    
     
 });
