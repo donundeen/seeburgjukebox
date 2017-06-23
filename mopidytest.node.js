@@ -117,14 +117,14 @@ var playPlaylist = function(playlist_uri){
 	return mopidy.library.lookup(uri)
 	  .then(function(data){
 		console.log("data is ")
-		console.log(data);
+		//console.log(data);
 		playlist_data = data;
 	});	  
   };
 	
   var add = function(data){
 	  console.log("add");
-	  console.log(data);
+	//  console.log(data);
 	return mopidy.tracklist.add(data);	  
   };
 	
@@ -133,13 +133,18 @@ var playPlaylist = function(playlist_uri){
 	return mopidy.playback.play();	  
   };
 	
-  stop()
-	.then(clear)
-	.then(lookup(playlist_uri))
-	.then(add(playlist_data))
-	.then(shuffle)
-	.then(play)
-	.done();
+  mopidy.playback.stop()
+	.then(function(){
+	  mopidy.tracklist.clear().then(function(){
+		mopidy.library.lookup(playlist_uri).then(function(data){
+			mopidy.tracklist.add(data).then(function(){
+				mopidy.tracklist.shuffle().then(function(){
+					mopidy.playback.play();
+				})
+			})
+		})
+	  })
+  }); 
 };
 
 
