@@ -68,7 +68,7 @@ console.log("interrupting");
 
 	var addTrack = function(uri){
 //		return mopidy.tracklist.add(null, 0, uri).then(function(tracks){
-		return mopidy.tracklist.add(null, 0, "local:track:/home/pi/Music/interruptSong.mp3").then(function(tracks){
+		return mopidy.tracklist.add(null, 0, "file:///home/pi/Music/interruptSong.mp3").then(function(tracks){
 			console.log(JSON.stringify(tracks));
 			newTrack = tracks[0];
 			console.log("newTrack is ");
