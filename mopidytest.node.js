@@ -166,14 +166,17 @@ var mopidy_online = false;
 mopidy.on("state:online", function(){
     listPlaylists();
     setVolumeLow();
+    mopidy.library.refresh().then(function(){
 //	mopidy.library.search({"track_name":"welcomeToMakerHub.mp3"}).then(function(res){
 //	mopidy.library.search({"uri":"local:"}).then(function(res){
-	mopidy.library.search({}, uris = ["local:"]).then(function(res){
+	mopidy.library.search({'artist':"Manu Dibango"}).then(function(res){
 		console.log("results are");
 		console.log(JSON.stringify(res[0]));
 	}).done();
  //   playPlaylist("spotify:user:donundeen:playlist:6wgip2mM9hKKjc9MgUbJxL");		  
 //setTimeout(interruptWithTrack, 3000);
+	    
+    });
 });
 
 //mopidy.on(console.log.bind(console));
