@@ -168,7 +168,7 @@ mopidy.on("state:online", function(){
     setVolumeLow();
 //	mopidy.library.search({"track_name":"welcomeToMakerHub.mp3"}).then(function(res){
 //	mopidy.library.search({"uri":"local:"}).then(function(res){
-	mopidy.library.search({"any":"a"}, uris = ["spotify:"]).then(function(res){
+	mopidy.library.search({"any":"welcome"}, uris = ["file:///home/pi/Music"]).then(function(res){
 		console.log("results are  ");
 		console.log(JSON.stringify(res));
 	}).done();
