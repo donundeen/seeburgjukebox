@@ -40,7 +40,7 @@ console.log("interrupting");
 	// end playback
 	mopidy.playback.getCurrentTrack().then(function(track){
 		currentTrack = track;
-		mopidy.playback.getTimePosition(function(pos){
+		mopidy.playback.getTimePosition().then(function(pos){
 			currentPosition = pos;
 			mopidy.playback.pause().then(function(){
 				mopidy.playback.stop().then(function(){
