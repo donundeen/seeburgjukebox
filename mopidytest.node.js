@@ -102,49 +102,23 @@ var playPlaylist = function(playlist_uri){
 
   var playlist = allPlaylists[playlist_uri];
   var playlist_data;
-	
-  var clear = function(){
-	  console.log("clear");
-  	return mopidy.tracklist.clear();   	  
-  };
-  var stop = function(){
-	  console.log("stop");
-	return mopidy.playback.stop();
-  };
-	
-  var lookup = function(uri){
-	  console.log("lookup");
-	return mopidy.library.lookup(uri)
-	  .then(function(data){
-		console.log("data is ")
-		//console.log(data);
-		playlist_data = data;
-	});	  
-  };
-	
-  var add = function(data){
-	  console.log("add");
-	//  console.log(data);
-	return mopidy.tracklist.add(data);	  
-  };
-	
-  var play = function(){
-	  console.log("play");
-	return mopidy.playback.play();	  
-  };
-	
-  mopidy.playback.stop()
-	.then(function(){
+
+  mopidy.playback.stop().then(function(){
+	  console.log("clearing");
 	  mopidy.tracklist.clear().then(function(){
+		console.log("lookup");
 		mopidy.library.lookup(playlist_uri).then(function(data){
+			console.log("add");
 			mopidy.tracklist.add(data).then(function(){
+				console.log("shuffle");
 				mopidy.tracklist.shuffle().then(function(){
+					console.log("play");
 					mopidy.playback.play();
 				})
 			})
 		})
 	  })
-  }); 
+  }).done(); 
 };
 
 
