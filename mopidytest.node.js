@@ -112,16 +112,19 @@ var playPlaylist = function(playlist_uri){
 	return mopidy.playback.stop();
   };
 	
-  var lookup = function(playlist_uri){
+  var lookup = function(uri){
 	  console.log("lookup");
-	return mopidy.library.lookup(playlist_uri)
+	return mopidy.library.lookup(uri)
 	  .then(function(data){
+		console.log("data is ")
+		console.log(data);
 		playlist_data = data;
 	});	  
   };
 	
   var add = function(data){
 	  console.log("add");
+	  console.log(data);
 	return mopidy.tracklist.add(data);	  
   };
 	
