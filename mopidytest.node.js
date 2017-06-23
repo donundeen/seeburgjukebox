@@ -185,7 +185,7 @@ mopidy.on("state:online", function(){
     playPlaylist("spotify:user:donundeen:playlist:6wgip2mM9hKKjc9MgUbJxL");		  
 //setTimeout(interruptWithTrack, 3000);
 	    
-    });
+    
 });
 
 //mopidy.on(console.log.bind(console));
@@ -205,5 +205,3 @@ mopidy.on("event:trackPlaybackStarted", function(track){
 	}
 });
 
-
-console.log("done");
