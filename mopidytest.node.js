@@ -42,6 +42,7 @@ console.log("interrupting");
 	};
 	
 	var getCurrentTrack = function(){
+		console.log("getCurrentTrack");
 		return mopidy.playback.getCurrentTrack().then(function(value){currentTrack = value;});
 	};
 
@@ -56,6 +57,7 @@ console.log("interrupting");
 	};
 	
 	var stop = function(){
+		console.log("stop");
 		return mopidy.playback.stop();
 	};
 	var seek = function(time){
@@ -67,6 +69,7 @@ console.log("interrupting");
 	};
 
 	var addTrack = function(uri){
+		console.log("add track");
 //		return mopidy.tracklist.add(null, 0, uri).then(function(tracks){
 		return mopidy.tracklist.add(null, 0, "file:///home/pi/Music/interruptSong.mp3").then(function(tracks){
 			console.log(JSON.stringify(tracks));
@@ -174,7 +177,7 @@ mopidy.on("state:online", function(){
 		console.log(JSON.stringify(res[0]));
 	}).done();
  //   playPlaylist("spotify:user:donundeen:playlist:6wgip2mM9hKKjc9MgUbJxL");		  
-//setTimeout(interruptWithTrack, 3000);
+setTimeout(interruptWithTrack, 3000);
 	    
     });
 });
