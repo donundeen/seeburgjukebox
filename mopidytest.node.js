@@ -40,17 +40,17 @@ console.log("interrupting");
 	// end playback
 	mopidy.playback.getCurrentTrack().then(function(track){
 		currentTrack = track;
-		mopidy.playback.getTimePosition().then(function(pos){
+		return mopidy.playback.getTimePosition().then(function(pos){
 			currentPosition = pos;
-			mopidy.playback.pause().then(function(){
-				mopidy.playback.stop().then(function(){
-					mopidy.on("event:trackPlaybackEnded", whenDone).then(function(){
-						mopidy.tracklist.add(null, 0, "file:///home/pi/Music/welcomeToMakerHub.mp3").then(function(tracks){
+			return mopidy.playback.pause().then(function(){
+				return mopidy.playback.stop().then(function(){
+					return mopidy.on("event:trackPlaybackEnded", whenDone).then(function(){
+						return mopidy.tracklist.add(null, 0, "file:///home/pi/Music/welcomeToMakerHub.mp3").then(function(tracks){
 							console.log(JSON.stringify(tracks));
 							newTrack = tracks[0];
 							console.log("newTrack is ");
 							console.log(JSON.stringify(newTrack));
-							mopidfy.playback.play(newTrack);
+							return mopidfy.playback.play(newTrack);
 						})							
 					})
 				})
