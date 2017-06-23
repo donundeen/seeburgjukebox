@@ -127,7 +127,7 @@ mopidy.on("state:online", function(){
 		console.log(JSON.stringify(res[0]));
 	}).done();
 	*/
-    playPlaylist("spotify:user:donundeen:playlist:6wgip2mM9hKKjc9MgUbJxL");		  
+   // playPlaylist("spotify:user:donundeen:playlist:6wgip2mM9hKKjc9MgUbJxL");		  
 setTimeout(interruptWithTrack, 3000);
 	    
     
