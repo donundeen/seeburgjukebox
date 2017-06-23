@@ -170,7 +170,7 @@ mopidy.on("state:online", function(){
 //	mopidy.library.search({"uri":"local:"}).then(function(res){
 	mopidy.library.search({"any":"a"}, uris = ["spotify:"]).then(function(res){
 		console.log("results are  ");
-		console.log(JSON.stringify(res[0]t));
+		console.log(JSON.stringify(res[0]));
 	}).done();
  //   playPlaylist("spotify:user:donundeen:playlist:6wgip2mM9hKKjc9MgUbJxL");		  
 //setTimeout(interruptWithTrack, 3000);
