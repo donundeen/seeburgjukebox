@@ -44,15 +44,14 @@ console.log("interrupting");
 			currentPosition = pos;
 			return mopidy.playback.pause().then(function(){
 				return mopidy.playback.stop().then(function(){
-					return mopidy.on("event:trackPlaybackEnded", whenDone).then(function(){
-						return mopidy.tracklist.add(null, 0, "file:///home/pi/Music/welcomeToMakerHub.mp3").then(function(tracks){
-							console.log(JSON.stringify(tracks));
-							newTrack = tracks[0];
-							console.log("newTrack is ");
-							console.log(JSON.stringify(newTrack));
-							return mopidfy.playback.play(newTrack);
-						})							
-					})
+					mopidy.on("event:trackPlaybackEnded", whenDone);
+					return mopidy.tracklist.add(null, 0, "file:///home/pi/Music/welcomeToMakerHub.mp3").then(function(tracks){
+						console.log(JSON.stringify(tracks));
+						newTrack = tracks[0];
+						console.log("newTrack is ");
+						console.log(JSON.stringify(newTrack));
+						return mopidfy.playback.play(newTrack);
+					})							
 				})
 			})
 		})
