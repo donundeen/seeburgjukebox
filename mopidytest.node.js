@@ -50,7 +50,7 @@ console.log("interrupting");
 						newTrack = tracks[0];
 						console.log("newTrack is ");
 						console.log(JSON.stringify(newTrack));
-						return mopidfy.playback.play(newTrack);
+						return mopidy.playback.play(newTrack);
 					})							
 				})
 			})
