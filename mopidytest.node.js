@@ -26,74 +26,38 @@ console.log("interrupting");
                 console.log("track done");
                 console.log(track);
                 console.log(currentTrack);
-                playTrack(currentTrack) 
-                .then(pause)  
-                .then(seek(currentPosition))
-                .then(resume)
-                .then(removeTrack(newTrack)) 
-                .then(function(){ 
-                        // remove the listener
-                        return mopidy.off("event:trackPlaybackEnded", whenDone);
-                }).done();
+		mopidy.playback.play(currentTrack).then(function(){
+			mopidy.playback.pause().then(function(){
+				mopidy.playback.seek(currenPosition).then(function(){
+					mopidy.tracklist.remove(newTrack).then(function(){
+						mopidy.off("event:trackPlaybackEnded", whenDone);
+					})
+				})
+			})
+		}).done();
         };
 	
-	var getCurrentTimePosition = function(){
-		return mopidy.playback.getTimePosition().then(function(value){currentPosition = value;});
-	};
-	
-	var getCurrentTrack = function(){
-		console.log("getCurrentTrack");
-		return mopidy.playback.getCurrentTrack().then(function(value){currentTrack = value;});
-	};
-
-	var pause = function(){
-		return mopidy.playback.pause();
-	};
-
-	var playTrack = function(track){
-		console.log("going to plauy track");
-		console.log(JSON.stringify(track));
-		return mopidy.playback.play(track);
-	};
-	
-	var stop = function(){
-		console.log("stop");
-		return mopidy.playback.stop();
-	};
-	var seek = function(time){
-		return mopidy.playback.seek(time);
-	};
-
-	var resume = function(){
-		return mopidy.playback.resume();
-	};
-
-	var addTrack = function(uri){
-		console.log("add track");
-//		return mopidy.tracklist.add(null, 0, uri).then(function(tracks){
-		return mopidy.tracklist.add(null, 0, "file:///home/pi/Music/welcomeToMakerHub.mp3").then(function(tracks){
-			console.log(JSON.stringify(tracks));
-			newTrack = tracks[0];
-			console.log("newTrack is ");
-			console.log(JSON.stringify(newTrack));
-		});
-	};
-
- 	var removeTrack = function(track){
-		return mopidy.tracklist.remove(track);
-	};
-
 	// end playback
-	getCurrentTrack()
-	.then(getCurrentTimePosition)
-	.then(pause)
-	.then(stop)
-	.then(function(){
-		return mopidy.on("event:trackPlaybackEnded", whenDone);
-	})
-	.then(addTrack(interruptUri))
-	.then(playTrack(newTrack))
-	.done();
+	mopidy.playback.getCurrentTrack().then(function(track){
+		currentTrack = track;
+		mopidy.playback.getTimePosition(function(pos){
+			currentPosition = pos;
+			mopidy.playback.pause().then(function(){
+				mopidy.playback.stop().then(function(){
+					mopidy.on("event:trackPlaybackEnded", whenDone).then(function(){
+						mopidy.tracklist.add(null, 0, "file:///home/pi/Music/welcomeToMakerHub.mp3").then(function(tracks){
+							console.log(JSON.stringify(tracks));
+							newTrack = tracks[0];
+							console.log("newTrack is ");
+							console.log(JSON.stringify(newTrack));
+							mopidfy.playback.play(newTrack);
+						})							
+					})
+				})
+			})
+		})
+	}).done();
+	
 };
 
 var playPlaylist = function(playlist_uri){
