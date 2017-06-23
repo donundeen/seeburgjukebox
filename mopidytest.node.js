@@ -104,13 +104,16 @@ var playPlaylist = function(playlist_uri){
   var playlist_data;
 	
   var clear = function(){
+	  console.log("clear");
   	return mopidy.tracklist.clear();   	  
   };
   var stop = function(){
+	  console.log("stop");
 	return mopidy.playback.stop();
   };
 	
   var lookup = function(playlist_uri){
+	  console.log("lookup");
 	return mopidy.library.lookup(playlist_uri)
 	  .then(function(data){
 		playlist_data = data;
@@ -118,20 +121,21 @@ var playPlaylist = function(playlist_uri){
   };
 	
   var add = function(data){
+	  console.log("add");
 	return mopidy.tracklist.add(data);	  
   };
 	
   var play = function(){
-	shuffle();
+	  console.log("play");
 	return mopidy.playback.play();	  
   };
 	
   stop()
-	.then(clear())
+	.then(clear)
 	.then(lookup(playlist_uri))
 	.then(add(playlist_data))
-	.then(shuffle())
-	.then(play())
+	.then(shuffle)
+	.then(play)
 	.done();
 };
 
@@ -169,6 +173,7 @@ var mopidy_online = false;
 mopidy.on("state:online", function(){
     listPlaylists();
     setVolumeLow();
+	/*
     mopidy.library.refresh().then(function(){
 //	mopidy.library.search({"track_name":"welcomeToMakerHub.mp3"}).then(function(res){
 //	mopidy.library.search({"uri":"local:"}).then(function(res){
@@ -176,6 +181,7 @@ mopidy.on("state:online", function(){
 		console.log("results are");
 		console.log(JSON.stringify(res[0]));
 	}).done();
+	*/
     playPlaylist("spotify:user:donundeen:playlist:6wgip2mM9hKKjc9MgUbJxL");		  
 //setTimeout(interruptWithTrack, 3000);
 	    
