@@ -71,7 +71,7 @@ console.log("interrupting");
 	var addTrack = function(uri){
 		console.log("add track");
 //		return mopidy.tracklist.add(null, 0, uri).then(function(tracks){
-		return mopidy.tracklist.add(null, 0, "file:///home/pi/Music/interruptSong.mp3").then(function(tracks){
+		return mopidy.tracklist.add(null, 0, "file:///home/pi/Music/welcomeToMakerHub.mp3").then(function(tracks){
 			console.log(JSON.stringify(tracks));
 			newTrack = tracks[0];
 			console.log("newTrack is ");
@@ -172,7 +172,7 @@ mopidy.on("state:online", function(){
     mopidy.library.refresh().then(function(){
 //	mopidy.library.search({"track_name":"welcomeToMakerHub.mp3"}).then(function(res){
 //	mopidy.library.search({"uri":"local:"}).then(function(res){
-	mopidy.library.search({'artist':"Manu Dibango"}).then(function(res){
+	mopidy.library.search({}, uris=["file:"]).then(function(res){
 		console.log("results are");
 		console.log(JSON.stringify(res[0]));
 	}).done();
