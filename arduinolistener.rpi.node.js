@@ -600,6 +600,9 @@ function processMessage(command){
       playPlaylist("spotify:user:1269706439:playlist:1JuUoy8kiYVXlwnmpUg3lo");
       break;
     case "D2":
+		  // spotify:user:mariejameson:playlist:7lAlqwCBMr7HpxuxnBuPWo
+		  // Cla$$y Brunch
+      playPlaylist("spotify:user:mariejameson:playlist:7lAlqwCBMr7HpxuxnBuPWo")		 
       break;
     case "D3":
       break;
