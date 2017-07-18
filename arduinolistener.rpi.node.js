@@ -602,7 +602,7 @@ function processMessage(command){
     case "D2":
 		  // spotify:user:mariejameson:playlist:7lAlqwCBMr7HpxuxnBuPWo
 		  // Cla$$y Brunch
-      playPlaylist("spotify:user:mariejameson:playlist:7lAlqwCBMr7HpxuxnBuPWo")		 
+      playPlaylist("spotify:user:mariejameson:playlist:7lAlqwCBMr7HpxuxnBuPWo");	 
       break;
     case "D3":
       break;
