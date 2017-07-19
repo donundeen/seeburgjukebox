@@ -384,6 +384,7 @@ var setVolumeHigh = function(){
 };
 
 var listPlaylists = function(){
+  console.log("listing playlists");
   mopidy.playlists.asList().then(function(data){
 	  console.log(data);
 	  for (var i=0; i < data.length; i++){
@@ -397,6 +398,7 @@ var listPlaylists = function(){
 var mopidy_online = false;
 
 mopidy.on("state:online", function(){
+    console.log("mopidy online");
     listPlaylists();
     setVolumeLow();
 });
