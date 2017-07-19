@@ -265,12 +265,15 @@ function sb_connect(){
 			console.log("caught spacebrew websocket error");
 			console.log(error);
 			sb = false;
+			setTimeout(sb_connect, 10000);
 		});
 		
 	}catch(ex){
 		console.log("sb connect exception " );
 		console.log(ex);
 		sb = false;
+		setTimeout(sb_connect, 10000);
+
 	}
 //	sb.send("selection","string","boot");
 }
