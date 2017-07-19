@@ -595,13 +595,14 @@ function processMessage(command){
     case "C10":
       break;
     case "D1":
-		// spotify:user:1269706439:playlist:1JuUoy8kiYVXlwnmpUg3lo
+		// Bailey Premeaux's Objective Jams
+		  // spotify:user:1269706439:playlist:1JuUoy8kiYVXlwnmpUg3lo
 		  //https://open.spotify.com/user/1269706439/playlist/1JuUoy8kiYVXlwnmpUg3lo
       playPlaylist("spotify:user:1269706439:playlist:1JuUoy8kiYVXlwnmpUg3lo");
       break;
     case "D2":
 		  // spotify:user:mariejameson:playlist:7lAlqwCBMr7HpxuxnBuPWo
-		  // Cla$$y Brunch
+		  // Sarah Harper's Cla$$y Brunch
       playPlaylist("spotify:user:mariejameson:playlist:7lAlqwCBMr7HpxuxnBuPWo");	 
       break;
     case "D3":
