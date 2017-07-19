@@ -343,19 +343,25 @@ var playPlaylist = function(playlist_uri){
   var playlist = allPlaylists[playlist_uri];
   console.log("playlist is ");
   console.log(playlist);
-  if(sb){
-	  try{
-		  sb.send("playlistname", "string", playlist.name);
-	  }catch(e){
-		console.log("sb send error " + e);	  
-	  }
-  }
+
   cleared.then(function(){
     mopidy.library.lookup(playlist_uri).then(function(data){
       var added = mopidy.tracklist.add(data);
       added.then(function(){
         shuffle();
         mopidy.playback.play();
+
+	  if(sb){
+		  try{
+			  sb.send("playlistname", "string", playlist.name);
+		  }catch(e){
+			console.log("sb send error " + e);
+			  console.log(data);
+		  }
+	  }	      
+	      
+	      
+	      
       });
     });
   });
