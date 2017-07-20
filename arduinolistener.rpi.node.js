@@ -617,8 +617,15 @@ function processMessage(command){
       playPlaylist("spotify:user:mariejameson:playlist:7lAlqwCBMr7HpxuxnBuPWo");	 
       break;
     case "D3":
+		  // https://open.spotify.com/user/13maddiefun./playlist/1YpohO70HMMrTBfSQRjEej
+		  // spotify:user:13maddiefun.:playlist:1YpohO70HMMrTBfSQRjEej
+		  // Madeline Clement's Maker Hub Jamz
+      playPlaylist("spotify:user:13maddiefun.:playlist:1YpohO70HMMrTBfSQRjEej");	 
       break;
     case "D4":
+		  //spotify:user:josegah:playlist:1mMwQNSzwBLpPU93xzkL5e
+	// Jose Andrade daft punk and gaming music
+      playPlaylist("spotify:user:josegah:playlist:1mMwQNSzwBLpPU93xzkL5e");
       break;
     case "D5":
       break;
