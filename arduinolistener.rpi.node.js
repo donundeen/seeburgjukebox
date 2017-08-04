@@ -16,25 +16,6 @@
 
 var fs = require("fs");
 
-var ps = require("ps-node");
-
-
-ps.lookup({
-    command: '/usr/bin/nodejs',
-    psargs: 'arduinolistener.rpi.node.js'
-    }, function(err, resultList ) {
-	console.log("got pslookup results");
-    if (err) {
-	    console.log("there was an error");
-        throw new Error( err );
-    }
- console.log(resultList);
-    resultList.forEach(function( process ){
-        if( process ){
-            console.log( 'PID: %s, COMMAND: %s, ARGUMENTS: %s', process.pid, process.command, process.arguments );
-        }
-    });
-});
 
 var Mopidy = require("mopidy");
 
