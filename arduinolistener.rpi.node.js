@@ -251,7 +251,7 @@ function sb_connect(){
                 sb.addPublish("Selected_K10","string","sent when the Jukebox has selected K10");
 		
 		sb.onStringMessage = function( name, value ){
-			if(name.match(/Select_.*/)) {
+			if(name.match(/Selected_.*/)) {
 				console.log("Message from sb: "+name);
 				var matches = name.match(/Select_([A-K][0-9]+)/);
 				var sent_command = matches[1];
