@@ -250,23 +250,23 @@ function sb_connect(){
                 sb.addPublish("Selected_K9","string","sent when the Jukebox has selected K9");
                 sb.addPublish("Selected_K10","string","sent when the Jukebox has selected K10");
 		
-		
+/*		
 		var onStringm = function(name, value){
 			console.log("string message received " + name);
 			
 		};
+*/		
+		//sb.onStringMessage = onStringm;
 		
-		sb.onStringMessage = onStringm;
-		
-		//sb.onStringMessage =  function( name, value ){
-		//	console.log("string message received " + name);
-		//	if(name.match(/Select_.*/)) {
-		//		console.log("Message from sb: "+name);
-		//		var matches = name.match(/Select_([A-K][0-9]+)/);
-		//		var sent_command = matches[1];
-		//		processMessage(sent_command);	
-		//	}
-		//}
+		sb.onStringMessage =  function onString( name, value ){
+			console.log("string message received " + name);
+			if(name.match(/Select_.*/)) {
+				console.log("Message from sb: "+name);
+				var matches = name.match(/Select_([A-K][0-9]+)/);
+				var sent_command = matches[1];
+				processMessage(sent_command);	
+			}
+		}
 		
 		
 		sb.onBooleanMessage = function onBoolean(name, value){
