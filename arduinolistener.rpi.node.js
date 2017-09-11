@@ -251,6 +251,13 @@ function sb_connect(){
                 sb.addPublish("Selected_K10","string","sent when the Jukebox has selected K10");
 		
 		
+		var onStringm = function(name, value){
+			console.log("string message received " + name);
+			
+		}
+		
+		sb.onStringMessage = onStringm;
+		/*
 		sb.onStringMessage =  function( name, value ){
 			console.log("string message received " + name);
 			if(name.match(/Select_.*/)) {
@@ -260,6 +267,7 @@ function sb_connect(){
 				processMessage(sent_command);	
 			}
 		}
+		*/
 		
 		sb.onBooleanMessage = function onBoolean(name, value){
 			console.log("got boolean message " + name);
