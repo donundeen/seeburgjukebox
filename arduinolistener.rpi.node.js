@@ -254,20 +254,20 @@ function sb_connect(){
 		var onStringm = function(name, value){
 			console.log("string message received " + name);
 			
-		}
+		};
 		
 		sb.onStringMessage = onStringm;
-		/*
-		sb.onStringMessage =  function( name, value ){
-			console.log("string message received " + name);
-			if(name.match(/Select_.*/)) {
-				console.log("Message from sb: "+name);
-				var matches = name.match(/Select_([A-K][0-9]+)/);
-				var sent_command = matches[1];
-				processMessage(sent_command);	
-			}
-		}
-		*/
+		
+		//sb.onStringMessage =  function( name, value ){
+		//	console.log("string message received " + name);
+		//	if(name.match(/Select_.*/)) {
+		//		console.log("Message from sb: "+name);
+		//		var matches = name.match(/Select_([A-K][0-9]+)/);
+		//		var sent_command = matches[1];
+		//		processMessage(sent_command);	
+		//	}
+		//}
+		
 		
 		sb.onBooleanMessage = function onBoolean(name, value){
 			console.log("got boolean message " + name);
