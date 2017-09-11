@@ -250,7 +250,7 @@ function sb_connect(){
                 sb.addPublish("Selected_K9","string","sent when the Jukebox has selected K9");
                 sb.addPublish("Selected_K10","string","sent when the Jukebox has selected K10");
 		
-		sb.onStringMessage = function onString( name, value ){
+		sb.onStringMessage = function onStringMessage( name, value ){
 			console.log("string message received " + name);
 			if(name.match(/Select_.*/)) {
 				console.log("Message from sb: "+name);
@@ -258,11 +258,11 @@ function sb_connect(){
 				var sent_command = matches[1];
 				processMessage(sent_command);	
 			}
-		}
+		};
 		
 		sb.onBooleanMessage = function onBoolean(name, value){
 			console.log("got boolean message " + name);
-		}
+		};
 		
 		console.log("connect");
 		sb.connect();
