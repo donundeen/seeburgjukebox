@@ -29,8 +29,8 @@ console.log("interrupting");
 		console.log("*******");
                 console.log(currentTrack);
 		console.log("goign to resume");
-//		mopidy.playback.play(currentTrack).then(function(){
-		mopidy.playback.play(track.tl_track).then(function(){
+		mopidy.playback.play(currentTrack).then(function(){
+//		mopidy.playback.play(track.tl_track).then(function(){
 			console.log("just played");
 			mopidy.playback.pause().then(function(){
 				console.log("just paused");
@@ -46,7 +46,7 @@ console.log("interrupting");
         };
 	
 	// end playback
-	mopidy.playback.getCurrentTrack().then(function(track){
+	mopidy.playback.getCurrentTlTrack().then(function(track){
 		currentTrack = track;
 		return mopidy.playback.getTimePosition().then(function(pos){
 			currentPosition = pos;
@@ -138,7 +138,12 @@ mopidy.on("state:online", function(){
 		console.log(JSON.stringify(res[0]));
 	}).done();
 	*/
-   // playPlaylist("spotify:user:donundeen:playlist:6wgip2mM9hKKjc9MgUbJxL");		  
+   // playPlaylist("spotify:user:donundeen:playlist:6wgip2mM9hKKjc9MgUbJxL");	
+	mopidy.on("event:playbackStateShanged", function(oldState, newState){
+		console.log("state changed");
+		console.log(oldState);
+		console.log(newState);
+	});
 setTimeout(interruptWithTrack, 3000);
 	    
     
