@@ -144,6 +144,11 @@ mopidy.on("state:online", function(){
 		console.log(oldState);
 		console.log(newState);
 	});
+	mopidy.on("event:trackPlaybackEnded", function(tltrack){
+		console.log("playbackended");
+		console.log(tltrack);
+	});
+
 setTimeout(interruptWithTrack, 3000);
 	    
     
