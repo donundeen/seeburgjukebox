@@ -37,7 +37,7 @@ console.log("interrupting");
 				mopidy.playback.seek(currentPosition).then(function(){
 					console.log("removing ");
 					console.log(newTrack);
-					mopidy.tracklist.remove({tlid : [interruptTlid]).then(function(){
+					mopidy.tracklist.remove({tlid : [interruptTlid]}).then(function(){
 //						mopidy.off("event:trackPlaybackEnded", whenDone);
 					})
 				})
