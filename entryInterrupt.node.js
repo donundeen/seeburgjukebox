@@ -21,6 +21,7 @@ whenDone = function(track){
 	console.log(track);
 	var tlid = track.tl_track.tlid;
 	if(tlid != interruptTlid){
+		console.log("not the song to remove, just keep going");
 		return;	
 	}
 	console.log("*******");
@@ -29,8 +30,9 @@ whenDone = function(track){
 	mopidy.playback.play(currentTrack).then(function(){
 //		mopidy.playback.play(track.tl_track).then(function(){
 		console.log("just played");
-		mopidy.playback.pause().then(function(){
+		//mopidy.playback.pause().then(function(){
 			console.log("just paused");
+			console.log("seeking to ");
 			mopidy.playback.seek(currentPosition).then(function(){
 				console.log("removing ");
 				console.log(newTrack);
@@ -38,7 +40,7 @@ whenDone = function(track){
 //						mopidy.off("event:trackPlaybackEnded", whenDone);
 				})
 			})
-		})
+		//})
 	}).done();
 };
 
