@@ -34,7 +34,7 @@ console.log("interrupting");
 			console.log("just played");
 			mopidy.playback.pause().then(function(){
 				console.log("just paused");
-				mopidy.playback.seek(currenPosition).then(function(){
+				mopidy.playback.seek(currentPosition).then(function(){
 					console.log("removing ");
 					mopidy.tracklist.remove(newTrack).then(function(){
 //						mopidy.off("event:trackPlaybackEnded", whenDone);
