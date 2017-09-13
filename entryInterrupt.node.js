@@ -23,6 +23,7 @@ console.log("interrupting");
 	var currentTrack, currentPosition, newTrack;
         var whenDone;
         whenDone = function(track){
+		mopidy.off("event:trackPlaybackEnded", whenDone);		
                 console.log("track done");
                 console.log(track);
 		console.log("*******");
@@ -36,7 +37,7 @@ console.log("interrupting");
 				mopidy.playback.seek(currenPosition).then(function(){
 					console.log("removing ");
 					mopidy.tracklist.remove(newTrack).then(function(){
-						mopidy.off("event:trackPlaybackEnded", whenDone);
+//						mopidy.off("event:trackPlaybackEnded", whenDone);
 					})
 				})
 			})
