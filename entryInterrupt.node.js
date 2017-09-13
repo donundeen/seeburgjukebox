@@ -28,7 +28,9 @@ console.log("interrupting");
                 console.log(currentTrack);
 		console.log("goign to resume");
 		mopidy.playback.play(currentTrack).then(function(){
+			console.log("just played");
 			mopidy.playback.pause().then(function(){
+				console.log("just paused");
 				mopidy.playback.seek(currenPosition).then(function(){
 					console.log("removing ");
 					mopidy.tracklist.remove(newTrack).then(function(){
