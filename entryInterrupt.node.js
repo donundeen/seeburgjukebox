@@ -28,8 +28,8 @@ console.log("interrupting");
 		console.log("*******");
                 console.log(currentTrack);
 		console.log("goign to resume");
-//		mopidy.playback.play(currentTrack).then(function(){
-		mopidy.playback.play(track.tl_track).then(function(){
+		mopidy.playback.play(currentTrack).then(function(){
+//		mopidy.playback.play(track.tl_track).then(function(){
 			console.log("just played");
 			mopidy.playback.pause().then(function(){
 				console.log("just paused");
