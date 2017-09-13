@@ -17,7 +17,7 @@ var interruptWithTrack = function(){
 	// get current track and time position
 console.log("interrupting");
         var songDir = "file:";
-        interruptSong = "WelcomeToMakerHubDubstep.mp3";
+//        interruptSong = "WelcomeToMakerHubDubstep.mp3";
         var interruptUri = songDir + interruptSong;
 
 	var currentTrack, currentPosition, newTrack;
@@ -45,7 +45,7 @@ console.log("interrupting");
 			return mopidy.playback.pause().then(function(){
 				return mopidy.playback.stop().then(function(){
 					mopidy.on("event:trackPlaybackEnded", whenDone);
-					return mopidy.tracklist.add(null, 0, "file:///home/pi/Music/WelcomeToMakerHubDubstep.mp3").then(function(tracks){
+					return mopidy.tracklist.add(null, 0, "file:///home/pi/Music/"+interruptSong).then(function(tracks){
 						console.log(JSON.stringify(tracks));
 						newTrack = tracks[0];
 						console.log("newTrack is ");
