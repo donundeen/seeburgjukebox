@@ -27,6 +27,7 @@ console.log("interrupting");
                 console.log(track);
                 console.log(currentTrack);
 		console.log("goign to resume");
+//		mopidy.playback.play(currentTrack).then(function(){
 		mopidy.playback.play(currentTrack).then(function(){
 			console.log("just played");
 			mopidy.playback.pause().then(function(){
@@ -46,6 +47,7 @@ console.log("interrupting");
 		currentTrack = track;
 		return mopidy.playback.getTimePosition().then(function(pos){
 			currentPosition = pos;
+			console.log("current Position " + currentPosition);	
 			return mopidy.playback.pause().then(function(){
 				return mopidy.playback.stop().then(function(){
 					mopidy.on("event:trackPlaybackEnded", whenDone);
