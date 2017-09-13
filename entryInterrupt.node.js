@@ -60,7 +60,7 @@ console.log("interrupting");
 						console.log(JSON.stringify(newTrack));
 						interruptTlid = newTrack.tlid;
 						console.log(interruptTlid);
-						mopidy.on("event:trackPlaybackEnded", whenDone);
+						//mopidy.on("event:trackPlaybackEnded", whenDone);
 						return mopidy.playback.play(newTrack);
 					})							
 				})
