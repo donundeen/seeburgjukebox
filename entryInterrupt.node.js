@@ -11,7 +11,7 @@ var mopidy = new Mopidy({
 });
 
 var interruptSong = "WelcomeToMakerHubCreepy.mp3";
-
+var interruptTlid = 0;
 
 var interruptWithTrack = function(){
 	// get current track and time position
@@ -26,9 +26,11 @@ console.log("interrupting");
                 console.log("track done");
                 console.log(track);
                 console.log(currentTrack);
+		console.log("goign to resume");
 		mopidy.playback.play(currentTrack).then(function(){
 			mopidy.playback.pause().then(function(){
 				mopidy.playback.seek(currenPosition).then(function(){
+					console.log("removing ");
 					mopidy.tracklist.remove(newTrack).then(function(){
 						mopidy.off("event:trackPlaybackEnded", whenDone);
 					})
@@ -50,6 +52,8 @@ console.log("interrupting");
 						newTrack = tracks[0];
 						console.log("newTrack is ");
 						console.log(JSON.stringify(newTrack));
+						interruptTlid = newTrack.tlid;
+						console.log(interruptTlid);
 						return mopidy.playback.play(newTrack);
 					})							
 				})
