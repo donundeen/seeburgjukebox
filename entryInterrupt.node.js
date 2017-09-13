@@ -12,6 +12,37 @@ var mopidy = new Mopidy({
 
 var interruptSong = "WelcomeToMakerHubCreepy.mp3";
 var interruptTlid = 0;
+var currentTrack, currentPosition, newTrack;
+
+var whenDone;
+whenDone = function(track){
+	//mopidy.off("event:trackPlaybackEnded", whenDone);		
+	console.log("track done");
+	console.log(track);
+	var tlid = track.tl_track.tlid;
+	if(tlid != interruptTlid){
+		return;	
+	}
+	console.log("*******");
+	console.log(currentTrack);
+	console.log("goign to resume");
+	mopidy.playback.play(currentTrack).then(function(){
+//		mopidy.playback.play(track.tl_track).then(function(){
+		console.log("just played");
+		mopidy.playback.pause().then(function(){
+			console.log("just paused");
+			mopidy.playback.seek(currentPosition).then(function(){
+				console.log("removing ");
+				console.log(newTrack);
+				mopidy.tracklist.remove({tlid : [interruptTlid]}).then(function(){
+//						mopidy.off("event:trackPlaybackEnded", whenDone);
+				})
+			})
+		})
+	}).done();
+};
+
+
 
 var interruptWithTrack = function(){
 	// get current track and time position
@@ -20,31 +51,6 @@ console.log("interrupting");
 //        interruptSong = "WelcomeToMakerHubDubstep.mp3";
         var interruptUri = songDir + interruptSong;
 
-	var currentTrack, currentPosition, newTrack;
-        var whenDone;
-        whenDone = function(track){
-		mopidy.off("event:trackPlaybackEnded", whenDone);		
-                console.log("track done");
-                console.log(track);
-		console.log("*******");
-                console.log(currentTrack);
-		console.log("goign to resume");
-		mopidy.playback.play(currentTrack).then(function(){
-//		mopidy.playback.play(track.tl_track).then(function(){
-			console.log("just played");
-			mopidy.playback.pause().then(function(){
-				console.log("just paused");
-				mopidy.playback.seek(currentPosition).then(function(){
-					console.log("removing ");
-					console.log(newTrack);
-					mopidy.tracklist.remove({tlid : [interruptTlid]}).then(function(){
-//						mopidy.off("event:trackPlaybackEnded", whenDone);
-					})
-				})
-			})
-		}).done();
-        };
-	
 	// end playback
 	mopidy.playback.getCurrentTlTrack().then(function(track){
 		currentTrack = track;
@@ -60,7 +66,6 @@ console.log("interrupting");
 						console.log(JSON.stringify(newTrack));
 						interruptTlid = newTrack.tlid;
 						console.log(interruptTlid);
-						//mopidy.on("event:trackPlaybackEnded", whenDone);
 						return mopidy.playback.play(newTrack);
 					})							
 				})
@@ -144,10 +149,7 @@ mopidy.on("state:online", function(){
 		console.log(oldState);
 		console.log(newState);
 	});
-	mopidy.on("event:trackPlaybackEnded", function(tltrack){
-		console.log("playbackended");
-		console.log(tltrack);
-	});
+	mopidy.on("event:trackPlaybackEnded", whenDone);
 
 setTimeout(interruptWithTrack, 3000);
 	    
