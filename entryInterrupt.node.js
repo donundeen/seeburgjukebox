@@ -29,8 +29,8 @@ console.log("interrupting");
 		console.log("*******");
                 console.log(currentTrack);
 		console.log("goign to resume");
-		mopidy.playback.play(currentTrack).then(function(){
-//		mopidy.playback.play(track.tl_track).then(function(){
+//		mopidy.playback.play(currentTrack).then(function(){
+		mopidy.playback.play(track.tl_track).then(function(){
 			console.log("just played");
 			mopidy.playback.pause().then(function(){
 				console.log("just paused");
@@ -52,7 +52,6 @@ console.log("interrupting");
 			console.log("current Position " + currentPosition);	
 			return mopidy.playback.pause().then(function(){
 				return mopidy.playback.stop().then(function(){
-					mopidy.on("event:trackPlaybackEnded", whenDone);
 					return mopidy.tracklist.add(null, 0, "file:///home/pi/Music/"+interruptSong).then(function(tracks){
 						console.log(JSON.stringify(tracks));
 						newTrack = tracks[0];
@@ -60,6 +59,7 @@ console.log("interrupting");
 						console.log(JSON.stringify(newTrack));
 						interruptTlid = newTrack.tlid;
 						console.log(interruptTlid);
+						mopidy.on("event:trackPlaybackEnded", whenDone);
 						return mopidy.playback.play(newTrack);
 					})							
 				})
