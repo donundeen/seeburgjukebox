@@ -10,7 +10,7 @@ var mopidy = new Mopidy({
     callingConvention : "by-position-or-name"
 });
 
-var interruptSong = "WelcomeToMakerHubCreepy.mp3";
+var interruptSong = "WelcomeToMakerHubDubstep.mp3";
 var interruptTlid = 0;
 var currentTrack, currentPosition, newTrack;
 
