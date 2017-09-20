@@ -642,6 +642,9 @@ function processMessage(command){
       playPlaylist("spotify:user:josegah:playlist:1mMwQNSzwBLpPU93xzkL5e");
       break;
     case "D5":
+		  // Derek acosta, Gusto
+		  //spotify:user:cube4d:playlist:3tlhAC2zp3btb1X4Uf1tjR
+      playPlaylist("spotify:user:cube4d:playlist:3tlhAC2zp3btb1X4Uf1tjR");
       break;
     case "D6":
       break;
