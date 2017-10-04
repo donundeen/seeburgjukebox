@@ -647,6 +647,10 @@ function processMessage(command){
       playPlaylist("spotify:user:cube4d:playlist:3tlhAC2zp3btb1X4Uf1tjR");
       break;
     case "D6":
+		  // https://open.spotify.com/user/pepprcabbg/playlist/3vhSAm7EnAJBHZH1eoLaCS
+		  // spotify:user:pepprcabbg:playlist:3vhSAm7EnAJBHZH1eoLaCS
+		  // Mickey Cervino's "Juke"
+      playPlaylist("spotify:user:pepprcabbg:playlist:3vhSAm7EnAJBHZH1eoLaCS");
       break;
     case "D7":
       break;
