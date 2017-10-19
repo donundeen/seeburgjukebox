@@ -662,6 +662,9 @@ function processMessage(command){
 
       break;
     case "E1":
+	// spotify:user:donundeen:playlist:4Z9TnvMCmrZAfjl2jbeYeJ
+	// happy birthday playlist
+      playPlaylist("spotify:user:donundeen:playlist:4Z9TnvMCmrZAfjl2jbeYeJ");
 
       break;
     case "E2":
