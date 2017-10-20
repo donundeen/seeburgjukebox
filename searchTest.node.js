@@ -17,7 +17,7 @@ var searchAndPlay = function(query){
 	}
 	
 	var queryObj = {
-		'title':[query]
+		'track_name':[query]
 	};
 	console.log("searching");
 	mopidy.library.search(queryObj).then(function(results){
