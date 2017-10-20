@@ -23,7 +23,7 @@ var searchAndPlay = function(query){
 	mopidy.library.search(queryObj).then(function(results){
 		console.log(results);
 		for(var i = 0; i< results.length; i++){
-			if(results[i].tracks){
+			if(results[i].tracks && results[i].url.match("spotify")){
 				var tracks = results[i].tracks;
 				mopidy.tracklist.add(tracks).then(function(tracks){
 					console.log("added tracks");
