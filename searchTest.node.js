@@ -21,7 +21,16 @@ var searchAndPlay = function(query){
 	};
 	console.log("searching");
 	mopidy.library.search(queryObj).then(function(results){
-		console.log(results);			     
+		console.log(results);
+		for(var i = 0; i< results.length; i++){
+			if(results[i].tracks){
+				var tracks = results[i].tracks;
+				mopidy.tracklist.add(tracks).then(function(tracks){
+					console.log("added tracks");
+					console.log(JSON.stringify(tracks));
+				});
+			}
+		}
         });
 }
 
