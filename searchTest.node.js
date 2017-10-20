@@ -23,7 +23,7 @@ var searchAndPlay = function(query){
 	mopidy.library.search(queryObj).then(function(results){
 		console.log(results);
 		for(var i = 0; i< results.length; i++){
-			if(results[i].tracks && && results[i].uri && results[i].uri.match("spotify")){
+			if(results[i].tracks && results[i].uri && results[i].uri.match("spotify")){
 				var tracks = results[i].tracks;
 				mopidy.tracklist.add(tracks).then(function(tracks){
 					console.log("added tracks");
@@ -69,7 +69,7 @@ mopidy.on("state:online", function(){
     setVolumeLow();
 
 	
-    searchAndPlay("birthday");
+    searchAndPlay("love");
 	    
     
 });
