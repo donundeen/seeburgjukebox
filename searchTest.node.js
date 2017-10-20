@@ -10,98 +10,20 @@ var mopidy = new Mopidy({
     callingConvention : "by-position-or-name"
 });
 
-var interruptSong = "WelcomeToMakerHubDubstep.mp3";
-var interruptTlid = 0;
-var currentTrack, currentPosition, newTrack;
 
-var whenDone;
-whenDone = function(track){
-	//mopidy.off("event:trackPlaybackEnded", whenDone);		
-	console.log("track done");
-	console.log(track);
-	var tlid = track.tl_track.tlid;
-	if(tlid != interruptTlid){
-		console.log("not the song to remove, just keep going");
-		return;	
+var searchAndPlay = function(query){
+	if (!query){
+		query = "birthday";	
 	}
-	console.log("*******");
-	console.log(currentTrack);
-	console.log("goign to resume");
-	mopidy.playback.play(currentTrack).then(function(){
-//		mopidy.playback.play(track.tl_track).then(function(){
-		console.log("just played");
-		//mopidy.playback.pause().then(function(){
-			console.log("just paused");
-			console.log("seeking to ");
-			mopidy.playback.seek(currentPosition).then(function(){
-				console.log("removing ");
-				console.log(newTrack);
-				mopidy.tracklist.remove({tlid : [interruptTlid]}).then(function(){
-//						mopidy.off("event:trackPlaybackEnded", whenDone);
-				})
-			})
-		//})
-	}).done();
-};
-
-
-
-var interruptWithTrack = function(){
-	// get current track and time position
-console.log("interrupting");
-        var songDir = "file:";
-//        interruptSong = "WelcomeToMakerHubDubstep.mp3";
-        var interruptUri = songDir + interruptSong;
-
-	// end playback
-	mopidy.playback.getCurrentTlTrack().then(function(track){
-		currentTrack = track;
-		return mopidy.playback.getTimePosition().then(function(pos){
-			currentPosition = pos;
-			console.log("current Position " + currentPosition);	
-			return mopidy.playback.pause().then(function(){
-				return mopidy.playback.stop().then(function(){
-					return mopidy.tracklist.add(null, 0, "file:///home/pi/Music/"+interruptSong).then(function(tracks){
-						console.log(JSON.stringify(tracks));
-						newTrack = tracks[0];
-						console.log("newTrack is ");
-						console.log(JSON.stringify(newTrack));
-						interruptTlid = newTrack.tlid;
-						console.log(interruptTlid);
-						return mopidy.playback.play(newTrack);
-					})							
-				})
-			})
-		})
-	}).done();
 	
-};
-
-var playPlaylist = function(playlist_uri){
-  console.log("in playPlayList");
-  console.log("playlist is " + playlist_uri);
-
-  var playlist = allPlaylists[playlist_uri];
-  var playlist_data;
-
-  mopidy.playback.stop().then(function(){
-	  console.log("clearing");
-	  mopidy.tracklist.clear().then(function(){
-		console.log("lookup");
-		mopidy.library.lookup(playlist_uri).then(function(data){
-			console.log("add");
-			mopidy.tracklist.add(data).then(function(){
-				console.log("shuffle");
-				mopidy.tracklist.shuffle().then(function(){
-					console.log("play");
-					mopidy.playback.play();
-				})
-			})
-		})
-	  })
-  }).done(); 
-};
-
+	var queryObj = {
+		'title':[query]
+	};
+	console.log("searching");
+	mopidy.library.search(queryObj).then(function(results){
+		console.log(results);			     
+        });
+}
 
 var shuffle = function(){
   return mopidy.tracklist.shuffle();
@@ -136,42 +58,12 @@ var mopidy_online = false;
 mopidy.on("state:online", function(){
     listPlaylists();
     setVolumeLow();
-	/*
-    mopidy.library.refresh().then(function(){
-//	mopidy.library.search({"track_name":"welcomeToMakerHub.mp3"}).then(function(res){
-//	mopidy.library.search({"uri":"local:"}).then(function(res){
-	mopidy.library.search({}, uris=["file:"]).then(function(res){
-		console.log("results are");
-		console.log(JSON.stringify(res[0]));
-	}).done();
-	*/
-   // playPlaylist("spotify:user:donundeen:playlist:6wgip2mM9hKKjc9MgUbJxL");	
-	mopidy.on("event:playbackStateShanged", function(oldState, newState){
-		console.log("state changed");
-		console.log(oldState);
-		console.log(newState);
-	});
-	mopidy.on("event:trackPlaybackEnded", whenDone);
 
-setTimeout(interruptWithTrack, 3000);
+	
+    searchAndPlay("birthday");
 	    
     
 });
 
-//mopidy.on(console.log.bind(console));
 
-mopidy.on("event:trackPlaybackStarted", function(track){
-	console.log("track playback started 2");
-	console.log(JSON.stringify(track, null, 2));
-	try{
-		console.log("artist " + track.tl_track.track.artists[0].name);
-	}catch(artisterror){
-		console.log("error getting track artists name");	
-	}
-	try{
-		console.log("song " + track.tl_track.track.name);
-	}catch(titleerror){
-		console.log("error getting track name");
-	}
-});
 
