@@ -26,9 +26,15 @@ var searchAndPlay = function(query){
 			if(results[i].tracks && results[i].uri && results[i].uri.match("spotify")){
 				var tracks = results[i].tracks;
 				if(tracks.length == 0){
-					mopidy.tracklist.add(tracks).then(function(tracks){
-						console.log("added tracks");
-						console.log(JSON.stringify(tracks));
+					mopidy.tracklist.clear().then(function(){
+						mopidy.tracklist.add(tracks).then(function(tracks){
+							console.log("added tracks");
+							console.log(JSON.stringify(tracks));
+							mopidy.tracklist.shuffle().then(function(){
+								console.log("playing");
+								mopidy.playback.play();	
+							});
+						});
 					});
 				}else{
 					console.log("no results found");	
