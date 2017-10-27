@@ -653,6 +653,7 @@ function processMessage(command){
       playPlaylist("spotify:user:pepprcabbg:playlist:3vhSAm7EnAJBHZH1eoLaCS");
       break;
     case "D7":
+		  // Samu's spotify playlist : Mood Modd
 		  //spotify:user:figrenergif:playlist:0ycw1aCcoWeRlldoNMvfRn
       playPlaylist("spotify:user:figrenergif:playlist:0ycw1aCcoWeRlldoNMvfRn");
 		  
