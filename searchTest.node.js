@@ -24,7 +24,7 @@ var searchAndPlay = function(query){
 	console.log("searching");
 	console.log(queryObj);
 	mopidy.library.search(queryObj).then(function(results){
-		console.log(results);
+		console.log(JSON.stringify(results));
 		for(var i = 0; i< results.length; i++){
 			if(results[i].uri && results[i].uri.match("spotify")){
 				var tracks = results[i].tracks;
