@@ -872,7 +872,7 @@ var searchAndPlay = function(query){
 	var queryObj = {
 		'track_name':[query]
 	};
-	queryObj = {'any' : ['a']};
+	//queryObj = {'any' : ['a']};
 	
 	console.log("searching");
 	console.log(queryObj);
