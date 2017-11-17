@@ -48,6 +48,7 @@ function sb_connect(){
 		sb.addPublish("songartist", "string", "current jukebox artist");  // create the publication feed
 		sb.addPublish("playlistname", "string", "current jukebox playlist");  // create the publication feed
 		
+		sb.addSubscribe("Search", "string", "Search for matching songs and play them");
 		sb.addSubscribe("Select_A1","string","any string to trigger A1");
 		sb.addSubscribe("Select_A2","string","any string to trigger A2");
 		sb.addSubscribe("Select_A3","string","any string to trigger A3");
@@ -265,6 +266,8 @@ function sb_connect(){
 				var matches = name.match(/Select_([A-K][0-9]+)/);
 				var sent_command = matches[1];
 				processMessage(sent_command);	
+			}if(name.match(/Search.*/)){
+			    searchAndPlay(value);
 			}
 		}
 		
@@ -860,6 +863,42 @@ function processMessage(command){
 }
 
 
+
+var searchAndPlay = function(query){
+	if (!query){
+		query = "birthday";	
+	}
+	
+	var queryObj = {
+		'track_name':[query]
+	};
+	queryObj = {'any' : ['a']};
+	
+	console.log("searching");
+	console.log(queryObj);
+	mopidy.library.search(queryObj).then(function(results){
+//		console.log(JSON.stringify(results));
+		for(var i = 0; i< results.length; i++){
+			if(results[i].uri && results[i].uri.match("spotify")){
+				var tracks = results[i].tracks;
+				if(tracks && tracks.length > 0){
+					mopidy.tracklist.clear().then(function(){
+						mopidy.tracklist.add(tracks).then(function(tracks){
+							console.log("added tracks");
+							console.log(JSON.stringify(tracks));
+							mopidy.tracklist.shuffle().then(function(){
+								console.log("playing");
+								mopidy.playback.play();	
+							});
+						});
+					});
+				}else{
+					console.log("no results found");	
+				}
+			}
+		}
+        });
+}
 
 
 /*
