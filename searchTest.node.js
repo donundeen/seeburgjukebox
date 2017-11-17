@@ -27,9 +27,8 @@ var searchAndPlay = function(query){
 //		console.log(JSON.stringify(results));
 		for(var i = 0; i< results.length; i++){
 			if(results[i].uri && results[i].uri.match("spotify")){
-				console.log(JSON.stringify(results[i].tracks,null,' '));
 				var tracks = results[i].tracks;
-				if(tracks && tracks.length == 0){
+				if(tracks && tracks.length > 0){
 					mopidy.tracklist.clear().then(function(){
 						mopidy.tracklist.add(tracks).then(function(tracks){
 							console.log("added tracks");
