@@ -662,6 +662,9 @@ function processMessage(command){
 		  
       break;
     case "D8":
+		  // Closing time:
+		  // spotify:user:donundeen:playlist:26D49gSujdIToi4TlG8klK
+      playPlaylist("spotify:user:donundeen:playlist:26D49gSujdIToi4TlG8klK");		  
       break;
     case "D9":
       break;
