@@ -611,7 +611,7 @@ function processMessage(command){
     case "C4":
 	//spotify:user:flameon8761:playlist:6MpfBzPKdETCQdOTgCmtE0
 	// Calvin's Vibez
-	playPlaylist("spotify:user:donundeen:playlist:3Hs9sHphOiM8JeyI6nudZG");
+	playPlaylist("spotify:user:flameon8761:playlist:6MpfBzPKdETCQdOTgCmtE0");
       break;
     case "C5":
       break;
