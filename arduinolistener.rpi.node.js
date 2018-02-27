@@ -609,6 +609,9 @@ function processMessage(command){
       setVolumeHigh();
       break;
     case "C4":
+	//spotify:user:flameon8761:playlist:6MpfBzPKdETCQdOTgCmtE0
+	// Calvin's Vibez
+	playPlaylist("spotify:user:donundeen:playlist:3Hs9sHphOiM8JeyI6nudZG");
       break;
     case "C5":
       break;
@@ -667,6 +670,7 @@ function processMessage(command){
       playPlaylist("spotify:user:donundeen:playlist:26D49gSujdIToi4TlG8klK");		  
       break;
     case "D9":
+		  
       break;
     case "D10":
 
