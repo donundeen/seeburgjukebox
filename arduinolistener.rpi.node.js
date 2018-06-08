@@ -371,6 +371,8 @@ var playPlaylist = function(playlist_uri){
   cleared.then(function(){
     mopidy.library.lookup(playlist_uri).then(function(data){
       var added = mopidy.tracklist.add(data);
+	    console.log("playlist data");
+	    console.log(data);
       added.then(function(){
         shuffle();
         mopidy.playback.play();
