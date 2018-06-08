@@ -295,7 +295,7 @@ function sb_connect(){
 //	sb.send("selection","string","boot");
 }
 }
-sb_connect();
+//sb_connect();
 
 var mopidy = new Mopidy({
     autoConnect: true,
@@ -425,6 +425,7 @@ mopidy.on("state:online", function(){
 mopidy.on("event:trackPlaybackStarted", function(track){
 	console.log("track playback started 2");
 	console.log(JSON.stringify(track, null, 2));
+   	if(sb){
 	try{
 		console.log("artist " + track.tl_track.track.artists[0].name);
 		sb.send("songartist","string", track.tl_track.track.artists[0].name);
@@ -436,6 +437,7 @@ mopidy.on("event:trackPlaybackStarted", function(track){
 		sb.send("songtitle","string", track.tl_track.track.name);
 	}catch(titleerror){
 		console.log("error getting track name");
+	}
 	}
 });
 
