@@ -26,9 +26,13 @@ var server = "192.168.1.96";
 var name = "Jukebox";
 var description = "Jukebox Selections";
 var sb = false;
+var do_spacebrew = false;
 
 function sb_connect(){
 	if(sb){
+		return;
+	}
+	if(!do_spacebrew){
 		return;
 	}
 	sb = new Spacebrew.Client( server, name, description );
