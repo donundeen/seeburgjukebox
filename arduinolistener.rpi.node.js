@@ -622,6 +622,9 @@ function processMessage(command){
 	playPlaylist("spotify:user:flameon8761:playlist:6MpfBzPKdETCQdOTgCmtE0");
       break;
     case "C5":
+	// Madeline Lee's Summer 2018 playlist
+		  // spotify:user:121910898:playlist:0cyBjxXtzdAKzrZHkZ1Hsc
+	playPlaylist("spotify:user:121910898:playlist:0cyBjxXtzdAKzrZHkZ1Hsc");		  
       break;
     case "C6":
       break;
