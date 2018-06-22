@@ -627,6 +627,10 @@ function processMessage(command){
 	playPlaylist("spotify:user:121910898:playlist:0cyBjxXtzdAKzrZHkZ1Hsc");		  
       break;
     case "C6":
+		  //spotify:user:donundeen:playlist:4OhFqNQsL9Vp2S5RmtyHQ3
+		  // Kadhja Bonet and friends
+	playPlaylist("spotify:user:donundeen:playlist:4OhFqNQsL9Vp2S5RmtyHQ3");		  
+		  
       break;
     case "C7":
       break;
