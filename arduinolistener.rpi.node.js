@@ -128,6 +128,11 @@ function poll_doorbell(callback){
     }
     var data = JSON.parse(body);
     var stream = false;
+    if(!data.feeds){
+	    console.log("no feeds returned");
+	    console.log(JSON.stringify(data, null, "  "));
+	return;    
+    }
     var feeds = data.feeds.filter(function(f){return f.name = feedname});
     if(feeds.length > 0){
         stream = feeds[0].stream;
