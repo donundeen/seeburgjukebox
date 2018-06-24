@@ -15,6 +15,7 @@
 */
 
 var fs = require("fs");
+var request = require("request");
 
 
 var Mopidy = require("mopidy");
@@ -106,6 +107,51 @@ var playPlaylist = function(playlist_uri){
     });
   });
 };
+
+var key = ""; // put AIO key here
+var group = "MakerHubEvents";
+var feedname= "backdoorbell";
+
+var firstrun = true;
+
+var prev_stream_id = false;
+function poll_doorbell(callback){
+  var receiveurl = "https://io.adafruit.com/api/groups/"+group+"/receive.json?x-aio-key="+key
+  request(receiveurl, function(error, response, body){
+   // console.log("receive");
+//    console.log(error);
+//    console.log(response);
+//    console.log(body);
+    if(error){
+        console.log("ERROR" + error);
+        return;
+    }
+    var data = JSON.parse(body);
+    var stream = false;
+    var feeds = data.feeds.filter(function(f){return f.name = feedname});
+    if(feeds.length > 0){
+        stream = feeds[0].stream;
+        if(!firstrun && prev_stream_id != stream.id){
+          prev_stream_id = stream.id;
+          callback(stream.value);
+        }else if(firstrun){
+          prev_stream_id = stream.id;
+         // console.log("same value");
+        }else{
+
+        }
+    }
+    firstrun = false; 
+  });
+}
+
+function doorbell_alert(value){ 	
+  console.log("new value: " + value);
+  interruptWithTrack();
+}
+
+setInterval(function(){poll_doorbell(doorbell_alert);}, 3000);
+
 
 var setVolumeLow = function(){
 	var result = mopidy.mixer.setVolume(5);
