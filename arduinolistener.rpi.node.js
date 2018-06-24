@@ -56,7 +56,7 @@ var interruptWithTrack = function(){
 	var currentPosition = mopidy.playback.getTimePosition();
 	// end playback
 	
-	var songDir = "file:///home/pi/seeburgjukebox";
+	var songDir = "file:///home/pi/seeburgjukebox/";
 	var interruptSong = "welcomeToMakerHub.mp3";
 	var interruptUri = songDir + interruptSong;
 	// add interrupt track to playlist, at first position	
