@@ -56,31 +56,33 @@ var interruptWithTrack = function(){
 	var currentPosition = mopidy.playback.getTimePosition();
 	// end playback
 	
-	var songDir = "";
+	var songDir = "file:///home/pi/seeburgjukebox";
 	var interruptSong = "welcomeToMakerHub.mp3";
 	var interruptUri = songDir + interruptSong;
 	// add interrupt track to playlist, at first position	
-	var added = mopidy.tracklist.add(null, 0, interruptUri);
+	var added = mopidy.tracklist.add(null, 0, interruptUri)
+	.then(function(added){
 	// play the track
-	var newTrack  =added[0];
-	var whenDone;
-	whenDone = function(track){
+		var newTrack  =added[0];
+		var whenDone;
+		whenDone = function(track){
 	
-		mopidy.playback.play(currentTrack);
-		mopidy.playback.pause();
-		mopidy.playback.seek(currentPosition);
-		mopidy.playback.resume();
-		// resume at original location
-		// remove the track
-		mopidy.tracklist.remove(newTrack);
-		
-		// remove the listener
-		mopidy.off("event:trackPlaybackEnded", whenDone);
-	};
-	mopidy.playback.stop();
+			mopidy.playback.play(currentTrack);
+			mopidy.playback.pause();
+			mopidy.playback.seek(currentPosition);
+			mopidy.playback.resume();
+			// resume at original location
+			// remove the track
+			mopidy.tracklist.remove(newTrack);
+			
+			// remove the listener
+			mopidy.off("event:trackPlaybackEnded", whenDone);
+		};
+		mopidy.playback.stop();
 
-	mopidy.on("event:trackPlaybackEnded", whenDone);
-	mopidy.playback.play(newTrack);
+		mopidy.on("event:trackPlaybackEnded", whenDone);
+		mopidy.playback.play(newTrack);	
+	});
 };
 
 
