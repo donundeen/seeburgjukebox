@@ -108,7 +108,7 @@ var interruptWithTrack = function(){
 	// end playback
 
 	var songDir = "file:///home/pi/seeburgjukebox/";
-	var interruptSong = "WelcomeToMakerHubDubstep.mp3";
+	var interruptSong = "DoorbellInterrupt.mp3";
 	var interruptUri = songDir + interruptSong;
 	// add interrupt track to playlist, at first position	
 	var added = mopidy.tracklist.add(null, 0, interruptUri)
