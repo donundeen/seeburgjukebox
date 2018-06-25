@@ -16,11 +16,13 @@
 
 var fs = require("fs");
 var request = require("request");
-
-
 var Mopidy = require("mopidy");
 
 var allPlaylists = {};
+
+var songDir = "file:///home/pi/seeburgjukebox/";
+var interruptSong = "DoorbellInterrupt.mp3";
+var interruptUri = songDir + interruptSong;
 
 var sb = false;
 
@@ -60,32 +62,29 @@ var inInterruptTrack = false;
 var whenDone;
 
 whenDone = function(track){
-                        console.log("in whenDone " + track.tl_track.tlid + " : " + interruptTrack.tlid);
-			console.log(JSON.stringify(track, null, "  "));
-
+	
 	if(!interruptTrack || track.tl_track.tlid != interruptTrack.tlid){
 		  console.log("not the right track, skipping");
 		  return;
 	}
 
 
-                        if(currentTrack){
-	                        console.log(JSON.stringify(currentTrack, null, " " ));
-                                console.log("resuming track");
-                                mopidy.playback.play(currentTrack);
-                                mopidy.playback.pause();
-                                mopidy.playback.seek(currentPosition);
-                                mopidy.playback.resume();
-                        }
-                        // resume at original location
-                        // remove the track
-                        console.log("removing "+interruptTrack.tlid);
-                        mopidy.tracklist.remove({'tlid': [interruptTrack.tlid]}).then(function(removed){
-				interruptTrack = false;
-				console.log("removed");
-				console.log(JSON.stringify(removed, null, "  "));
-			});
-                        // remove the listener
+        if(currentTrack){
+		console.log(JSON.stringify(currentTrack, null, " " ));
+                console.log("resuming track");
+                mopidy.playback.play(currentTrack);
+                mopidy.playback.pause();
+                mopidy.playback.seek(currentPosition);
+                mopidy.playback.resume();
+        }
+        // resume at original location
+        // remove the track
+        console.log("removing "+interruptTrack.tlid);
+        mopidy.tracklist.remove({'tlid': [interruptTrack.tlid]}).then(function(removed){
+		interruptTrack = false;
+		console.log("removed");
+		console.log(JSON.stringify(removed, null, "  "));
+	});
 };
 
 mopidy.on("event:trackPlaybackEnded", whenDone);
@@ -96,9 +95,9 @@ var interruptWithTrack = function(){
 	console.log("interrupting");
 	// get current track and time position
 	mopidy.playback.getCurrentTlTrack().then(function(ctrack){
-          console.log("currentTrack " );
-          currentTrack = ctrack;
-	  console.log(JSON.stringify(ctrack, null , "  "));
+          	console.log("currentTrack " );
+        	currentTrack = ctrack;
+	  	console.log(JSON.stringify(ctrack, null , "  "));
 	});
 	mopidy.playback.getTimePosition().then(function(cpos){
 		console.log("currentPosition");
@@ -107,9 +106,7 @@ var interruptWithTrack = function(){
         });
 	// end playback
 
-	var songDir = "file:///home/pi/seeburgjukebox/";
-	var interruptSong = "DoorbellInterrupt.mp3";
-	var interruptUri = songDir + interruptSong;
+
 	// add interrupt track to playlist, at first position	
 	var added = mopidy.tracklist.add(null, 0, interruptUri)
 	.then(function(added){
@@ -243,19 +240,18 @@ mopidy.on("state:online", function(){
 mopidy.on("event:trackPlaybackStarted", function(track){
 	console.log("track playback started 2");
 	console.log(JSON.stringify(track, null, 2));
-   	if(sb){
-	try{
-		console.log("artist " + track.tl_track.track.artists[0].name);
-		sb.send("songartist","string", track.tl_track.track.artists[0].name);
-	}catch(artisterror){
-		console.log("error getting track artists name");	
-	}
-	try{
-		console.log("song " + track.tl_track.track.name);
-		sb.send("songtitle","string", track.tl_track.track.name);
-	}catch(titleerror){
-		console.log("error getting track name");
-	}
+   	if(false){ // send track information to adafruit.io, or create a generic IOT wrapper 
+		try{
+			console.log("artist " + track.tl_track.track.artists[0].name);
+		
+		}catch(artisterror){
+			console.log("error getting track artists name");	
+		}
+		try{
+			console.log("song " + track.tl_track.track.name);
+		}catch(titleerror){
+			console.log("error getting track name");
+		}
 	}
 });
 
@@ -265,8 +261,6 @@ console.log("got mopidy");
 console.log(mopidy); 
 /*
 */
-
-
 
 var displayResult = function(result) {
     console.log(JSON.stringify(result, null, 2));
@@ -294,33 +288,30 @@ var serialPort = new SerialPort(portname, {
 });
 
 
-
-  serialPort.on("open", function () {
-    console.log('open');
-    serialPort.on('data', function(data) {
-    	data = data.toString().trim();
-    	var done = false;
-      if(data != ""){
-  	 //   console.log('data received: ' + data);
-  	    if(/^[A-K][0-9]+$/.test(data)){
-  	    	fullMessage = data;
-  	    	done = true;
-  	    	waitingOnNumber = false;
-  	    }else{
-  	    	console.log("don't understand " + data);
-  	    }
-  	    if(done){
-  	   // 	console.log("final signal" + fullMessage);
-  	    	done = false;
-  	    	processMessage(fullMessage.toUpperCase());
-  		  } 
-      }
-    });  
-    serialPort.write("ls\n", function(err, results) {
-      console.log('err ' + err);
-      console.log('results ' + results);
-    });  
-  });
+serialPort.on("open", function () {
+	console.log('open');
+    	serialPort.on('data', function(data) {
+    		data = data.toString().trim();
+    		var done = false;
+      		if(data != ""){
+	  		if(/^[A-K][0-9]+$/.test(data)){
+  	    			fullMessage = data;
+		  	    	done = true;
+  	    			waitingOnNumber = false;
+		  	}else{
+  	    			console.log("don't understand " + data);
+  	    		}
+		      	if(done){
+ 		 	    	done = false;
+  	    			processMessage(fullMessage.toUpperCase());
+	  		} 
+      		}
+    	});  
+    	serialPort.write("ls\n", function(err, results) {
+      		console.log('err ' + err);
+		console.log('results ' + results);
+	});  
+});
 
 
 
@@ -674,8 +665,10 @@ function processMessage(command){
       //reboot
       reboot();
       break;
-
-
+    case "L1":
+      // secret Jukebox-code-compatible code for triggering doorbell. So the jukebox can listen to ONE adafruit.io channel eventually
+      interruptWithTrack();		  
+      break;
     default:
       console.log("don't know what to do with that command");
 
