@@ -50,38 +50,80 @@ var reboot = function(){
   require('reboot').reboot();
 };
 
+
+
+
+var currentTrack = false;
+var currentPosition = false;
+var interruptTrack = false;
+var inInterruptTrack = false;
+var whenDone;
+
+whenDone = function(track){
+                        console.log("in whenDone " + track.tl_track.tlid + " : " + interruptTrack.tlid);
+			console.log(JSON.stringify(track, null, "  "));
+
+	if(!interruptTrack || track.tl_track.tlid != interruptTrack.tlid){
+		  console.log("not the right track, skipping");
+		  return;
+	}
+
+
+                        if(currentTrack){
+	                        console.log(JSON.stringify(currentTrack, null, " " ));
+                                console.log("resuming track");
+                                mopidy.playback.play(currentTrack);
+                                mopidy.playback.pause();
+                                mopidy.playback.seek(currentPosition);
+                                mopidy.playback.resume();
+                        }
+                        // resume at original location
+                        // remove the track
+                        console.log("removing "+interruptTrack.tlid);
+                        mopidy.tracklist.remove({'tlid': [interruptTrack.tlid]}).then(function(removed){
+				interruptTrack = false;
+				console.log("removed");
+				console.log(JSON.stringify(removed, null, "  "));
+			});
+                        // remove the listener
+};
+
+mopidy.on("event:trackPlaybackEnded", whenDone);
+
+
+
 var interruptWithTrack = function(){
+	console.log("interrupting");
 	// get current track and time position
-	var currentTrack = mopidy.playback.getCurrentTrack();
-	var currentPosition = mopidy.playback.getTimePosition();
+	mopidy.playback.getCurrentTlTrack().then(function(ctrack){
+          console.log("currentTrack " );
+          currentTrack = ctrack;
+	  console.log(JSON.stringify(ctrack, null , "  "));
+	});
+	mopidy.playback.getTimePosition().then(function(cpos){
+		console.log("currentPosition");
+		currentPosition = cpos;
+	        console.log(JSON.stringify(cpos, null, "  "));
+        });
 	// end playback
-	
-	var songDir = "file:///home/pi/seeburgjukebox";
-	var interruptSong = "welcomeToMakerHub.mp3";
+
+	var songDir = "file:///home/pi/seeburgjukebox/";
+	var interruptSong = "WelcomeToMakerHubDubstep.mp3";
 	var interruptUri = songDir + interruptSong;
 	// add interrupt track to playlist, at first position	
 	var added = mopidy.tracklist.add(null, 0, interruptUri)
 	.then(function(added){
-	// play the track
-		var newTrack  =added[0];
-		var whenDone;
-		whenDone = function(track){
-	
-			mopidy.playback.play(currentTrack);
-			mopidy.playback.pause();
-			mopidy.playback.seek(currentPosition);
-			mopidy.playback.resume();
-			// resume at original location
-			// remove the track
-			mopidy.tracklist.remove(newTrack);
-			
-			// remove the listener
-			mopidy.off("event:trackPlaybackEnded", whenDone);
-		};
+        	// play the track
+          	console.log("added");
+		interruptTrack  = added[0];
 		mopidy.playback.stop();
 
-		mopidy.on("event:trackPlaybackEnded", whenDone);
-		mopidy.playback.play(newTrack);	
+		console.log("gonna plaY");
+		console.log(JSON.stringify(interruptTrack, null, "  "));
+		mopidy.playback.play(interruptTrack).then(function(startata){
+			console.log("playback happening");
+			console.log(JSON.stringify(startata, null,  "  "));
+		});	
 	});
 };
 
@@ -98,13 +140,16 @@ var playPlaylist = function(playlist_uri){
       var added = mopidy.tracklist.add(data);
 	    console.log("playlist data");
 	    console.log(data);
-      added.then(function(){
+      added.then(function(addedTracks){
         shuffle();
-        mopidy.playback.play();
+	var firstTrack = addedTracks[Math.floor((Math.random() * addedTracks.length))];
+	console.log("gonna play");
+	console.log(JSON.stringify(firstTrack, null, "  "));
 
-	      
-	      
-	   	      
+        mopidy.playback.play(firstTrack).then(function(playing){
+		console.log("playing playlist");
+		console.log(JSON.stringify(playing, null, "  "));
+	});
       });
     });
   });
