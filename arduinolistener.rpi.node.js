@@ -72,10 +72,10 @@ whenDone = function(track){
         if(currentTrack){
 		console.log(JSON.stringify(currentTrack, null, " " ));
                 console.log("resuming track");
-                mopidy.playback.play(currentTrack);
-                mopidy.playback.pause();
-                mopidy.playback.seek(currentPosition);
-                mopidy.playback.resume();
+                mopidy.playback.play(currentTrack)
+			.then(p1 => mopidy.playback.pause()
+			.then(p2 => mopidy.playback.seek(currentPosition)
+			.then(p3 => mopidy.playback.resume())));
         }
         // resume at original location
         // remove the track
