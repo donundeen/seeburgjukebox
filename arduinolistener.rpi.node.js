@@ -26,6 +26,8 @@ var interruptUri = songDir + interruptSong;
 
 var sb = false;
 
+var currentlyPlaying = false;
+
 var mopidy = new Mopidy({
     autoConnect: true,
     webSocketUrl : "ws://127.0.0.1:6680/mopidy/ws/",
@@ -41,11 +43,19 @@ var nextSong = function(){
 };
 
 var stopPlaying = function(){
-  mopidy.playback.stop();
+	if(currentlyPlaying){
+		mopidy.playback.stop();
+		currentlyPlaying = false;
+	}
+	currentTrack = false;
+	currentPosition = false;
 };
 
 var startPlaying = function(){
-  mopidy.playback.play();
+	if(!currentlyPlaying){
+		currentlyPlaying = true;
+		mopidy.playback.play();
+	}
 };
 
 var reboot = function(){
@@ -69,7 +79,7 @@ whenDone = function(track){
 	}
 
 
-        if(currentTrack){
+        if(currentTrack && currentlyPlaying){
 		console.log(JSON.stringify(currentTrack, null, " " ));
                 console.log("resuming track");
                 mopidy.playback.play(currentTrack)
@@ -82,12 +92,14 @@ whenDone = function(track){
         }
         // resume at original location
         // remove the track
-        console.log("removing "+interruptTrack.tlid);
-        mopidy.tracklist.remove({'tlid': [interruptTrack.tlid]}).then(function(removed){
-		interruptTrack = false;
-		console.log("removed");
-		console.log(JSON.stringify(removed, null, "  "));
-	});
+	if(interruptTrack){
+	        console.log("removing "+interruptTrack.tlid);
+        	mopidy.tracklist.remove({'tlid': [interruptTrack.tlid]}).then(function(removed){
+			interruptTrack = false;
+			console.log("removed");
+			console.log(JSON.stringify(removed, null, "  "));
+		});
+	}
 };
 
 mopidy.on("event:trackPlaybackEnded", whenDone);
@@ -97,16 +109,18 @@ mopidy.on("event:trackPlaybackEnded", whenDone);
 var interruptWithTrack = function(){
 	console.log("interrupting");
 	// get current track and time position
-	mopidy.playback.getCurrentTlTrack().then(function(ctrack){
-          	console.log("currentTrack " );
-        	currentTrack = ctrack;
-	  	console.log(JSON.stringify(ctrack, null , "  "));
-	});
-	mopidy.playback.getTimePosition().then(function(cpos){
-		console.log("currentPosition");
-		currentPosition = cpos;
-	        console.log(JSON.stringify(cpos, null, "  "));
-        });
+	if(currentlyPlaying){
+		mopidy.playback.getCurrentTlTrack().then(function(ctrack){
+        	  	console.log("currentTrack " );
+        		currentTrack = ctrack;
+		  	console.log(JSON.stringify(ctrack, null , "  "));
+		});
+		mopidy.playback.getTimePosition().then(function(cpos){
+			console.log("currentPosition");
+			currentPosition = cpos;
+		        console.log(JSON.stringify(cpos, null, "  "));
+        	});
+	}
 	// end playback
 
 
@@ -117,8 +131,7 @@ var interruptWithTrack = function(){
           	console.log("added");
 		interruptTrack  = added[0];
 		mopidy.playback.stop();
-
-		console.log("gonna plaY");
+		console.log("gonna play");
 		console.log(JSON.stringify(interruptTrack, null, "  "));
 		mopidy.playback.play(interruptTrack).then(function(startata){
 			console.log("playback happening");
@@ -129,30 +142,31 @@ var interruptWithTrack = function(){
 
 
 var playPlaylist = function(playlist_uri){
-  var cleared = mopidy.tracklist.clear();
-  mopidy.playback.stop();
-  var playlist = allPlaylists[playlist_uri];
-  console.log("playlist is ");
-  console.log(playlist);
+	currentlyPlaying = true;
+	var cleared = mopidy.tracklist.clear();
+	mopidy.playback.stop();
+	var playlist = allPlaylists[playlist_uri];
+	console.log("playlist is ");
+	console.log(playlist);
 
-  cleared.then(function(){
-    mopidy.library.lookup(playlist_uri).then(function(data){
-      var added = mopidy.tracklist.add(data);
-	    console.log("playlist data");
-	    console.log(data);
-      added.then(function(addedTracks){
-        shuffle();
-	var firstTrack = addedTracks[Math.floor((Math.random() * addedTracks.length))];
-	console.log("gonna play");
-	console.log(JSON.stringify(firstTrack, null, "  "));
+	cleared.then(function(){
+  		mopidy.library.lookup(playlist_uri).then(function(data){
+      			var added = mopidy.tracklist.add(data);
+	    		console.log("playlist data");
+	    		console.log(data);
+      			added.then(function(addedTracks){
+        			shuffle();
+				var firstTrack = addedTracks[Math.floor((Math.random() * addedTracks.length))];
+				console.log("gonna play");
+				console.log(JSON.stringify(firstTrack, null, "  "));
 
-        mopidy.playback.play(firstTrack).then(function(playing){
-		console.log("playing playlist");
-		console.log(JSON.stringify(playing, null, "  "));
-	});
-      });
-    });
-  });
+        			mopidy.playback.play(firstTrack).then(function(playing){
+					console.log("playing playlist");
+					console.log(JSON.stringify(playing, null, "  "));
+				});
+      			});
+    		});
+  	});
 };
 
 var key = ""; // put AIO key here
