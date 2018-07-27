@@ -78,6 +78,17 @@ whenDone = function(track){
 		  return;
 	}
 
+        // resume at original location
+        // remove the track
+	if(interruptTrack){
+	        console.log("removing "+interruptTrack.tlid);
+        	mopidy.tracklist.remove({'tlid': [interruptTrack.tlid]}).then(function(removed){
+			interruptTrack = false;
+			console.log("removed");
+			console.log(JSON.stringify(removed, null, "  "));
+		});
+	}	
+	
 
         if(currentTrack && currentlyPlaying){
 		console.log(JSON.stringify(currentTrack, null, " " ));
@@ -98,16 +109,7 @@ whenDone = function(track){
         }else{
 		console.log("not currently playing, not resuming");	
 	}
-        // resume at original location
-        // remove the track
-	if(interruptTrack){
-	        console.log("removing "+interruptTrack.tlid);
-        	mopidy.tracklist.remove({'tlid': [interruptTrack.tlid]}).then(function(removed){
-			interruptTrack = false;
-			console.log("removed");
-			console.log(JSON.stringify(removed, null, "  "));
-		});
-	}
+
 };
 
 mopidy.on("event:trackPlaybackEnded", whenDone);
