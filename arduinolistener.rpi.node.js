@@ -83,13 +83,21 @@ whenDone = function(track){
 		console.log(JSON.stringify(currentTrack, null, " " ));
                 console.log("resuming track");
                 mopidy.playback.play(currentTrack)
-			.then(function(){mopidy.playback.pause();})
-			.then(function(){mopidy.playback.seek(currentPosition);})
-			.then(function(){mopidy.playback.resume();
+			.then(function(){
+				console.log("pause");
+				mopidy.playback.pause();})
+			.then(function(){
+				console.log("seek");
+				mopidy.playback.seek(currentPosition);})
+			.then(function(){
+				console.log("resume");
+				mopidy.playback.resume();
 				currentTrack = false;
 				currentPosition = false;
 			});
-        }
+        }else{
+		console.log("not currently playing, not resuming");	
+	}
         // resume at original location
         // remove the track
 	if(interruptTrack){
@@ -257,10 +265,9 @@ mopidy.on("state:online", function(){
 mopidy.on("event:trackPlaybackStarted", function(track){
 	console.log("track playback started 2");
 	console.log(JSON.stringify(track, null, 2));
-   	if(false){ // send track information to adafruit.io, or create a generic IOT wrapper 
+   	if(true){ // send track information to adafruit.io, or create a generic IOT wrapper 
 		try{
-			console.log("artist " + track.tl_track.track.artists[0].name);
-		
+			console.log("artist " + track.tl_track.track.artists[0].name);		
 		}catch(artisterror){
 			console.log("error getting track artists name");	
 		}
