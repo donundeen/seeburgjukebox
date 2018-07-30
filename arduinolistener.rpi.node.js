@@ -30,7 +30,6 @@ var interruptUri = songDir + interruptSong;
 
 var sb = false;
 
-var currentlyPlaying = false;
 
 var mopidy = new Mopidy({
     autoConnect: true,
@@ -71,6 +70,7 @@ var reboot = function(){
 
 var currentTrack = false;
 var currentPosition = false;
+var currentlyPlaying = false;
 var interruptTrack = false;
 var inInterruptTrack = false;
 var whenDone;
@@ -314,6 +314,11 @@ var mopidy_online = false;
 
 mopidy.on("state:online", function(){
     console.log("mopidy online");
+    mopidy.playback.getState().then(function(state){
+	    console.log("got state ");
+	    console.log(state);
+	    console.log(mopidy.PlaybackState.STOPPED);
+    });
     listPlaylists();
     setVolumeLow();
 });
