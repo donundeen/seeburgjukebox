@@ -234,11 +234,12 @@ setInterval(function(){poll_doorbell(doorbell_alert);}, 3000);
 
 
 var command_feedname= "jukebox_command";
+var command_group = "jukebox";
 var prev_command_streamid = false;
 var command_firstrun = true;
 
 function poll_command(callback){
-  var receiveurl = "https://io.adafruit.com/api/groups/"+group+"/receive.json?x-aio-key="+key
+  var receiveurl = "https://io.adafruit.com/api/groups/"+command_group+"/receive.json?x-aio-key="+key
   request(receiveurl, function(error, response, body){
    // console.log("receive");
 //    console.log(error);
