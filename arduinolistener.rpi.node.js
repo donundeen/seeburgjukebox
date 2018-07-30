@@ -208,7 +208,7 @@ function poll_doorbell(callback){
 	    console.log(JSON.stringify(data, null, "  "));
 	return;    
     }
-    var feeds = data.feeds.filter(function(f){return f.name = feedname});
+    var feeds = data.feeds.filter(function(f){return f.name == feedname});
     if(feeds.length > 0){
         stream = feeds[0].stream;
         if(!firstrun && prev_stream_id != stream.id){
@@ -256,7 +256,7 @@ function poll_command(callback){
 	    console.log(JSON.stringify(data, null, "  "));
 	return;    
     }
-    var feeds = data.feeds.filter(function(f){return f.name = command_feedname});
+    var feeds = data.feeds.filter(function(f){return f.name == command_feedname});
     if(feeds.length > 0){
         stream = feeds[0].stream;
 	if(!stream){
