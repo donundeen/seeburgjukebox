@@ -229,6 +229,55 @@ function doorbell_alert(value){
 setInterval(function(){poll_doorbell(doorbell_alert);}, 3000);
 
 
+var command_feedname= "jukebox_command";
+var prev_command_streamid = false;
+var prev_stream_id = false;
+var command_firstrun = true;
+
+function poll_command(callback){
+  var receiveurl = "https://io.adafruit.com/api/groups/"+group+"/receive.json?x-aio-key="+key
+  request(receiveurl, function(error, response, body){
+   // console.log("receive");
+//    console.log(error);
+//    console.log(response);
+//    console.log(body);
+    if(error){
+        console.log("ERROR" + error);
+        return;
+    }
+    var data = JSON.parse(body);
+    var stream = false;
+    if(!data.feeds){
+	    console.log("no feeds returned");
+	    console.log(JSON.stringify(data, null, "  "));
+	return;    
+    }
+    var feeds = data.feeds.filter(function(f){return f.name = command_feedname});
+    if(feeds.length > 0){
+        stream = feeds[0].stream;
+        if(!command_firstrun && prev_command_streamid != stream.id){
+          prev_command_stream_id = stream.id;
+          callback(stream.value);
+        }else if(command_firstrun){
+          prev_command_stream_id = stream.id;
+         // console.log("same value");
+        }else{
+
+        }
+    }
+    firstrun = false; 
+  });
+}
+
+function command_sent(value){ 	
+  console.log("new command value: " + value);
+//  interruptWithTrack();
+}
+
+setInterval(function(){poll_command(command_sent);}, 3000);
+
+
+
 var setVolumeLow = function(){
 	var result = mopidy.mixer.setVolume(5);
 	console.log("set volume low " + result);
