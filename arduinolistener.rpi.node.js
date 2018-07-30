@@ -259,6 +259,9 @@ function poll_command(callback){
     var feeds = data.feeds.filter(function(f){return f.name = command_feedname});
     if(feeds.length > 0){
         stream = feeds[0].stream;
+	if(!stream){
+		console.log(feeds[0]);
+	}
         if(!command_firstrun && prev_command_streamid != stream.id){
           prev_command_stream_id = stream.id;
           callback(stream.value);
