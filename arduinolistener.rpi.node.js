@@ -263,12 +263,13 @@ function poll_command(callback){
 	if(!stream){
 		console.log(feeds[0]);
 	}
+	    console.log(stream);
         if(!command_firstrun && prev_command_streamid != stream.id){
           prev_command_stream_id = stream.id;
           callback(stream.value);
         }else if(command_firstrun){
           prev_command_stream_id = stream.id;
-         // console.log("same value");
+          console.log("same value");
         }else{
 
         }
