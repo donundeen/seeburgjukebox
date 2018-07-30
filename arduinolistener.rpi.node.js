@@ -48,8 +48,8 @@ var nextSong = function(){
 var stopPlaying = function(){
 	if(currentlyPlaying){
 		mopidy.playback.stop();
-		currentlyPlaying = false;
 	}
+	currentlyPlaying = false;
 	currentTrack = false;
 	currentPosition = false;
 };
@@ -111,7 +111,8 @@ whenDone = function(track){
 				currentPosition = false;
 			});
         }else{
-		console.log("not currently playing, not resuming");	
+		console.log("not currently playing, not resuming");
+		mopidy.playback.stop();
 	}
 
 };
@@ -263,13 +264,12 @@ function poll_command(callback){
 	if(!stream){
 		console.log(feeds[0]);
 	}
-	    console.log(stream);
         if(!command_firstrun && prev_command_stream_id != stream.id){
           prev_command_stream_id = stream.id;
           callback(stream.value);
         }else if(command_firstrun){
           prev_command_stream_id = stream.id;
-          console.log("same value");
+//          console.log("same value");
         }else{
 
         }
@@ -317,7 +317,9 @@ mopidy.on("state:online", function(){
     mopidy.playback.getState().then(function(state){
 	    console.log("got state ");
 	    console.log(state);
-	    console.log(mopidy.PlaybackState.STOPPED);
+	    if(state == "playing"){
+		currentlyPlaying = true;
+	    }
     });
     listPlaylists();
     setVolumeLow();
