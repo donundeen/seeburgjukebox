@@ -233,7 +233,7 @@ function doorbell_alert(value){
 setInterval(function(){poll_doorbell(doorbell_alert);}, 3000);
 
 
-var command_feedname= "jukebox-command";
+var command_feedname= "jukebox_command";
 var command_group = "jukebox";
 var prev_command_streamid = false;
 var command_firstrun = true;
@@ -256,7 +256,7 @@ function poll_command(callback){
 	    console.log(JSON.stringify(data, null, "  "));
 	return;    
     }
-    console.log(data.feeds);
+   // console.log(data.feeds);
     var feeds = data.feeds.filter(function(f){return f.name == command_feedname});
     if(feeds.length > 0){
         stream = feeds[0].stream;
@@ -273,7 +273,7 @@ function poll_command(callback){
 
         }
     }
-    firstrun = false; 
+    command_firstrun = false; 
   });
 }
 
