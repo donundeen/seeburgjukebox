@@ -14,6 +14,10 @@
     });
 */
 
+
+var mysecrets  = require (__dirname + "/secrets.js").secrets();
+
+
 var fs = require("fs");
 var request = require("request");
 var Mopidy = require("mopidy");
@@ -179,7 +183,7 @@ var playPlaylist = function(playlist_uri){
   	});
 };
 
-var key = ""; // put AIO key here
+var key = mysecrets.aio_key; // put AIO key here
 var group = "MakerHubEvents";
 var feedname= "backdoorbell";
 
@@ -231,7 +235,6 @@ setInterval(function(){poll_doorbell(doorbell_alert);}, 3000);
 
 var command_feedname= "jukebox_command";
 var prev_command_streamid = false;
-var prev_stream_id = false;
 var command_firstrun = true;
 
 function poll_command(callback){
@@ -271,12 +274,10 @@ function poll_command(callback){
 
 function command_sent(value){ 	
   console.log("new command value: " + value);
-//  interruptWithTrack();
+  processCommand(value);
 }
 
 setInterval(function(){poll_command(command_sent);}, 3000);
-
-
 
 var setVolumeLow = function(){
 	var result = mopidy.mixer.setVolume(5);
@@ -392,6 +393,7 @@ serialPort.on("open", function () {
 
 function processMessage(command){
 	console.log("going to process command : " + command);
+  command = command.toUpperCase();
   switch(command){
   case "A1":
       // Maker Hub Staff picks
@@ -743,6 +745,9 @@ function processMessage(command){
     case "L1":
       // secret Jukebox-code-compatible code for triggering doorbell. So the jukebox can listen to ONE adafruit.io channel eventually
       interruptWithTrack();		  
+      break;
+    case "DOORBELL":		  
+     interruptWithTrack();		  
       break;
     default:
       console.log("don't know what to do with that command");
