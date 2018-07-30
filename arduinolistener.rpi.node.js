@@ -256,6 +256,7 @@ function poll_command(callback){
 	    console.log(JSON.stringify(data, null, "  "));
 	return;    
     }
+    console.log(feeds);
     var feeds = data.feeds.filter(function(f){return f.name == command_feedname});
     if(feeds.length > 0){
         stream = feeds[0].stream;
