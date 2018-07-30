@@ -279,7 +279,7 @@ function poll_command(callback){
 
 function command_sent(value){ 	
   console.log("new command value: " + value);
-  processCommand(value);
+  processMessage(value);
 }
 
 setInterval(function(){poll_command(command_sent);}, 3000);
