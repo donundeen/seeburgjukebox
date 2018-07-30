@@ -160,23 +160,23 @@ var playPlaylist = function(playlist_uri){
 	var cleared = mopidy.tracklist.clear();
 	mopidy.playback.stop();
 	var playlist = allPlaylists[playlist_uri];
-	console.log("playlist is ");
-	console.log(playlist);
+	//console.log("playlist is ");
+	//console.log(playlist);
 
 	cleared.then(function(){
   		mopidy.library.lookup(playlist_uri).then(function(data){
       			var added = mopidy.tracklist.add(data);
 	    		console.log("playlist data");
-	    		console.log(data);
+	  //  		console.log(data);
       			added.then(function(addedTracks){
         			shuffle();
 				var firstTrack = addedTracks[Math.floor((Math.random() * addedTracks.length))];
 				console.log("gonna play");
-				console.log(JSON.stringify(firstTrack, null, "  "));
+		//		console.log(JSON.stringify(firstTrack, null, "  "));
 
         			mopidy.playback.play(firstTrack).then(function(playing){
 					console.log("playing playlist");
-					console.log(JSON.stringify(playing, null, "  "));
+		//			console.log(JSON.stringify(playing, null, "  "));
 				});
       			});
     		});
@@ -235,7 +235,7 @@ setInterval(function(){poll_doorbell(doorbell_alert);}, 3000);
 
 var command_feedname= "jukebox_command";
 var command_group = "jukebox";
-var prev_command_streamid = false;
+var prev_command_stream_id = false;
 var command_firstrun = true;
 
 function poll_command(callback){
@@ -264,7 +264,7 @@ function poll_command(callback){
 		console.log(feeds[0]);
 	}
 	    console.log(stream);
-        if(!command_firstrun && prev_command_streamid != stream.id){
+        if(!command_firstrun && prev_command_stream_id != stream.id){
           prev_command_stream_id = stream.id;
           callback(stream.value);
         }else if(command_firstrun){
