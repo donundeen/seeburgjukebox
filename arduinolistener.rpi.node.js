@@ -514,6 +514,9 @@ function processMessage(command){
 		  
       break;
     case "C7":
+		  // spotify:user:ryan.mannion:playlist:7a0gj4eUHONHVWZ83O5PUZ
+		  // Ryan Mannion's Outlaw Country
+	playPlaylist("spotify:user:ryan.mannion:playlist:7a0gj4eUHONHVWZ83O5PUZ");
       break;
     case "C8":
       break;
