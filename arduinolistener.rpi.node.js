@@ -202,7 +202,14 @@ function poll_doorbell(callback){
         console.log("ERROR" + error);
         return;
     }
-    var data = JSON.parse(body);
+    var data = false;
+    try{ 
+    	data = JSON.parse(body);
+    }catch(e){
+	console.log("error parsing doorbell AIO body");
+	console.log(e);
+	console.log(body);
+    }
     var stream = false;
     if(!data.feeds){
 	    console.log("no feeds returned");
