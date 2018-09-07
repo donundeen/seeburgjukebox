@@ -533,6 +533,10 @@ function processMessage(command){
 	playPlaylist("spotify:user:ryan.mannion:playlist:7a0gj4eUHONHVWZ83O5PUZ");
       break;
     case "C8":
+		  // Sarah Harper's Summer 2018
+		  // spotify:user:15sharper:playlist:7rsGH7Ug5OHSKIuFIQOMZd
+	playPlaylist("spotify:user:15sharper:playlist:7rsGH7Ug5OHSKIuFIQOMZd");
+		  
       break;
     case "C9":
       break;
