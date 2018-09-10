@@ -26,7 +26,7 @@ var allPlaylists = {};
 
 var songDir = "file:///home/pi/seeburgjukebox/";
 var doorbellSong = "DoorbellInterrupt.mp3";
-var doorbellUri = songDir + interruptSong;
+var doorbellUri = songDir + doorbellSong;
 var chatSong = "IncomingChat.mp3";
 var chatUri = songDir + chatSong;
 
