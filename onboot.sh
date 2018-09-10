@@ -22,3 +22,4 @@ sudo -u pi /usr/bin/git pull
 
 
 sudo -u pi forever start --minUpTime 100 --spinSleepTime 2000 -m 200 -o /home/pi/arduinolistener.log.txt -e /home/pi/arduinolistener.err.txt /home/pi/seeburgjukebox/arduinolistener.rpi.node.js > /home/pi/arduinolistener.forever.txt &
+sudo -u pi forever start --minUpTime 100 --spinSleepTime 2000 -m 200 -o /home/pi/chatlistenter.log.txt  -c python /home/pi/libraryh3lpListener/current-activity.py > ~/libraryh3lp.log.txt &
