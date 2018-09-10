@@ -25,8 +25,11 @@ var Mopidy = require("mopidy");
 var allPlaylists = {};
 
 var songDir = "file:///home/pi/seeburgjukebox/";
-var interruptSong = "DoorbellInterrupt.mp3";
-var interruptUri = songDir + interruptSong;
+var doorbellSong = "DoorbellInterrupt.mp3";
+var doorbellUri = songDir + interruptSong;
+var chatSong = "IncomingChat.mp3";
+var chatUri = songDir + chatSong;
+
 
 var sb = false;
 
@@ -121,7 +124,7 @@ mopidy.on("event:trackPlaybackEnded", whenDone);
 
 
 
-var interruptWithTrack = function(){
+var interruptWithTrack = function(interruptUri){
 	console.log("interrupting");
 	// get current track and time position
 	if(currentlyPlaying){
@@ -185,14 +188,15 @@ var playPlaylist = function(playlist_uri){
 };
 
 var key = mysecrets.aio_key; // put AIO key here
-var group = "MakerHubEvents";
-var feedname= "backdoorbell";
-
+var events_group = "MakerHubEvents";
+var doorbell_feedname= "backdoorbell";
+var chat_feedname = "signagemessage";
 var firstrun = true;
 
-var prev_stream_id = false;
-function poll_doorbell(callback){
-  var receiveurl = "https://io.adafruit.com/api/groups/"+group+"/receive.json?x-aio-key="+key
+var prev_doorbellstream_id = false;
+var prev_chatstream_id= false;
+function poll_events(){
+  var receiveurl = "https://io.adafruit.com/api/groups/"+events_group+"/receive.json?x-aio-key="+key
   request(receiveurl, function(error, response, body){
    // console.log("receive");
 //    console.log(error);
@@ -210,20 +214,34 @@ function poll_doorbell(callback){
 	console.log(e);
 	console.log(body);
     }
-    var stream = false;
     if(!data.feeds){
 	    console.log("no feeds returned");
 	    console.log(JSON.stringify(data, null, "  "));
 	return;    
     }
-    var feeds = data.feeds.filter(function(f){return f.name == feedname});
-    if(feeds.length > 0){
-        stream = feeds[0].stream;
-        if(!firstrun && prev_stream_id != stream.id){
-          prev_stream_id = stream.id;
-          callback(stream.value);
+    // check for doorbell alerts
+    var doorbell_feeds = data.feeds.filter(function(f){return f.name == doorbell_feedname});
+    if(doorbell_feeds.length > 0){
+        var stream = doorbell_feeds[0].stream;
+        if(!firstrun && prev_doorbellstream_id != stream.id){
+          prev_doorbellstream_id = stream.id;
+          doorbell_alert(stream.value);
         }else if(firstrun){
-          prev_stream_id = stream.id;
+          prev_doorbellstream_id = stream.id;
+         // console.log("same value");
+        }else{
+
+        }
+    }
+    // check for doorbell alerts
+    var chat_feeds = data.feeds.filter(function(f){return f.name == chat_feedname});
+    if(chat_feeds.length > 0){
+        var stream = chat_feeds[0].stream;
+        if(!firstrun && prev_chatstream_id != stream.id && stream.value.match(/Incoming Chat/)){
+          prev_chatstream_id = stream.id;
+          chat_alert(stream.value);
+        }else if(firstrun){
+          prev_chatstream_id = stream.id;
          // console.log("same value");
         }else{
 
@@ -235,10 +253,14 @@ function poll_doorbell(callback){
 
 function doorbell_alert(value){ 	
   console.log("new value: " + value);
-  interruptWithTrack();
+  interruptWithTrack(doorbellUri);
+}
+function chat_alert(value){ 	
+  console.log("new value: " + value);
+  interruptWithTrack(chatUri);
 }
 
-setInterval(function(){poll_doorbell(doorbell_alert);}, 3000);
+setInterval(function(){poll_events();}, 3000);
 
 
 var command_feedname= "jukebox_command";
