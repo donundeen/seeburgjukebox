@@ -317,6 +317,21 @@ function poll_command(callback){
 function command_sent(value){ 	
   console.log("new command value: " + value);
   processMessage(value);
+  send_command_recieved(value);
+}
+
+
+function send_command_recieved(value){
+	// send the jukebox command that was recieved
+	//gumakerhub/feeds/jukebox.jukebox-command
+    var sendurl = "https://io.adafruit.com/api/groups/jukebox/send.json?x-aio-key="+key+"&jukebox_keypress="+value;
+	
+  request(sendurl, function(error, response, body){ 
+  	console.log("response");
+	console.log(response);
+	console.log(error);
+  });
+	
 }
 
 setInterval(function(){poll_command(command_sent);}, 3000);
