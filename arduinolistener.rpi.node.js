@@ -804,6 +804,7 @@ function processMessage(command){
 
       break;
     case "K8":
+      reboot();
 
       break;
     case "K9":
@@ -811,7 +812,6 @@ function processMessage(command){
       break;
     case "K10":
       //reboot
-      reboot();
       break;
     case "L1":
       // secret Jukebox-code-compatible code for triggering doorbell. So the jukebox can listen to ONE adafruit.io channel eventually
