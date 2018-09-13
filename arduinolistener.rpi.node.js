@@ -317,7 +317,6 @@ function poll_command(callback){
 function command_sent(value){ 	
   console.log("new command value: " + value);
   processMessage(value);
-  send_command_recieved(value);
 }
 
 
@@ -825,6 +824,8 @@ function processMessage(command){
 
 
   }
+    send_command_recieved(value);
+
 
 }
 
