@@ -457,6 +457,8 @@ serialPort.on("open", function () {
 function processMessage(command){
 	console.log("going to process command : " + command);
   command = command.toUpperCase();
+  send_command_recieved(command);
+	
   switch(command){
   case "A1":
       // Maker Hub Staff picks
@@ -824,7 +826,6 @@ function processMessage(command){
 
 
   }
-    send_command_recieved(value);
 
 
 }
