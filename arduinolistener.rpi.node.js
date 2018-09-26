@@ -577,6 +577,11 @@ function processMessage(command){
 		  
       break;
     case "C9":
+		  // Maya Archer's Maker Hub Bops
+		  // spotify:user:mayarcher17:playlist:0hgN4px8QwVhVuQxO96tp8
+	playPlaylist("spotify:user:mayarcher17:playlist:0hgN4px8QwVhVuQxO96tp8");
+		  
+		  
       break;
     case "C10":
       break;
