@@ -584,6 +584,10 @@ function processMessage(command){
 		  
       break;
     case "C10":
+		  // Zihan Xiao's maroon 5 et al playlist
+		  // spotify:user:cdental:playlist:7iDoasWCg3G0AXeYBh0fxz
+	playPlaylist("spotify:user:cdental:playlist:7iDoasWCg3G0AXeYBh0fxz");
+		  
       break;
     case "D1":
 		// Bailey Premeaux's Objective Jams
