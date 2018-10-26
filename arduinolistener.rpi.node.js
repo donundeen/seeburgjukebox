@@ -85,6 +85,14 @@ whenDone = function(track){
 		  return;
 	}
 
+	/*
+	// need to test this part
+	var uri = track.tl_track.track.uri;
+	if(currentlyInterrupting[uri]){
+		currentlyInterrupting[uri] = false;
+	}
+	*/
+	
         // resume at original location
         // remove the track
 	if(interruptTrack){
@@ -123,9 +131,19 @@ whenDone = function(track){
 mopidy.on("event:trackPlaybackEnded", whenDone);
 
 
-
+var currentlyInterrupting = {};
 var interruptWithTrack = function(interruptUri){
+	
 	console.log("interrupting");
+	
+	// testing this part
+	/*
+	if(currentlyInterrupting[interruptUri]){
+		console.log("already interrupting with " + interruptUri);
+		return;
+	}
+	currentlyInterrupting[interruptUri] = true;
+	*/
 	// get current track and time position
 	if(currentlyPlaying){
 		mopidy.playback.getCurrentTlTrack().then(function(ctrack){
