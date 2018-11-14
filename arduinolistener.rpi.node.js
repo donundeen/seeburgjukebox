@@ -652,6 +652,9 @@ function processMessage(command){
       playPlaylist("spotify:user:donundeen:playlist:26D49gSujdIToi4TlG8klK");		  
       break;
     case "D9":
+		  // Don's fun rocking playlist
+		  // spotify:user:donundeen:playlist:4TrfQdPpWHXt7YCwevK7x1
+      playPlaylist("spotify:user:donundeen:playlist:4TrfQdPpWHXt7YCwevK7x1");		  
 		  
       break;
     case "D10":
