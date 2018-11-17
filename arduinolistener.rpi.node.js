@@ -241,6 +241,9 @@ function poll_events(){
     var doorbell_feeds = data.feeds.filter(function(f){return f.name == doorbell_feedname});
     if(doorbell_feeds.length > 0){
         var stream = doorbell_feeds[0].stream;
+	if(!stream && doorbell_feeds[0].id){
+	  stream = doorbell_feeds[0];
+	}
         if(!firstrun && prev_doorbellstream_id != stream.id){
           prev_doorbellstream_id = stream.id;
           doorbell_alert(stream.value);
@@ -255,6 +258,10 @@ function poll_events(){
     var chat_feeds = data.feeds.filter(function(f){return f.name == chat_feedname});
     if(chat_feeds.length > 0){
         var stream = chat_feeds[0].stream;
+	if(!stream && chat_feeds[0].id){
+	  stream = chat_feeds[0];
+	}
+	    
         if(!firstrun && prev_chatstream_id != stream.id && stream.value.match(/Incoming Chat/)){
           prev_chatstream_id = stream.id;
           chat_alert(stream.value);
