@@ -669,7 +669,9 @@ function processMessage(command){
 		  
       break;
     case "D10":
-
+		  // Don's fun 80's playlist
+		  // spotify:user:eepulos:playlist:2IHK7qjrzm6BV81UbDHW6U
+      playPlaylist("spotify:user:eepulos:playlist:2IHK7qjrzm6BV81UbDHW6U");
       break;
     case "E1":
 	// spotify:user:donundeen:playlist:4Z9TnvMCmrZAfjl2jbeYeJ
