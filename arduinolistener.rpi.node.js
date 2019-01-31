@@ -680,10 +680,12 @@ function processMessage(command){
 
       break;
     case "E2":
-
+	//Jamie Farrell's on the road playlist
+	playPlaylist("spotify:user:1268743304:playlist:3vZNSz4PZXAt7CyvFaluBV");
       break;
     case "E3":
-
+	//Jamie Farrell's shboom doo wop
+	playPlaylist("spotify:user:1268743304:playlist:1fhHOLImGS78RmISCNSFyI");
       break;
     case "E4":
 
