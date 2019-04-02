@@ -688,7 +688,8 @@ function processMessage(command){
 	playPlaylist("spotify:user:1268743304:playlist:1fhHOLImGS78RmISCNSFyI");
       break;
     case "E4":
-
+	//Kat's Throback Playlist
+	playPlaylist("spotify:user:12151279994:playlist:6qwifqfBA0S7g6oWUuKv4M");
       break;
     case "E5":
 
