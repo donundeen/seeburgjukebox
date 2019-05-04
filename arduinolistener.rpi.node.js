@@ -692,8 +692,9 @@ function processMessage(command){
 	playPlaylist("spotify:user:12151279994:playlist:6qwifqfBA0S7g6oWUuKv4M");
       break;
     case "E5":
-
-      break;
+	//Daria's Akon Only Playlist
+	playPlaylist("spotify:user:spotify:playlist:37i9dQZF1DZ06evO0gCG2c");
+    break;
     case "E6":
 
       break;
