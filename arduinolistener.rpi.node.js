@@ -696,7 +696,9 @@ function processMessage(command){
 	playPlaylist("spotify:user:spotify:playlist:37i9dQZF1DZ06evO0gCG2c");
     break;
     case "E6":
-
+	// Don's Latest Jams spotify:user:donundeen:playlist:7k8J5jxHduvlJWazJkz8jD
+	playPlaylist("spotify:user:donundeen:playlist:7k8J5jxHduvlJWazJkz8jD");
+		  
       break;
     case "E7":
 
