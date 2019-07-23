@@ -701,7 +701,8 @@ function processMessage(command){
 		  
       break;
     case "E7":
-
+	// kat's Maker Hub Playlist
+      	playPlaylist("spotify:user:1262604682:playlist:1u0vICS6e16F8VTphlvx1i");
       break;
     case "E8":
 
