@@ -705,10 +705,14 @@ function processMessage(command){
       	playPlaylist("spotify:user:1262604682:playlist:1u0vICS6e16F8VTphlvx1i");
       break;
     case "E8":
-
+       // Lucinda's Ruck March 
+      // spotify:user:1232962652:playlist:1lzqqq6uVIJFx5TMfGU7pt
+      playPlaylist("spotify:user:1232962652:playlist:1lzqqq6uVIJFx5TMfGU7pt");
       break;
     case "E9":
-
+      // Lucinda's Classical Maker Hub 
+      // https://open.spotify.com/playlist/1SMbej0HBWd9zM95gVVNVt
+      playPlaylist("spotify:user:zvn1x0o2mfbqvjqw6u0zyovz9:playlist:1SMbej0HBWd9zM95gVVNVt");
       break;
     case "E10":
 
