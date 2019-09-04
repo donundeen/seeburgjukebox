@@ -715,6 +715,10 @@ function processMessage(command){
       playPlaylist("spotify:user:zvn1x0o2mfbqvjqw6u0zyovz9:playlist:1SMbej0HBWd9zM95gVVNVt");
       break;
     case "E10":
+      // Josh's PB&Jams 
+      // spotify:user:jjmauss1234:playlist:4FLM4aLb2ttXqlB2Pd1qxS
+      playPlaylist("spotify:user:jjmauss1234:playlist:4FLM4aLb2ttXqlB2Pd1qxS");
+      break;
 
       break;
     case "F1":
