@@ -719,8 +719,6 @@ function processMessage(command){
       // spotify:user:jjmauss1234:playlist:4FLM4aLb2ttXqlB2Pd1qxS
       playPlaylist("spotify:user:jjmauss1234:playlist:4FLM4aLb2ttXqlB2Pd1qxS");
       break;
-
-      break;
     case "F1":
 
       break;
