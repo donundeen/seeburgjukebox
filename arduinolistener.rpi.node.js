@@ -195,7 +195,7 @@ var playPlaylist = function(playlist_uri){
 				var firstTrack = addedTracks[Math.floor((Math.random() * addedTracks.length))];
 				console.log("gonna play");
 				console.log(addedTracks);
-		//		console.log(JSON.stringify(firstTrack, null, "  "));
+				console.log(JSON.stringify(firstTrack, null, "  "));
 
         			mopidy.playback.play(firstTrack).then(function(playing){
 					console.log("playing playlist");
