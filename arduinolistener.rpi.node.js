@@ -199,7 +199,7 @@ var playPlaylist = function(playlist_uri){
 
         			mopidy.playback.play(firstTrack).then(function(playing){
 					console.log("playing playlist");
-		//			console.log(JSON.stringify(playing, null, "  "));
+					console.log(JSON.stringify(playing, null, "  "));
 				});
       			});
     		});
