@@ -324,8 +324,8 @@ function poll_command(callback){
     if(feeds.length > 0){
         stream = feeds[0].stream;
 	if(!stream){
-		console.log("nothing at feeds[0].stream");
-		console.log(feeds[0]);
+		//console.log("nothing at feeds[0].stream");
+		//console.log(feeds[0]);
 		if(feeds[0].id){
 		  stream = feeds[0];	
 		}
