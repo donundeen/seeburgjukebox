@@ -182,8 +182,8 @@ var playPlaylist = function(playlist_uri){
 	var cleared = mopidy.tracklist.clear();
 	mopidy.playback.stop();
 	var playlist = allPlaylists[playlist_uri];
-	//console.log("playlist is ");
-	//console.log(playlist);
+	console.log("playlist is " + playlist_uri);
+	console.log(playlist);
 
 	cleared.then(function(){
   		mopidy.library.lookup(playlist_uri).then(function(data){
