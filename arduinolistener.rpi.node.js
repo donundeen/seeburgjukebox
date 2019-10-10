@@ -405,7 +405,7 @@ mopidy.on("state:online", function(){
     setVolumeLow();
 });
 
-//mopidy.on(console.log.bind(console));
+mopidy.on(console.log.bind(console));
 
 mopidy.on("event:trackPlaybackStarted", function(track){
 	console.log("track playback started 2");
