@@ -183,17 +183,18 @@ var playPlaylist = function(playlist_uri){
 	mopidy.playback.stop();
 	var playlist = allPlaylists[playlist_uri];
 	console.log("playlist is " + playlist_uri);
-	console.log(playlist);
+	//console.log(playlist);
 
 	cleared.then(function(){
   		mopidy.library.lookup(playlist_uri).then(function(data){
       			var added = mopidy.tracklist.add(data);
 	    		console.log("playlist data");
-	  //  		console.log(data);
+	    		console.log(data);
       			added.then(function(addedTracks){
         			shuffle();
 				var firstTrack = addedTracks[Math.floor((Math.random() * addedTracks.length))];
 				console.log("gonna play");
+				console.log(addedTracks);
 		//		console.log(JSON.stringify(firstTrack, null, "  "));
 
         			mopidy.playback.play(firstTrack).then(function(playing){
