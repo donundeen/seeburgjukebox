@@ -31,7 +31,7 @@ mopidy.on("state:online", function(){
 	    console.log("got state ");
 	    console.log(state);
 	    console.log("trying to lookup");
-	    mopidy.library.lookup(lookupURId).then(function(data){
+	    mopidy.library.lookup(lookupURI).then(function(data){
       			var added = mopidy.tracklist.add(data);
 	    		console.log("playlist data");
 	    		console.log(data);
