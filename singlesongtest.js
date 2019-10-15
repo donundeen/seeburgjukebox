@@ -28,6 +28,9 @@ mopidy.on("state:online", function(){
     mopidy.playback.getState().then(function(state){
 	    console.log("got state ");
 	    console.log(state);
+	    console.log("trying to play");
+	    mopidy.playback.play(currentTrack);
+	    
     });
 });
 
