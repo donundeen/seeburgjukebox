@@ -29,7 +29,7 @@ mopidy.on("state:online", function(){
 	    console.log("got state ");
 	    console.log(state);
 	    console.log("trying to play");
-	    mopidy.playback.play(currentTrack);
+	    mopidy.playback.play(trackURI);
 	    
     });
 });
