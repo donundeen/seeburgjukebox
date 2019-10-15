@@ -34,8 +34,10 @@ mopidy.on("state:online", function(){
 	    mopidy.library.lookup(lookupURI)
 	    .then(function(tracks){
 		   console.log("got tracks");
-		   console.log(tracks);
-//		   mopidy.playback.play(trackURI);
+		   console.log(tracks[0]);
+		   mopidy.playback.play(tracks[0]).then(function(track){
+			console.log("playback thing");   
+		   });
 	    });
 	    
     });
