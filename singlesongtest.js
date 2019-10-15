@@ -40,9 +40,13 @@ mopidy.on("state:online", function(){
 				console.log("gonna play");
 				console.log(addedTracks);
 				console.log(JSON.stringify(firstTrack, null, "  "));
-        			mopidy.playback.play(firstTrack).then(function(playing){
+        			mopidy.playback.play(firstTrack)
+				.then(function(playing){
 					console.log("playing playlist");
 					console.log(JSON.stringify(playing, null, "  "));
+				}).catch(function(msg){
+					console.log("EROROR??");
+					console.log(msg);
 				});
       			});
     		});
