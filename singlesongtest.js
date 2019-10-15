@@ -9,6 +9,8 @@ spotify:track:53pAFogNWnl3dPV7RBENGq
 
 var trackURI = "spotify:track:53pAFogNWnl3dPV7RBENGq";
 
+var lookupURI = "spotify:user:donundeen:playlist:3Hs9sHphOiM8JeyI6nudZG";
+
 var mysecrets  = require (__dirname + "/secrets.js").secrets();
 
 
@@ -29,7 +31,7 @@ mopidy.on("state:online", function(){
 	    console.log("got state ");
 	    console.log(state);
 	    console.log("trying to lookup");
-	    mopidy.library.lookup(trackURI)
+	    mopidy.library.lookup(lookupURI)
 	    .then(function(tracks){
 		   console.log("got tracks");
 		   console.log(tracks);
