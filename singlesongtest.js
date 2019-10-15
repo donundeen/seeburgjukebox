@@ -28,8 +28,13 @@ mopidy.on("state:online", function(){
     mopidy.playback.getState().then(function(state){
 	    console.log("got state ");
 	    console.log(state);
-	    console.log("trying to play");
-	    mopidy.playback.play(trackURI);
+	    console.log("trying to lookup");
+	    mopidy.library.lookup(trackURI)
+	    .then(function(tracks){
+		   console.log("got tracks");
+		   console.log(tracks);
+//		   mopidy.playback.play(trackURI);
+	    });
 	    
     });
 });
