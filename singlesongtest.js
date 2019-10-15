@@ -31,14 +31,21 @@ mopidy.on("state:online", function(){
 	    console.log("got state ");
 	    console.log(state);
 	    console.log("trying to lookup");
-	    mopidy.library.lookup(lookupURI)
-	    .then(function(tracks){
-		   console.log("got tracks");
-		   console.log(tracks[0]);
-		   mopidy.playback.play(tracks[0]).then(function(track){
-			console.log("playback thing");   
-		   });
-	    });
+	    mopidy.library.lookup(playlist_uri).then(function(data){
+      			var added = mopidy.tracklist.add(data);
+	    		console.log("playlist data");
+	    		console.log(data);
+      			added.then(function(addedTracks){
+				var firstTrack = addedTracks[0];
+				console.log("gonna play");
+				console.log(addedTracks);
+				console.log(JSON.stringify(firstTrack, null, "  "));
+        			mopidy.playback.play(firstTrack).then(function(playing){
+					console.log("playing playlist");
+					console.log(JSON.stringify(playing, null, "  "));
+				});
+      			});
+    		});
 	    
     });
 });
