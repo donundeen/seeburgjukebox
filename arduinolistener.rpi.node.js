@@ -721,7 +721,9 @@ function processMessage(command){
       playPlaylist("spotify:user:jjmauss1234:playlist:4FLM4aLb2ttXqlB2Pd1qxS");
       break;
     case "F1":
-
+      // The Maker Musical Theatre
+      //spotify:user:jjmauss1234:playlist:2UnktkjZlMlMLaPJHwALHK
+      playPlaylist("spotify:user:jjmauss1234:playlist:2UnktkjZlMlMLaPJHwALHK")
       break;
     case "F2":
 
