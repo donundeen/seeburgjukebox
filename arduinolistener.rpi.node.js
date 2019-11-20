@@ -721,10 +721,14 @@ function processMessage(command){
       playPlaylist("spotify:user:jjmauss1234:playlist:4FLM4aLb2ttXqlB2Pd1qxS");
       break;
     case "F1":
-
+	// Georgetown Bands
+	// spotify:playlist:14JlW70P3X0wbaZuoeo5jI
+      playPlaylist("spotify:playlist:14JlW70P3X0wbaZuoeo5jI");
       break;
     case "F2":
-
+      // christmas Bangerz
+	// spotify:playlist:6v9uMDCccJQVq3uySoI4r4
+      playPlaylist("spotify:playlist:6v9uMDCccJQVq3uySoI4r4");
       break;
     case "F3":
 
