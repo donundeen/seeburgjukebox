@@ -723,12 +723,14 @@ function processMessage(command){
     case "F1":
 	// Georgetown Bands
 	// spotify:playlist:14JlW70P3X0wbaZuoeo5jI
-      playPlaylist("spotify:playlist:14JlW70P3X0wbaZuoeo5jI");
+		  // https://open.spotify.com/playlist/5UwQL2jFtk81xTjebq5SMe?si=jPA2ftPoQoCa4ccLVQmu7w
+      playPlaylist("spotify:user:seam_ster8:playlist:14JlW70P3X0wbaZuoeo5jI");
       break;
     case "F2":
       // christmas Bangerz
 	// spotify:playlist:6v9uMDCccJQVq3uySoI4r4
-      playPlaylist("spotify:playlist:6v9uMDCccJQVq3uySoI4r4");
+		  //spotify:playlist:7k8J5jxHduvlJWazJkz8jD
+      playPlaylist("spotify:user:Livvimurray:playlist:6v9uMDCccJQVq3uySoI4r4");
       break;
     case "F3":
 
