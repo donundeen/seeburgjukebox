@@ -721,19 +721,20 @@ function processMessage(command){
       playPlaylist("spotify:user:jjmauss1234:playlist:4FLM4aLb2ttXqlB2Pd1qxS");
       break;
     case "F1":
-	// Georgetown Bands
-	// spotify:playlist:14JlW70P3X0wbaZuoeo5jI
-		  // https://open.spotify.com/playlist/5UwQL2jFtk81xTjebq5SMe?si=jPA2ftPoQoCa4ccLVQmu7w
-      playPlaylist("spotify:user:seam_ster8:playlist:14JlW70P3X0wbaZuoeo5jI");
+	// The Maker Musical Theater
+	// spotify:playlist:2UnktkjZlMlMLaPJHwALHK
+      playPlaylist("spotify:user:jjmauss1234:playlist:2UnktkjZlMlMLaPJHwALHK");
       break;
     case "F2":
-      // christmas Bangerz
+      // christmas bangerz
 	// spotify:playlist:6v9uMDCccJQVq3uySoI4r4
 		  //spotify:playlist:7k8J5jxHduvlJWazJkz8jD
       playPlaylist("spotify:user:Livvimurray:playlist:6v9uMDCccJQVq3uySoI4r4");
       break;
     case "F3":
-
+	// Georgetown Bands
+	// spotify:playlist:14JlW70P3X0wbaZuoeo5jI
+      playPlaylist("spotify:user:seam_ster8:playlist:14JlW70P3X0wbaZuoeo5jI");
       break;
     case "F4":
 
