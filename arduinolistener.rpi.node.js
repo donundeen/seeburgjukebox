@@ -689,7 +689,7 @@ function processMessage(command){
 	playPlaylist("spotify:user:1268743304:playlist:1fhHOLImGS78RmISCNSFyI");
       break;
     case "E4":
-	//Kat's Throback Playlist
+	//Kat's Throwback Playlist
 	playPlaylist("spotify:user:12151279994:playlist:6qwifqfBA0S7g6oWUuKv4M");
       break;
     case "E5":
@@ -742,10 +742,14 @@ function processMessage(command){
       playPlaylist("spotify:user:hanachong663:playlist:2gyd9vMZmDDNABN18VGeoq");
       break;
     case "F5":
-
+      // Clara's All Time Fav's 
+      // spotify:playlist:53pwLEXP0PkgeCwHlRIp8j
+      playPlaylist("spotify:user:cosmicconundrumhomestuck:playlist:53pwLEXP0PkgeCwHlRIp8j")
       break;
     case "F6":
-
+      // Kat's Real MakerHub Playlist
+      // spotify:playlist:57AVFcHkpkWZ1oRSbyx6lR
+      playPlaylist("spotify:user:12151279994:playlist:57AVFcHkpkWZ1oRSbyx6lR");
       break;
     case "F7":
 
