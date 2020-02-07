@@ -752,6 +752,10 @@ function processMessage(command){
       playPlaylist("spotify:user:12151279994:playlist:57AVFcHkpkWZ1oRSbyx6lR");
       break;
     case "F7":
+		  // allegra's Maker Hub Jams
+		  // spotify:playlist:1WRQ2ZEER72Oux6sG7rSQ0
+		  // spotify:user:kvqrrjlzmvtsoio2hn0cl94jx:playlist:1WRQ2ZEER72Oux6sG7rSQ0
+      playPlaylist("spotify:user:kvqrrjlzmvtsoio2hn0cl94jx:playlist:1WRQ2ZEER72Oux6sG7rSQ0");
 
       break;
     case "F8":
