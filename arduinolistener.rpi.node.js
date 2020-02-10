@@ -759,7 +759,9 @@ function processMessage(command){
 
       break;
     case "F8":
-
+	// Mitch's True Favorites Playlist
+	//spotify:playlist:5lteHLPzjD3EPpS4mInaCv
+	playPlaylist("spotify:user:mnamremir:playlist:5lteHLPzjD3EPpS4mInaCv")
       break;
     case "F9":
 
