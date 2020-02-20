@@ -655,8 +655,7 @@ function processMessage(command){
     case "D7":
 		  // Samu's spotify playlist : Mood Modd
 		  //spotify:user:figrenergif:playlist:0ycw1aCcoWeRlldoNMvfRn
-      playPlaylist("spotify:user:figrenergif:playlist:0ycw1aCcoWeRlldoNMvfRn");
-		  
+      playPlaylist("spotify:user:figrenergif:playlist:0ycw1aCcoWeRlldoNMvfRn");	  
       break;
     case "D8":
 		  // Closing time:
@@ -666,8 +665,7 @@ function processMessage(command){
     case "D9":
 		  // Don's fun rocking playlist
 		  // spotify:user:donundeen:playlist:4TrfQdPpWHXt7YCwevK7x1
-      playPlaylist("spotify:user:donundeen:playlist:4TrfQdPpWHXt7YCwevK7x1");		  
-		  
+      playPlaylist("spotify:user:donundeen:playlist:4TrfQdPpWHXt7YCwevK7x1");		    
       break;
     case "D10":
 		  // Don's fun 80's playlist
@@ -678,7 +676,6 @@ function processMessage(command){
 	// spotify:user:donundeen:playlist:4Z9TnvMCmrZAfjl2jbeYeJ
 	// happy birthday playlist
       playPlaylist("spotify:user:donundeen:playlist:4Z9TnvMCmrZAfjl2jbeYeJ");
-
       break;
     case "E2":
 	//Jamie Farrell's on the road playlist
@@ -698,15 +695,14 @@ function processMessage(command){
     break;
     case "E6":
 	// Don's Latest Jams spotify:user:donundeen:playlist:7k8J5jxHduvlJWazJkz8jD
-	playPlaylist("spotify:user:donundeen:playlist:7k8J5jxHduvlJWazJkz8jD");
-		  
+	playPlaylist("spotify:user:donundeen:playlist:7k8J5jxHduvlJWazJkz8jD");  
       break;
     case "E7":
 	// kat's Maker Hub Playlist
       	playPlaylist("spotify:user:1262604682:playlist:1u0vICS6e16F8VTphlvx1i");
       break;
     case "E8":
-       // Lucinda's Ruck March 
+      // Lucinda's Ruck March 
       // spotify:user:1232962652:playlist:1lzqqq6uVIJFx5TMfGU7pt
       playPlaylist("spotify:user:1232962652:playlist:1lzqqq6uVIJFx5TMfGU7pt");
       break;
@@ -727,7 +723,7 @@ function processMessage(command){
       break;
     case "F2":
       // christmas bangerz
-	// spotify:playlist:6v9uMDCccJQVq3uySoI4r4
+      // spotify:playlist:6v9uMDCccJQVq3uySoI4r4
 		  //spotify:playlist:7k8J5jxHduvlJWazJkz8jD
       playPlaylist("spotify:user:Livvimurray:playlist:6v9uMDCccJQVq3uySoI4r4");
       break;
@@ -742,7 +738,7 @@ function processMessage(command){
       playPlaylist("spotify:user:hanachong663:playlist:2gyd9vMZmDDNABN18VGeoq");
       break;
     case "F5":
-      // Clara's All Time Fav's 
+      // Clara's All Time Faves 
       // spotify:playlist:53pwLEXP0PkgeCwHlRIp8j
       playPlaylist("spotify:user:cosmicconundrumhomestuck:playlist:53pwLEXP0PkgeCwHlRIp8j")
       break;
@@ -756,7 +752,6 @@ function processMessage(command){
 		  // spotify:playlist:1WRQ2ZEER72Oux6sG7rSQ0
 		  // spotify:user:kvqrrjlzmvtsoio2hn0cl94jx:playlist:1WRQ2ZEER72Oux6sG7rSQ0
       playPlaylist("spotify:user:kvqrrjlzmvtsoio2hn0cl94jx:playlist:1WRQ2ZEER72Oux6sG7rSQ0");
-
       break;
     case "F8":
 	// Mitch's True Favorites Playlist
