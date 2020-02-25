@@ -756,10 +756,12 @@ function processMessage(command){
     case "F8":
 	// Mitch's True Favorites Playlist
 	//spotify:playlist:5lteHLPzjD3EPpS4mInaCv
-	playPlaylist("spotify:user:mnamremir:playlist:5lteHLPzjD3EPpS4mInaCv")
+	playPlaylist("spotify:user:mnamremir:playlist:5lteHLPzjD3EPpS4mInaCv");
       break;
     case "F9":
-
+	//Kelly's making stuff
+	//spotify:playlist:62kiNJvyBpcuRu4WeIOUp1
+	playPlaylist("spotify:user:1233411013:playlist:62kiNJvyBpcuRu4WeIOUp1");
       break;
     case "F10":
 
