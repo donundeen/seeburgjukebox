@@ -748,9 +748,9 @@ function processMessage(command){
       playPlaylist("spotify:user:12151279994:playlist:57AVFcHkpkWZ1oRSbyx6lR");
       break;
     case "F7":
-		  // allegra's Maker Hub Jams
-		  // spotify:playlist:1WRQ2ZEER72Oux6sG7rSQ0
-		  // spotify:user:kvqrrjlzmvtsoio2hn0cl94jx:playlist:1WRQ2ZEER72Oux6sG7rSQ0
+	// allegra's Maker Hub Jams
+	// spotify:playlist:1WRQ2ZEER72Oux6sG7rSQ0
+	// spotify:user:kvqrrjlzmvtsoio2hn0cl94jx:playlist:1WRQ2ZEER72Oux6sG7rSQ0
       playPlaylist("spotify:user:kvqrrjlzmvtsoio2hn0cl94jx:playlist:1WRQ2ZEER72Oux6sG7rSQ0");
       break;
     case "F8":
@@ -764,7 +764,9 @@ function processMessage(command){
 	playPlaylist("spotify:user:1233411013:playlist:62kiNJvyBpcuRu4WeIOUp1");
       break;
     case "F10":
-
+	//Clara's the childhood you wish you had
+	//https://open.spotify.com/playlist/3cOlWXDAHJ93yTAgqBCsa5
+	playPlaylist("spotify:user:cosmicconundrumhomestuck:playlist:3cOlWXDAHJ93yTAgqBCsa5")
       break;
     case "G1":
 
