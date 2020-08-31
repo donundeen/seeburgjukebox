@@ -31,6 +31,8 @@ var doorbellUri = songDir + doorbellSong;
 var chatSong = "IncomingChat.mp3";
 var chatUri = songDir + chatSong;
 
+var defaultCommand = "E6";
+
 
 var sb = false;
 
@@ -490,7 +492,6 @@ serialPort.on("open", function () {
 });
 
 
-
 function processMessage(command){
 	console.log("going to process command : " + command);
   command = command.toUpperCase();
@@ -776,125 +777,166 @@ function processMessage(command){
 	playPlaylist("spotify:user:cosmicconundrumhomestuck:playlist:3cOlWXDAHJ93yTAgqBCsa5")
       break;
     case "G1":
+processMessage(defaultCommand);
 
       break;
     case "G2":
+processMessage(defaultCommand);
 
       break;
     case "G3":
+processMessage(defaultCommand);
 
       break;
     case "G4":
+processMessage(defaultCommand);
 
       break;
     case "G5":
+processMessage(defaultCommand);
 
       break;
     case "G6":
+processMessage(defaultCommand);
 
       break;
     case "G7":
+processMessage(defaultCommand);
 
       break;
     case "G8":
+processMessage(defaultCommand);
 
       break;
     case "G9":
+processMessage(defaultCommand);
 
       break;
     case "G10":
+processMessage(defaultCommand);
 
       break;
     case "H1":
+processMessage(defaultCommand);
 
       break;
     case "H2":
+processMessage(defaultCommand);
 
       break;
     case "H3":
+processMessage(defaultCommand);
 
       break;
     case "H4":
+processMessage(defaultCommand);
 
       break;
     case "H5":
+processMessage(defaultCommand);
 
       break;
     case "H6":
+processMessage(defaultCommand);
 
       break;
     case "H7":
+processMessage(defaultCommand);
 
       break;
     case "H8":
+processMessage(defaultCommand);
 
       break;
     case "H9":
+processMessage(defaultCommand);
 
       break;
     case "H10":
+processMessage(defaultCommand);
 
       break;
     case "J1":
+processMessage(defaultCommand);
 
       break;
     case "J2":
+processMessage(defaultCommand);
 
       break;
     case "J3":
+processMessage(defaultCommand);
 
       break;
     case "J4":
+processMessage(defaultCommand);
 
       break;
     case "J5":
+processMessage(defaultCommand);
 
       break;
     case "J6":
+processMessage(defaultCommand);
 
       break;
     case "J7":
+processMessage(defaultCommand);
 
       break;
     case "J8":
+processMessage(defaultCommand);
 
       break;
     case "J9":
+processMessage(defaultCommand);
 
       break;
     case "J10":
+processMessage(defaultCommand);
 
       break;
     case "K1":
+processMessage(defaultCommand);
 
       break;
     case "K2":
+processMessage(defaultCommand);
 
       break;
     case "K3":
+processMessage(defaultCommand);
 
       break;
     case "K4":
+processMessage(defaultCommand);
 
       break;
     case "K5":
+processMessage(defaultCommand);
 
       break;
     case "K6":
+processMessage(defaultCommand);
 
       break;
     case "K7":
+processMessage(defaultCommand);
 
       break;
     case "K8":
+//processMessage(defaultCommand);
       reboot();
 
       break;
     case "K9":
+processMessage(defaultCommand);
 
       break;
     case "K10":
       //reboot
+processMessage(defaultCommand);
+		  
       break;
     case "L1":
       // secret Jukebox-code-compatible code for triggering doorbell. So the jukebox can listen to ONE adafruit.io channel eventually
@@ -905,6 +947,7 @@ function processMessage(command){
       break;
     default:
       console.log("don't know what to do with that command");
+	processMessage(defaultCommand);
 
 
   }
