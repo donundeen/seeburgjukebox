@@ -150,7 +150,7 @@ var interruptWithTrack = function(interruptUri){
 		mopidy.playback.getCurrentTlTrack().then(function(ctrack){
         	  	console.log("currentTrack " );
         		currentTrack = ctrack;
-		  	console.log(JSON.stringify(ctrack, null , "  "));
+		  	//console.log(JSON.stringify(ctrack, null , "  "));
 		});
 		mopidy.playback.getTimePosition().then(function(cpos){
 			console.log("currentPosition");
@@ -190,17 +190,17 @@ var playPlaylist = function(playlist_uri){
   		mopidy.library.lookup(playlist_uri).then(function(data){
       			var added = mopidy.tracklist.add(data);
 	    		console.log("playlist data");
-	    		console.log(data);
+	    		//console.log(data);
       			added.then(function(addedTracks){
         			shuffle();
 				var firstTrack = addedTracks[Math.floor((Math.random() * addedTracks.length))];
 				console.log("gonna play");
-				console.log(addedTracks);
+				//console.log(addedTracks);
 				console.log(JSON.stringify(firstTrack, null, "  "));
 
         			mopidy.playback.play(firstTrack).then(function(playing){
 					console.log("playing playlist");
-					console.log(JSON.stringify(playing, null, "  "));
+					//console.log(JSON.stringify(playing, null, "  "));
 				});
       			});
     		});
@@ -232,11 +232,11 @@ function poll_events(){
     }catch(e){
 	console.log("error parsing doorbell AIO body");
 	console.log(e);
-	console.log(body);
+	//console.log(body);
     }
     if(!data.feeds){
 	    console.log("no feeds returned");
-	    console.log(JSON.stringify(data, null, "  "));
+	//    console.log(JSON.stringify(data, null, "  "));
 	return;    
     }
     // check for doorbell alerts
@@ -311,8 +311,8 @@ function poll_command(callback){
     	data = JSON.parse(body);
     }catch(e){
 	console.log("error parsing command AIO body");
-	//console.log(e);
-	console.log(body);
+	console.log(e);
+	//console.log(body);
     }
     var stream = false;
     if(!data.feeds){
@@ -412,7 +412,7 @@ mopidy.on("state:online", function(){
 
 // this creaetes a LOT of debugging info
 if(alleventlogging){
-	mopidy.on(console.log.bind(console));
+	//mopidy.on(console.log.bind(console));
 }
 mopidy.on("event:trackPlaybackStarted", function(track){
 	console.log("track playback started 2");
