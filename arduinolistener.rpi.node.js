@@ -14,6 +14,7 @@
     });
 */
 
+var alleventlogging = true;
 
 var mysecrets  = require (__dirname + "/secrets.js").secrets();
 
@@ -100,13 +101,13 @@ whenDone = function(track){
         	mopidy.tracklist.remove({'tlid': [interruptTrack.tlid]}).then(function(removed){
 			interruptTrack = false;
 			console.log("removed");
-			console.log(JSON.stringify(removed, null, "  "));
+			//console.log(JSON.stringify(removed, null, "  "));
 		});
 	}	
 	
 
         if(currentTrack && currentlyPlaying){
-		console.log(JSON.stringify(currentTrack, null, " " ));
+		//console.log(JSON.stringify(currentTrack, null, " " ));
                 console.log("resuming track");
                 mopidy.playback.play(currentTrack)
 			.then(function(){
@@ -154,7 +155,7 @@ var interruptWithTrack = function(interruptUri){
 		mopidy.playback.getTimePosition().then(function(cpos){
 			console.log("currentPosition");
 			currentPosition = cpos;
-		        console.log(JSON.stringify(cpos, null, "  "));
+		        //console.log(JSON.stringify(cpos, null, "  "));
         	});
 	}
 	// end playback
@@ -164,14 +165,14 @@ var interruptWithTrack = function(interruptUri){
 	var added = mopidy.tracklist.add(null, 0, interruptUri)
 	.then(function(added){
         	// play the track
-          	console.log("added");
+          	console.log("interrupt added");
 		interruptTrack  = added[0];
 		mopidy.playback.stop();
-		console.log("gonna play");
-		console.log(JSON.stringify(interruptTrack, null, "  "));
+		console.log("gonna play interrupt");
+		//console.log(JSON.stringify(interruptTrack, null, "  "));
 		mopidy.playback.play(interruptTrack).then(function(startata){
 			console.log("playback happening");
-			console.log(JSON.stringify(startata, null,  "  "));
+			//console.log(JSON.stringify(startata, null,  "  "));
 		});	
 	});
 };
@@ -310,13 +311,13 @@ function poll_command(callback){
     	data = JSON.parse(body);
     }catch(e){
 	console.log("error parsing command AIO body");
-	console.log(e);
+	//console.log(e);
 	console.log(body);
     }
     var stream = false;
     if(!data.feeds){
 	    console.log("no feeds returned");
-	    console.log(JSON.stringify(data, null, "  "));
+	 //   console.log(JSON.stringify(data, null, "  "));
 	return;    
     }
    // console.log(data.feeds);
@@ -399,7 +400,7 @@ mopidy.on("state:online", function(){
     console.log("mopidy online");
     mopidy.playback.getState().then(function(state){
 	    console.log("got state ");
-	    console.log(state);
+	  //  console.log(state);
 	    if(state == "playing"){
 		currentlyPlaying = true;
 	    }
@@ -408,8 +409,11 @@ mopidy.on("state:online", function(){
     setVolumeLow();
 });
 
-mopidy.on(console.log.bind(console));
 
+// this creaetes a LOT of debugging info
+if(alleventlogging){
+	mopidy.on(console.log.bind(console));
+}
 mopidy.on("event:trackPlaybackStarted", function(track){
 	console.log("track playback started 2");
 	console.log(JSON.stringify(track, null, 2));
