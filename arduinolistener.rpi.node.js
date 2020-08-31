@@ -362,9 +362,9 @@ function send_command_recieved(value){
   	console.log("response");
 	console.log(response);
 	console.log(error);
-	*/
-  });
 	
+  });
+	*/
 }
 
 setInterval(function(){poll_command(command_sent);}, 3000);
