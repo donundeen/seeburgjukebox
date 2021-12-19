@@ -1,0 +1,17 @@
+{
+   "type": "module",
+  "name": "mac_osasciprt_udp",
+  "version": "1.0.0",
+  "description": "listening to udp fpr jukebox messages, then using osascript to do stuff ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dgram": "^1.0.1",
+    "node-osascript": "^2.1.0",
+    "node-osc": "^6.1.11"
+  }
+}
