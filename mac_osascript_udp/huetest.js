@@ -39,14 +39,14 @@ var newhue = Math.floor(huemax * .66);
 
 /*
 sexy purple/blue
-	    "bri": 212,
         "hue": 46497,
         "sat": 251,
+	    "bri": 212,
 */
 
 
-setHSL(1, 46497, 212, 251, 10);
-setHSL(2, 46497, 212, 251, 10);
+setHSB(1, 46497, 212, 251, 10);
+setHSB(2, 46497, 212, 251, 10);
 
 /*
 setLightsOff(1);
@@ -64,18 +64,16 @@ function setLightsOff(bulb){
 }
 
 
-function setHSL(bulb,hcolor,brt,satn,tran) {
+function setHSB(bulb,hcolor,brt,satn,tran) {
 	// hcolor: 0-10000
 	// brt : 0-200
 	// satn: 0-250
 	console.log(hsldata);
 
-
-
 	hsldata.hue = hcolor;
 	hsldata.bri = brt;
 	hsldata.sat = satn;
-	hsldata.tran = tran;
+	hsldata.transitiontime = tran;
 
 	var jsonstring = JSON.stringify(hsldata);
 	console.log(jsonstring);
