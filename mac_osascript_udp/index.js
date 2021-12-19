@@ -57,6 +57,7 @@ function runCommand(command){
 	var theCommand = commandconfig[command];
 	if(!theCommand){
 		console.log("don't know what to do with sent command " + command);
+		return;
 	}
 	switch(theCommand.command){
 		case "calib_low":
