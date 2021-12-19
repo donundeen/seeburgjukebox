@@ -21,6 +21,7 @@ var addone = false;
 
 var PORT = 9002;
 var HOST = '127.0.0.1';
+var buggyLetters = ["A","C","E","G","J"];
 
 
 var oscServer = new Server(PORT, '0.0.0.0', () => {
@@ -34,7 +35,8 @@ oscServer.on('message', function (msg) {
   var path = msg[0];
   var letter = msg[1];
   var number = msg[2];
-  if(addone){
+  // if addone and letter is one of A, C, E,G,J
+  if(addone && buggyLetters.indexOf(letter) > -1 ){
   	number++;
   }
   var command = letter+number;

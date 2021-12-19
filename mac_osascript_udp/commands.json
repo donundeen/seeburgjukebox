@@ -17,6 +17,9 @@
 		"command" : "donothing"
 	},
 	"J10" : {
+		"command" : "donothing"
+	},
+	"J11" : {
 		"command" : "calib_high"
 	}
 }
