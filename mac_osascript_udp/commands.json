@@ -1,0 +1,18 @@
+{
+	"A2" : {
+		"command" : "nextsong"
+	},
+	"A3" : {
+		"command" : "playlist",
+		"playlist": "7k8J5jxHduvlJWazJkz8jD"
+	},
+	"J0" : {
+		"command" : "calib_low"
+	},
+	"J1" : {
+		"command" : "donothing"
+	},
+	"J10" : {
+		"command" : "calib_high"
+	}
+}
