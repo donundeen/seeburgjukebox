@@ -6,6 +6,10 @@
 		"command" : "playlist",
 		"playlist": "7k8J5jxHduvlJWazJkz8jD"
 	},
+	"B1" :{
+		"command" : "setlights",
+		"lightvalue" : "lightstring here"
+	},
 	"J0" : {
 		"command" : "calib_low"
 	},

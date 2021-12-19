@@ -69,6 +69,9 @@ function runCommand(command){
 		case "playlist":
 			var playlist_id = theCommand.playlist;
 			playPlaylist(playlist_id);
+		case "setlights":
+			var lightvalue = theCommand.lightvalue;
+			setLights(lightvalue);
 		case "nextsong":
 			playNextSong();
 			break;
@@ -103,6 +106,8 @@ function donothing(){
 
 
 function playPlaylist(playlist_id){
+	console.log("play playlist " +playlist_id);
+
 	var scriptline = "tell application \"Spotify\" to play track  \"spotify:playlist:"+playlist_id+"\"";
 
 	console.log(scriptline);
@@ -120,6 +125,13 @@ function playNextSong(){
   		if (err) return console.error(err)
   		console.log(result, raw)
 	});
+
+}
+
+function setLights(lightvalue){
+	// set color on the philips hue lights
+	console.log("setLights " + lightvalue);
+	console.log("not implemented");
 
 }
 
