@@ -373,7 +373,7 @@ void sendOSCUDP(String letter, int number){
   char letterPtr[6];
 
   letter.toCharArray(letterPtr,2); 
-  oscmsg.add(letterPtr).add(number).add(ipbuffer);
+  oscmsg.add(letterPtr).add(number);//.add(ipbuffer);
   Serial.print("sending data ");
   Serial.print(letter);
   Serial.println(number);
