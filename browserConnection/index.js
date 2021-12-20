@@ -1,4 +1,4 @@
-//
+// see https://socket.io/
 import { Server } from "socket.io";
 
 const io = new Server({cors: {
