@@ -223,3 +223,7 @@ use script editor.
 to find available commands:
 file->open dictionary->Spotify
 */
+
+// websockets for talking TO web pages/displays in the apartment: 
+// https://cheatcode.co/tutorials/how-to-set-up-a-websocket-client-with-javascript
+
