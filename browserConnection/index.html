@@ -1,0 +1,39 @@
+<html>
+<head>
+<script src="socket.io.min.js" crossorigin="anonymous"></script>
+
+<script>
+//const socket = io("localhost:9003");
+const socket = io("192.168.8.168:9003");
+
+// client-side
+socket.on("connect", () => {
+  console.log(socket.id); // x8WIv7-mJelg7on_ALbx
+  socket.emit("private message","hello there");
+});
+
+socket.on("disconnect", () => {
+  console.log(socket.id); // undefined
+});
+
+socket.on("tell you", (msg)=>{
+	console.log(msg);
+});
+
+//socket.connect("http://localhost:9003");
+
+//io.listen(9003);
+
+console.log("trying");
+
+
+</script>
+
+
+</head>
+<body>
+	this is the webpage
+
+
+</body>
+</html>
