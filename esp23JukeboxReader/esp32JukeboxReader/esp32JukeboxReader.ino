@@ -141,6 +141,9 @@ void setup() {
   delay(1000);
 
 
+  WiFi.mode(WIFI_STA);
+
+
   Serial.print("ESP Board MAC Address:  ");
   Serial.println(WiFi.macAddress());
 
@@ -153,10 +156,13 @@ void setup() {
 
       if(HARDCODE_SSID){
         Serial.println("connecting to hardcoded SSID");
+        // status codes here: https://realglitch.com/2018/07/arduino-wifi-status-codes/
+        
         Serial.println(WIFI_SSID);
         Serial.println(WIFI_PASSWORD);
         
         WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+//        WiFi.begin(WIFI_SSID);
         while (WiFi.status() != WL_CONNECTED) {
           // wifi status codes: https://realglitch.com/2018/07/arduino-wifi-status-codes/
           delay(1000);
