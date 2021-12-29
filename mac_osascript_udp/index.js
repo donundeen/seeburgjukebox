@@ -53,7 +53,7 @@ oscServer.on('message', function (msg) {
 
 
 function runTest(){
-//	runCommand ("K9");
+	runCommand ("K9");
 }
 
 
@@ -221,7 +221,7 @@ function setHSB(bulb,hcolor,satn,brt,tran) {
 	// hcolor: 0-10000
 	// brt : 0-200
 	// satn: 0-250
-
+	hsldata.on = true;
 	hsldata.hue = hcolor;
 	hsldata.bri = brt;
 	hsldata.sat = satn;
