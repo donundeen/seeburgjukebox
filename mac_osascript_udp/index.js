@@ -53,7 +53,7 @@ oscServer.on('message', function (msg) {
 
 
 function runTest(){
-	runCommand ("K9");
+//	runCommand ("K9");
 }
 
 
