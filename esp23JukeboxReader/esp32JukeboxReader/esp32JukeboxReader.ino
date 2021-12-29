@@ -65,7 +65,8 @@ const char *WIFI_PASSWORD = "WeL0veLettuce";
 //const char *WIFI_SSID = "PILGRIMAGE_25";
 //const char *WIFI_PASSWORD = "";
 //const char * UDPReceiverIP = "10.0.0.164"; // ip where UDP messages are going
-const char *UDPReceiverIP = "10.0.0.174"; // ip where UDP messages are going
+// const char *UDPReceiverIP = "10.0.0.174"; // main laptop // ip where UDP messages are going
+const char *UDPReceiverIP = "10.0.0.181"; // mac mini // ip where UDP messages are going
 //const char *UDPReceiverIP = "192.168.8.168"; // ip where UDP messages are going
 
 const int UDPPort = 9002; // the UDP port that Max is listening on

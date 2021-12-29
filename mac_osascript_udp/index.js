@@ -26,7 +26,7 @@ var PORT = config.osc.port;
 var HOST = config.osc.host;
 var buggyLetters = ["A","C","E","G","J"];
 
-
+cnosole.log("setting up to listen on " + HOST + " port " + PORT);
 
 
 var oscServer = new Server(PORT, '0.0.0.0', () => {
@@ -53,7 +53,7 @@ oscServer.on('message', function (msg) {
 
 
 function runTest(){
-	runCommand ("B1");
+//	runCommand ("B1");
 }
 
 
