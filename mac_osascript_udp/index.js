@@ -53,9 +53,8 @@ oscServer.on('message', function (msg) {
 
 
 function runTest(){
-//	runCommand ("B1");
+//	runCommand ("K9");
 }
-
 
 
 function runCommand(command){
@@ -65,35 +64,52 @@ function runCommand(command){
 		return;
 	}
 	console.log("running command " + command);
-	switch(theCommand.command){
-		case "calib_low":
-			console.log("case calib_low");
-			calib_low();
-			break;
-		case "calib_high":
-			console.log("case calib_high");
-			calib_high();
-			break;
-		case "donothing":
-			console.log("donothing");
-			donothing();
-			break;
-		case "playlist":
-			console.log("case playlist");
-			var playlist_id = theCommand.playlist;
-			playPlaylist(playlist_id);
-		case "setLightsHSB":
-			console.log("case setLightsHSB");
-			var lightvalue = theCommand.lightvalue;
-			setLightsHSB(lightvalue);
-			break;
-		case "nextsong":
-			console.log("case nextsong");
-			playNextSong();
-			break;
-		default:
-			console.log("don't have a function for " + theCommand.command);
-			break;
+
+	if(!theCommand.commands){
+		theCommand.commands = new Array(theCommand);
+	}
+
+	console.log(theCommand.commands);
+	for(var i = 0; i < theCommand.commands.length; i++){
+		var commandToRun = theCommand.commands[i];
+		console.log("command is ");
+		console.log(commandToRun)
+		switch(commandToRun.command){
+			case "calib_low":
+				console.log("case calib_low");
+				calib_low();
+				break;
+			case "calib_high":
+				console.log("case calib_high");
+				calib_high();
+				break;
+			case "donothing":
+				console.log("donothing");
+				donothing();
+				break;
+			case "playlist":
+				console.log("case playlist");
+				var playlist_id = commandToRun.playlist;
+				playPlaylist(playlist_id);
+				break;
+			case "setLightsHSB":
+				console.log("case setLightsHSB");
+				console.log(commandToRun);
+				var lightvalue = commandToRun.lightvalue;
+				setLightsHSB(lightvalue);
+				break;
+			case "nextsong":
+				console.log("case nextsong");
+				playNextSong();
+				break;
+			case "alloff":
+				console.log("all off");
+				allOff();
+				break;
+			default:
+				console.log("don't have a function for " + commandToRun.command);
+				break;
+		}
 	}
 }
 
@@ -112,6 +128,11 @@ function calib_high(){
 	// so we DON'T add one to commands that start with:
 	// A,C,E,G,J
 	addone = false;	
+}
+
+function allOff(){
+	allLightsOff();
+	musicOff();
 }
 
 
@@ -139,6 +160,22 @@ function playNextSong(){
 
 }
 
+function pauseSpotify(){
+	var scriptline = "tell application \"Spotify\" to pause";
+
+	console.log(scriptline);
+	osascript.execute(scriptline, function(err, result, raw){
+  		if (err) return console.error(err)
+  		console.log(result, raw)
+	});
+
+}
+
+function allLightsOff(){
+	setLightOff(1);
+	setLightOff(2);
+}
+
 function setLightsHSB(lightvalue){
 	// set color on the philips hue lights
 	console.log("setLights " + lightvalue);
@@ -157,6 +194,13 @@ function setLightsHSB(lightvalue){
 }
 
 
+
+
+function musicOff(){
+	pauseSpotify();
+}
+
+
 function donothing(){
 	console.log("donothing");
 }
@@ -165,7 +209,7 @@ function donothing(){
 //// HUE CONTROL FUNCTIONS
 var hsldata = {"on":true,"hue":43690,"bri":254,"sat":254,"transitiontime":10};
 
-function setLightsOff(bulb){
+function setLightOff(bulb){
 	hsldata.on = false;
 	var jsonstring = JSON.stringify(hsldata);
 	console.log(jsonstring);    
@@ -187,7 +231,6 @@ function setHSB(bulb,hcolor,satn,brt,tran) {
 	console.log(jsonstring);
     
 	execute('PUT', 'http://'+config.hue.bridge+'/api/'+config.hue.hash+'/lights/'+bulb+'/state',"'"+jsonstring+"'");
-
 }
 
 

@@ -35,6 +35,25 @@
 		},
 		"J11" : {
 			"command" : "calib_high"
+		},
+		"K9" :{
+			"commands" :
+			[{
+				"command" : "setLightsHSB",
+				"lightvalue" : "46497,251,212,10",
+				"comment" : "set sexy blueish lights"
+			},
+			{			
+				"command" : "playlist",
+				"playlist": "4PWrGhbIWfm6qD6f0ZhMLP",
+				"comment" : "playing sexy times playlist"
+			}
+			],
+			"comment": "let's get comfortable"
+		},
+		"K10" :{ 
+			"command" : "alloff"
 		}
+
 	}
 }
