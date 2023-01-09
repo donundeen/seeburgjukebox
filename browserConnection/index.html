@@ -2,14 +2,88 @@
 <head>
 <script src="socket.io.min.js" crossorigin="anonymous"></script>
 
+
+
+<style>
+.rangeslider{
+    width: 100%;
+}
+.sliderlabel{
+    font-size:4em;
+
+}
+  
+.sliderval{
+    font-size:.5em;
+}
+.myslider {
+    -webkit-appearance: none;
+    background: #FCF3CF  ;
+    width: 90%;
+    height: 4em;
+    opacity: 2;
+
+
+   }
+  
+ .hslider{
+  background: linear-gradient(to right, hsl(0,90%,34%), hsl(90,90%,34%), hsl(180,90%,34%),hsl(270,90%,34%), hsl(360,90%,34%));
+  /* Standard syntax */    
+
+ } 
+  
+.myslider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    cursor: pointer;
+    background: #34495E  ;
+    width: 5%;
+    height: 4.5em;
+}
+  
+  
+.myslider:hover {
+    opacity: 1;
+}
+
+.button{
+  margin:auto;
+  width: 80%;
+  font-size:4em;
+}
+  
+</style>
+
+</head>
+<body>
+	this is the webpage
+<div class="rangeslider">
+<span class="sliderlabel"> H<span> <input type="range" min="1" max="65000" value="10" class="myslider hslider" id="sliderRangeH"><BR>
+<span id="demoH" class="sliderval"></span>
+</div>
+<br>
+<div class="rangeslider">
+<span class="sliderlabel"> S<span>  <input type="range" min="1" max="255" value="251" class="myslider" id="sliderRangeS"><BR>
+<span id="demoS"  class="sliderval"></span>
+</div>
+<br>
+<div class="rangeslider">
+<span class="sliderlabel"> B<span>  <input type="range" min="1" max="255" value="212" class="myslider" id="sliderRangeB"><BR>
+<span id="demoB"  class="sliderval"></span>
+</div>
+<div class="rangeslider" align="center">
+  <button class="button" id="alloff" onclick="sendOff();">Off</button>
+</div>
+
 <script>
 //const socket = io("localhost:9003");
-const socket = io("192.168.8.168:9003");
+//const socket = io("192.168.8.168:9003");
+const socket = io("10.0.0.174:9003");
 
 // client-side
 socket.on("connect", () => {
   console.log(socket.id); // x8WIv7-mJelg7on_ALbx
   socket.emit("private message","hello there");
+//  socket.emit("hsb","46497,251,212,10");
 });
 
 socket.on("disconnect", () => {
@@ -17,7 +91,7 @@ socket.on("disconnect", () => {
 });
 
 socket.on("tell you", (msg)=>{
-	console.log(msg);
+  console.log(msg);
 });
 
 //socket.connect("http://localhost:9003");
@@ -26,14 +100,60 @@ socket.on("tell you", (msg)=>{
 
 console.log("trying");
 
+var rangesliderH = document.getElementById("sliderRangeH");
+var outputH = document.getElementById("demoH");
+outputH.innerHTML = rangesliderH.value;
+
+rangesliderH.oninput = function() {
+  outputH.innerHTML = this.value;
+  sendHSB();
+}
+
+var rangesliderS = document.getElementById("sliderRangeS");
+var outputS = document.getElementById("demoS");
+outputS.innerHTML = rangesliderS.value;
+
+rangesliderS.oninput = function() {
+  outputS.innerHTML = this.value;
+  sendHSB();
+}
+
+var rangesliderB = document.getElementById("sliderRangeB");
+var outputB = document.getElementById("demoB");
+outputB.innerHTML = rangesliderB.value;
+
+rangesliderB.oninput = function() {
+  outputB.innerHTML = this.value;
+  sendHSB();
+}
+
+
+
+
+function sendOff(){
+  console.log("off");
+  socket.emit("hsb","off");
+}
+
+function sendHSB(){
+  var H = rangesliderH.value;
+  var S = rangesliderS.value;
+  var B = rangesliderB.value;
+  var hsb = H+","+S+","+B+",5";
+  socket.emit("hsb",hsb);
+
+  dh = Math.floor((H / 65000) * 360);
+  ds = Math.floor((S / 255) * 100);
+  db = Math.floor((B / 255) * 100);
+  dhsl = "hsl("+dh+","+ds+"%,"+db+"%)";
+  console.log("document hsl " + dhsl);
+  document.body.style.background = dhsl;
+//  document.body.style.background = "hsl(34,34%,34%)";
+
+}
+
 
 </script>
-
-
-</head>
-<body>
-	this is the webpage
-
 
 </body>
 </html>

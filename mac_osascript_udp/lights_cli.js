@@ -3,11 +3,9 @@
 46497,251,212,10 : sexy blue lights
 */
 
-import { Server } from 'node-osc';
-
 import { createRequire } from "module";
 const require = createRequire(import.meta.url);
-const config = require("./config.json");
+const config = require("../mac_osascript_udp/config.json");
 
 const { exec } = require("child_process");
 
@@ -27,6 +25,8 @@ if(hsb && hsb.trim() != ""){
 }else{
 	allLightsOff();
 }
+
+
 function allLightsOff(){
 	setLightOff(1);
 	setLightOff(2);
